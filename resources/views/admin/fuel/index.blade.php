@@ -16,41 +16,41 @@
                         <table class="table table-striped table-bordered table-hover dataTable no-footer">
                             <tr>
                                 <th>SN</th>
-                                <th>Name</th>
-                                <th>Designation</th>
-                                <th>Vehicle Ownership</th>
-                                <th>Vehicle type</th>
+                                <th>Staff Name</th>
+                                <th>Date</th>
+                                <th>Month</th>
+                                <th>Mode</th>
                                 <th>Action</th>
                             </tr>
-                            {{--@foreach($staffs as $user)--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{$loop->iteration}}</td>--}}
-                                    {{--<td>{{$user->name}}</td>--}}
-                                    {{--<td>{{$user->designation->name}}</td>--}}
-                                    {{--<td>{{config('custom.vehicle_ownership')[$user->vehicle_ownership]}}</td>--}}
-                                    {{--<td>{{config('custom.vehicle_type')[$user->vehicle_type]}}</td>--}}
+                            @foreach($fuels as $user)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$user->staff->name}}</td>
+                                    <td>{{$user->date}}</td>
+                                    <td>{{config('custom.nepali_months')[$user->month]}}</td>
+                                    <td>{{$user->mode}}</td>
 
-                                    {{--<td>--}}
-                                        {{--<a href="{{ url('admin/staff/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>--}}
+                                    <td>
+                                        <a href="{{ url('admin/fuel/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 
-                                        {{--<a href="{{url('admin/staff/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>--}}
+                                        <a href="{{url('admin/fuel/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
 
 
-                                        {{--{!! Form::open([--}}
-                                                     {{--'method'=>'DELETE',--}}
-                                                     {{--'url' => ['admin/staff', $user->id],--}}
-                                                     {{--'style' => 'display:inline'--}}
-                                                     {{--]) !!}--}}
-                                        {{--{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(--}}
-                                    {{--'type' => 'submit',--}}
-                                    {{--'class' => 'btn btn-danger btn-xs',--}}
-                                    {{--'title' => 'Delete',--}}
-                                    {{--'onclick'=>'return confirm("Confirm delete?")'--}}
-                            {{--)) !!}--}}
-                                        {{--{!! Form::close() !!}--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
+                                        {!! Form::open([
+                                                     'method'=>'DELETE',
+                                                     'url' => ['admin/fuel', $user->id],
+                                                     'style' => 'display:inline'
+                                                     ]) !!}
+                                        {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(
+                                    'type' => 'submit',
+                                    'class' => 'btn btn-danger btn-xs',
+                                    'title' => 'Delete',
+                                    'onclick'=>'return confirm("Confirm delete?")'
+                            )) !!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                         {{--{!! $branches !!}--}}
 

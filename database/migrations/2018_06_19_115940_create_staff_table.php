@@ -19,14 +19,7 @@ class CreateStaffTable extends Migration
             $table->integer('designation_id');
             $table->date('joining_date');
             $table->string('licence_no') ;
-            $table->integer('vehicle_ownership');
-            $table->integer('vehicle_type');
-            $table->integer('office_vehicle')->nullable();
-            $table->string('vehicle_brand')->nullable();
-            $table->integer('mileage');
-            $table->integer('monthly_kota');
-            $table->string('engine_oil');
-            $table->string('driving_person_name');
+            $table->enum('status',['0','1']);
             $table->timestamps();
         });
     }

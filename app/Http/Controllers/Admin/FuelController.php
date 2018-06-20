@@ -18,7 +18,8 @@ class FuelController extends Controller
 
     public function index()
     {
-        return  view('admin.fuel.index');
+        $fuels= Fuel::orderBy('id','DESC')->get();
+        return  view('admin.fuel.index',compact('fuels'));
     }
 
     /**
