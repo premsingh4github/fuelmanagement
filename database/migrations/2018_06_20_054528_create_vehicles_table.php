@@ -17,7 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->increments('id');
             $table->integer('type');
             $table->string('brand');
-            $table->integer('mileage');
+            $table->integer('mileage')->nullable();
             $table->string('engine_no');
             $table->string('chassis_no');
             $table->date('registered_date');

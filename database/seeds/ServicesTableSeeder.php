@@ -13,11 +13,14 @@ class ServicesTableSeeder extends Seeder
     {
         DB::table('services')->insert([
             [
-            'name'=> 'Petrol'],
+            'name'=> 'Petrol'
+            ],
             [
-                'name'=> 'Diseal'],
+                'name'=> 'Diseal'
+            ],
             [
-                'name'=> 'Engine Oil']
+                'name'=> 'Engine Oil'
+            ]
 
         ]);
     }

@@ -8,6 +8,16 @@ class Fuel extends Model
 {
     public function staff()
     {
-        return $this->belongsTo(Staff::class,'staff_name');
+        return $this->belongsTo(Staff::class);
+    }
+
+    public function fuel_services()
+    {
+        return $this->hasMany(FuelService::class);
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(Staff::class,'receiver_id');
     }
 }

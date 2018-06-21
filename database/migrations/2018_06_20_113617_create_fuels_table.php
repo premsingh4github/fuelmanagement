@@ -16,16 +16,16 @@ class CreateFuelsTable extends Migration
         Schema::create('fuels', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->integer('staff_name');
-            $table->integer('month');
+            $table->integer('staff_id');
+            $table->integer('month_id');
             $table->string('mode');
             $table->integer('amount')->nullable();
-            $table->integer('petrolpump_name');
+            $table->integer('petrolpump_id')->unsigned();
             $table->string('other')->nullable();
-            $table->integer('quantity');
             $table->double('current_km');
             $table->double('previous_km');
-            $table->string('reciver_name');
+            $table->integer('receiver_id')->unsigned();
+            $table->foreign('receiver_id')->references('id')->on('staff');
             $table->timestamps();
         });
     }

@@ -16,7 +16,12 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        $des =Designation::all();
+        $des =Designation::orderBy('id','DESC');
+        if(\request('name')){
+            $name = \request('name');
+            $des->where('name','like',"%$name%");
+        }
+        $des = $des->get();
         return view('admin.designation.index',compact('des'));
     }
 

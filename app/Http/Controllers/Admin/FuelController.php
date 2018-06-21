@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Fuel;
+use App\FuelService;
 use App\Staff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,8 +30,11 @@ class FuelController extends Controller
      */
     public function create()
     {
-        $staff = Staff::all();
-        return view('admin.fuel.create',compact('staff'));
+        $staff = Staff::whereHas('vehicles')->get();
+        $staffs = Staff::all();
+        $cal = new \Nepali_Calendar();
+        $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
+        return view('admin.fuel.create',compact('staff','today_nepali','staffs'));
     }
 
     /**
@@ -41,28 +45,37 @@ class FuelController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $this->validate($request,[
-            'date'=>'required',
-            'staff_name'=>'required',
+            'staff_id'=>'required',
             'month'=>'required',
             'mode'=>'required',
             'petrolpump_name'=>'required',
-            'quantity'=>'required',
         ]);
         $fuel= new  Fuel;
-        $fuel->date =\request('date');
-        $fuel->staff_name = \request('staff_name');
-        $fuel->month = \request('month');
+        $cal = new \Nepali_Calendar();
+        $fuel->date = $cal->eng_to_nepali_date(date('Y-m-d'));
+        $fuel->staff_id = \request('staff_id');
+        $fuel->month_id = \request('month');
         $fuel->mode = \request('mode');
         $fuel->amount = \request('amount');
-        $fuel->petrolpump_name = \request('petrolpump_name');
-        $fuel->other = \request('other');
-        $fuel->quantity = \request('quantity');
+        $fuel->petrolpump_id = \request('petrolpump_name');
+        if(\request('other')){
+            $fuel->other = \request('other');
+        }
         $fuel->current_km = \request('current_km');
         $fuel->previous_km = \request('previous_km');
-        $fuel->reciver_name = \request('reciver_name');
+        $fuel->receiver_id = \request('receiver_id');
         $fuel->save();
+
+        if(\request('service')){
+            foreach (\request('service') as $key => $value){
+                $fuel_service = new FuelService;
+                $fuel_service->quantity = $value;
+                $fuel_service->vehicle_service_id = $key;
+                $fuel_service->fuel_id = $fuel->id;
+                $fuel_service->save();
+            }
+        }
 
         Session::flash('success_message','Fuel Added');
         return redirect('admin\fuel');
@@ -77,7 +90,8 @@ class FuelController extends Controller
      */
     public function show($id)
     {
-        //
+        $fuel = Fuel::findOrFail($id);
+        return view('admin.fuel.show',compact('fuel'));
     }
 
     /**
@@ -118,5 +132,14 @@ class FuelController extends Controller
     {
         dd(90);
 
+    }
+
+    public function staff_services()
+    {
+        \request()->validate([
+            'staff_id'=>'required|exists:staff,id'
+        ]);
+        $staff = Staff::findOrFail(\request('staff_id'));
+        return view('admin.ajax.staff_services',compact('staff'));
     }
 }

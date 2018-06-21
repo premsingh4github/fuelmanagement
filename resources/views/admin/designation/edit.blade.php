@@ -28,7 +28,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group col-sm-6 {{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="email">Code:</label>
+                                        <label for="email">Level:</label>
                                         <input type="text" name="level" id="level" class="form-control" value="{{old('level')? old('level') : $des->level}}">
                                         @if ($errors->has('level'))
                                             <span class="help-block">

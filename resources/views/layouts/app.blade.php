@@ -625,6 +625,68 @@
             $('#amount_container').slideDown();
         }
     }
+    function valueChange(selected,input) {
+        var container = $('#'+input+"_container");
+        var mealeage = $('#'+input);
+        if($('#'+selected).val() =='1'){
+            container.slideUp('slow');
+            mealeage.removeAttr('required');
+        }
+        else {
+            container.slideDown('slow');
+            mealeage.attr('required','required');
+        }
+
+
+    }
+
+    function petrolpumpChange() {
+        var type = $('#petrolpump_name').val()
+        $('.other_petrolpump').hide();
+        if(type == '1')
+        {
+            $('.other_petrolpump').show();
+            $('#other').attr('required','true');
+        }
+        else{
+            $('.other_petrolpump').hide();
+            $('#other').removeAttr('required');
+        }
+    }
+
+    function getamount() {
+        debugger;
+        $('#amount_container').slideDown();
+        $('#amount').attr('required','true')
+
+    }
+    function hideamount() {
+debugger;
+        $('#amount').removeAttr('required');
+        $('#amount_container').slideUp()
+    }
+
+    function  updateService() {
+        debugger;
+        var staff_id = $('#staff_id').val();
+        var month_id = $('#month').val();
+        if( (staff_id > 0)){
+            $.ajax({
+                type: "GET",
+                url: window.Laravel.base_url+'/admin/staff_services',
+                data: $("#myform").serialize(),
+                success:function (data) {
+                    $('#services').html(data);
+                    debugger
+                },
+                error:function (error) {
+                    debugger
+                }
+            });
+        }else{
+            $('#services').html("");
+        }
+    }
 
 </script>
 @yield('script')

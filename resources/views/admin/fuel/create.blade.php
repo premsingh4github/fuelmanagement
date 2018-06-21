@@ -2,17 +2,18 @@
 @section('content')
     <div class="container">
         <div class="row">
+            @include('includes.error')
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {!! Form::open(['url'=>url('admin/fuel'),'method'=>'POST','class'=>'form-horizontal']) !!}
+                        {!! Form::open(['url'=>url('admin/fuel'),'method'=>'POST','class'=>'form-horizontal','id'=>'myform']) !!}
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
                                     <label for="date" class="col-md-6 control-label">Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input id="date" type="text" tabindex="1" class="form-control nepali-calender" name="date" value="" required autofocus>
+                                        <input  type="text" tabindex="1" class="form-control " name="date" value="{{$today_nepali}}" required autofocus disabled="disabled">
                                         @if ($errors->has('date'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('date') }}</strong>
@@ -21,29 +22,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-
-
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('staff_name') ? ' has-error' : '' }}">
-                                    <label for="staff_name" class="col-md-6 control-label">Staff Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="staff_id" class="col-md-6 control-label">Staff Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select name="staff_name" id="staff_name"  tabindex="2" class="form-control" required autofocus>
+                                        <select onchange="updateService()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staff as $type)
                                                 <option value='{{$type->id}}'> {{$type->name}} </option>";
                                             @endforeach
-                                        </select> @if ($errors->has('staff_name'))
+                                        </select> @if ($errors->has('staff_id'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('staff_name') }}</strong>
+                                                <strong>{{ $errors->first('staff_id') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('month') ? ' has-error' : '' }}">
                                     <label for="month" class="col-md-6 control-label">Month <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
@@ -63,13 +59,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('mode') ? ' has-error' : '' }}">
                                     <label for="mode" class="col-md-6 control-label">Mode <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input type="radio" name="mode" value="Cash" onclick=getamount()> Cash<br>
+                                        <input type="radio" name="mode" value="Cash" onclick=getamount()> Cash
                                         <input type="radio" name="mode" value="Copon" onclick=hideamount()> Copon<br> @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
@@ -78,25 +72,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="display: none"id="amount" >
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-6" style="display: none"id="amount_container" >
                                 <div class="amountt"  >
                                     <div class="{{ $errors->has('amount') ? ' has-error' : '' }} ui-widget">
                                         <label for="amount" class="col-md-8 control-label">Amount <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                         <div class="col-md-12">
-                                            <input id="amount" type="number" tabindex="1" class="form-control " name="amount" value="" required autofocus>
+                                            <input id="amount" type="number" class="form-control " name="amount" value="" required autofocus>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('petrolpump_name') ? ' has-error' : '' }} ui-widget">
                                     <label for="petrolpump_name" class="col-md-8 control-label">PetrolPump Name <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <select name="petrolpump_name" id ='petrolpump_name'   onchange= change() tabindex="6" class="form-control"  required autofocus>
+                                        <select name="petrolpump_name" id ='petrolpump_name'   onchange="petrolpumpChange()" tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
                                             @Foreach(config('custom.petrolpumps') as $type => $item)
                                                 <option value='{{$type}}'> {{$item}} </option>";
@@ -107,10 +101,9 @@
                             </div>
 
 
-                            <div class="col-md-6">
-                                <div class="other_petrolpump" style="display: none-*">
+                                <div class="col-md-6 other_petrolpump" style="display: none">
                                     <div class="{{ $errors->has('other') ? ' has-error' : '' }}">
-                                        <label for="office_vehicle" class="col-md-6 control-label">Other  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                        <label for="office_vehicle" class="col-md-6 control-label">Other PetrolPump Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                         <div class="col-md-12">
                                             <input id="other" type="text" tabindex="1" class="form-control " name="other" value="" required autofocus>
 
@@ -122,26 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="personal_vehicle">
-                                    <div class="{{ $errors->has('quantity') ? ' has-error' : '' }} ui-widget">
-                                        <label for="vehicle_brand" class="col-md-8 control-label">Quantity <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
-                                        <div class="col-md-12">
-                                            <input id="quantity" type="text"  onchange=checkQuantity() tabindex="3" class="form-control " name="quantity" value="" required autofocus>
-                                            @if ($errors->has('quantity'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('quantity') }}</strong>
-                                                     </span>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="ajax">
 
@@ -162,8 +136,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
                                     <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
@@ -182,17 +154,24 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('reciver_name') ? ' has-error' : '' }} ui-widget">
-                                    <label for="reciver_name" class="col-md-8 control-label">Reciver_name <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
+                                    <label for="receiver_id" class="col-md-8 control-label">Reciver Name<span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <input id="reciver_name" type="text" tabindex="3" class="form-control " name="reciver_name" value="" required autofocus>
-                                        @if ($errors->has('reciver_name'))
+                                        <select name="receiver_id" id="receiver_id"  class="form-control" required autofocus>
+                                            <option value="">Select one...</option>
+                                            @foreach($staffs as $type)
+                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
+                                            @endforeach
+                                        </select> @if ($errors->has('receiver_id'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('reciver_name') }}</strong>
-                                                     </span>
+                                                <strong>{{ $errors->first('receiver_id') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row" id="services">
+
                         </div>
 
 
@@ -220,25 +199,7 @@
 @endsection
 @section('script')
     <script>
-        function change() {
-            debugger;
-            var type = $('#petrolpump_name').val()
 
-
-            debugger;
-            $('.other_petrolpump').hide();
-            if(type == '1')
-            {
-            debugger
-                $('.other_petrolpump').show();
-                $('#other').attr('required','true');
-            }
-            else{
-                debugger
-                $('.other_petrolpump').hide();
-                $('#other').removeAttr('required');
-            }
-        }
         function  checkQuantity() {
             debugger
             var staff_id = $('#staff_name').val();
@@ -261,17 +222,7 @@
             }
         }
 
-        function getamount() {
-            debugger
-            $('#amount').show()
-            $('#amount').attr('required','true')
 
-        }
-        function hideamount() {
-            debugger
-            $('#amount').hide()
-            $('#amount').removeAttr('required');
-        }
     </script>
 
 

@@ -35,27 +35,28 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="{{ $errors->has('joining_date') ? ' has-error' : '' }}">
-                                    <label for="joining_date" class="col-md-6 ">Driver : </label>
-                                    <div class="col-md-12">
-                                        {{$staff_veh->driver->name}}
-                                        @if ($errors->has('joining_date'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('joining_date') }}</strong>
-                                                     </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             @if($staff_veh->ownership == '1')
+
+                                <div class="col-md-4">
+                                    <div class="{{ $errors->has('joining_date') ? ' has-error' : '' }}">
+                                        <label for="joining_date" class="col-md-6 ">Driver : </label>
+                                        <div class="col-md-12">
+                                            Self
+                                            @if ($errors->has('joining_date'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('joining_date') }}</strong>
+                                                     </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
                                     <label for="licence_no" class="col-md-6 ">Vehicle Brand   </label>
                                     <div class="col-md-12">
-                                            {{$staff_veh->Person_veh->vehicle_brand}}
+                                            {{$staff_veh->person_veh->vehicle_brand}}
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>
@@ -68,7 +69,7 @@
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
                                     <label for="licence_no" class="col-md-6 ">Vehicle No   </label>
                                     <div class="col-md-12">
-                                        {{$staff_veh->Person_veh->vehicle_no}}
+                                        {{$staff_veh->person_veh->vehicle_no}}
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>
@@ -80,9 +81,9 @@
                             <div class="col-md-4">
 
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-6 ">Meilage   </label>
+                                    <label for="licence_no" class="col-md-8 ">Mileage   </label>
                                     <div class="col-md-12">
-                                        {{$staff_veh->Person_veh->mileage}}
+                                        {{$staff_veh->person_veh->mileage}}
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>
@@ -91,7 +92,66 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                                <div class="col-md-4{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                    <label for="licence_no" class="col-md-8 ">Ownership   </label>
+                                    <div class="col-md-12">
+                                        {{config('custom.vehicle_ownerships')[$staff_veh->ownership]}}
+                                        @if ($errors->has('licence_no'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                             </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                        <label for="licence_no" class="col-md-6 ">Vehicle Brand   </label>
+                                        <div class="col-md-12">
+                                            {{$staff_veh->vehicle->brand}}
+                                            @if ($errors->has('licence_no'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                                     </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                        <label for="licence_no" class="col-md-6 ">Vehicle No   </label>
+                                        <div class="col-md-12">
+                                            {{$staff_veh->vehicle->vehicle_no}}
+                                            @if ($errors->has('licence_no'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                                     </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                    <label for="licence_no" class="col-md-8 ">Mileage   </label>
+                                    <div class="col-md-12">
+                                        {{$staff_veh->vehicle->mileage}}
+                                        @if ($errors->has('licence_no'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                             </span>
+                                        @endif
+                                    </div>
+                                </div>
                             @endif
+
+                            @foreach($staff_veh->vehicle_services as $service)
+                                    <div class="col-md-4">
+                                        <label for="licence_no" class="col-md-8 ">{{$service->service->name}}  </label>
+                                        <div class="col-md-12">
+                                            {{$service->quota}} [litre/month]
+                                        </div>
+                                    </div>
+                            @endforeach
+
 
 
                         </div>

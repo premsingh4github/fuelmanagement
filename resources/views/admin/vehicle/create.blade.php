@@ -12,7 +12,7 @@
                                 <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
                                     <label for="type" class="col-md-6 control-label">Type  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select name="vehicle_type" id ='vehicle_type'   tabindex="6" class="form-control"  required autofocus>
+                                        <select onchange="valueChange('vehicle_type','mileage')" name="vehicle_type" id ='vehicle_type'   tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
                                             @Foreach(config('custom.vehicle_type') as $type => $item)
                                                 <option value='{{$type}}'> {{$item}} </option>";
@@ -40,9 +40,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div id="mileage_container" class="col-md-4">
                                 <div class="{{ $errors->has('mileage') ? ' has-error' : '' }}">
-                                    <label for="mileage" class="col-md-6 control-label">Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="mileage" class="col-md-8 control-label">Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
 
                                     <div class="col-md-12">
                                         <input id="mileage" type="number" tabindex="3" class="form-control  " name="mileage" value="" required autofocus>
@@ -187,6 +187,7 @@
 
             }
         }
+
 
     </script>
 

@@ -8,14 +8,18 @@ return [
         '1'=>'Personal',
         '2'=>'Offical'
     ],
+    'vehicle_ownerships'=>[
+        '1'=>'Personal',
+        '2'=>'Offical'
+    ],
     'vehicle_type'=>[
         '1'=>'Bike',
         '2'=>'car',
         '3'=>'Bus'
     ],
     'status'=>[
-        '0'=> 'Enable',
-        '1'=>'Disable'
+        '1'=> 'Enable',
+        '0'=>'Disable'
     ],
     'nepali_months'=>[
         '1'=>'Baishakh',

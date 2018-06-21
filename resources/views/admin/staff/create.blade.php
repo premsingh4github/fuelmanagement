@@ -59,7 +59,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-6 control-label"> Driving Licence<span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="licence_no" class="col-md-8 control-label"> Driving Licence<span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
                                         <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="" required autofocus>
                                         @if ($errors->has('licence_no'))
@@ -68,18 +68,6 @@
                                                      </span>
                                         @endif
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="{{ $errors->has('status') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-6 control-label"> Status  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-
-                                    <select name="status"   tabindex="2" class="form-control" required autofocus>
-                                    <option value="">Select one...</option>
-                                    @foreach(config('custom.status') as $type=>$index )
-                                        <option value='{{$type}}'> {{$index}} </option>";
-                                    @endforeach
-                                </select>
                                 </div>
                             </div>
                         </div>
@@ -92,9 +80,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <button type="reset" tabindex="9" class="btn btn-warning reset">
-                                    Reset
-                                </button>
+                                <a href="{{url('admin/staff')}}"class="btn btn-warning reset">
+                                    Back
+                                </a>
                             </div>
                         </div>
 

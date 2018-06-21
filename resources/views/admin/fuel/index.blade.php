@@ -27,7 +27,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$user->staff->name}}</td>
                                     <td>{{$user->date}}</td>
-                                    <td>{{config('custom.nepali_months')[$user->month]}}</td>
+                                    <td>{{config('custom.nepali_months')[$user->month_id]}}</td>
                                     <td>{{$user->mode}}</td>
 
                                     <td>

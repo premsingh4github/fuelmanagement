@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\PersonalVehicle;
+use App\Service;
 use App\Staff;
 use App\StaffVehicle;
 use App\Vehicle;
+use App\VehicleService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -30,13 +32,14 @@ class StaffVehicleController extends Controller
      */
     public function create()
     {
-       $staff = Staff::all();
+       $staffs = Staff::select('staff.id','staff.name')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','DESC')->get();
        $vehicle = Vehicle::all();
        $drivers =  Staff::whereHas('designation',function ($q){
            $q->where('name','Driver');
        })->get();
+       $services = Service::all();
 
-        return view('admin.staffvehicle.create',compact('staff','vehicle','drivers'));
+        return view('admin.staffvehicle.create',compact('staffs','vehicle','drivers','services'));
     }
 
     /**
@@ -72,6 +75,16 @@ class StaffVehicleController extends Controller
             $personal_veh->save();
 
         }
+        $services = Service::all();
+        foreach ($services as $service){
+            if(\request($service->id) && (\request($service->id) > 0 ) ){
+                $vehicleService = new VehicleService;
+                $vehicleService->service_id = $service->id;
+                $vehicleService->quota = \request($service->id);
+                $vehicleService->staff_vehicle_id = $staff_veh->id;
+                $vehicleService->save();
+            }
+        }
         Session::flash('success_message','Staff Vehicle Added');
         return redirect('admin/staff_vehicle');
 
@@ -101,9 +114,12 @@ class StaffVehicleController extends Controller
     public function edit($id)
     {
         $staff_veh = StaffVehicle::findOrfail($id);
-        $staff = Staff::all();
+        $staff = Staff::select('staff.id','staff.name')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','DESC')->get();
         $vehicle = Vehicle::all();
-        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicle'));
+        $drivers =  Staff::whereHas('designation',function ($q){
+            $q->where('name','Driver');
+        })->get();
+        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicle','drivers'));
 
     }
 

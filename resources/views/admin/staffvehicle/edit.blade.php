@@ -50,13 +50,14 @@
                             </div>
                         </div>
                         <div class="row">
+                            @if($staff_veh->ownership == '1')
                             {{--@if($staff_veh->Person_veh)--}}
                             <div class="personal" >
                                 <div class="col-md-4">
                                     <div class="{{ $errors->has('vehicle_brand') ? ' has-error' : '' }}">
                                         <label for="vehicle_brand" class="col-md-6 control-label"> Vehicle Brand<span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                         <div class="col-md-12">
-                                            <input id="vehicle_brand" type="text" tabindex="3" class="form-control " name="vehicle_brand" value="  {{$staff_veh->Person_veh?$staff_veh->Person_veh->vehicle_brand:''}}" required autofocus>
+                                            <input id="vehicle_brand" type="text" tabindex="3" class="form-control " name="vehicle_brand" value="  {{$staff_veh->person_veh?$staff_veh->person_veh->vehicle_brand:''}}" required autofocus>
                                             @if ($errors->has('vehicle_brand'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('vehicle_brand') }}</strong>
@@ -75,37 +76,39 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="{{ $errors->has('mileage') ? ' has-error' : '' }}">
-                                        <label for="mileage" class="col-md-6 control-label"> Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                        <label for="mileage" class="col-md-8 control-label"> Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
 
                                         <input id="mileage" type="text" tabindex="3" class="form-control " name="mileage" value="  {{$staff_veh->Person_veh?$staff_veh->Person_veh->mileage:''}}" required autofocus>
 
                                     </div>
                                 </div>
                             </div>
-                                {{--@endif--}}
-                        </div>
-                        <div class="row">
-                            {{--@if($staff_veh->vehicle_id)--}}
-                            <div class="offical" >
-                                <div class="col-md-6">
-                                    <div class="{{ $errors->has('ovehicle') ? ' has-error' : '' }}">
-                                        <label for="ovehicle" class="col-md-6 control-label">Vehicle  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                        <div class="col-md-12">
-                                            <select name="ovehicle"   id="ovehicle" tabindex="2" class="form-control" onchange=getinfo() required autofocus>
-                                                <option value="">Select one...</option>
-                                                @foreach($vehicle as $type)
-                                                    <option value='{{$type->id}}' > {{config('custom.vehicle_type')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('staff'))
-                                                <span class="help-block">
+                                @else
+                                <div class="offical" >
+                                    <div class="col-md-6">
+                                        <div class="{{ $errors->has('ovehicle') ? ' has-error' : '' }}">
+                                            <label for="ovehicle" class="col-md-6 control-label">Vehicle  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                            <div class="col-md-12">
+                                                <select name="ovehicle"   id="ovehicle" tabindex="2" class="form-control" onchange=getinfo() required autofocus>
+                                                    <option value="">Select one...</option>
+                                                    @foreach($vehicle as $type)
+                                                        <option value='{{$type->id}}' @if($type->id == $staff_veh->vehicle_id) selected @endif > {{config('custom.vehicle_type')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
+                                                    @endforeach
+                                                </select>
+                                                @if ($errors->has('staff'))
+                                                    <span class="help-block">
                                                 <strong>{{ $errors->first('staff') }}</strong>
                                             </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                @endif
+                        </div>
+                        <div class="row">
+                            {{--@if($staff_veh->vehicle_id)--}}
+
                                 {{--@endif--}}
                         </div>
                         <div class="row">
@@ -121,8 +124,10 @@
 
                                         <select name="driver"   tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
-                                            @foreach($staff as $type)
-                                                <option value='{{$type->id}}'@if($type->id == $staff_veh->driver_id)selected @endif> {{$type->name}} </option>";
+                                            <option value="0" @if('0' == $staff_veh->driver_id) selected @endif>Self</option>
+
+                                            @foreach($drivers as $type)
+                                                <option value='{{$type->id}}'@if($type->id == $staff_veh->driver_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
                                         </select>

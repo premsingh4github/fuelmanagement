@@ -33,6 +33,7 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
     Route::resource('fuel','Admin\FuelController');
     Route::get('/staff_vehicle/getvehicledetail','Admin\StaffVehicleController@getvehicledetail');
     Route::resource('staff_vehicle','Admin\StaffVehicleController');
+    Route::get('staff_services','Admin\FuelController@staff_services');
 
 
 
@@ -44,6 +45,8 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
 Route::group(['middleware'=>'user','prefix'=>'user'],function (){
     Route::get('','user\UserController@index');
 });
+
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');

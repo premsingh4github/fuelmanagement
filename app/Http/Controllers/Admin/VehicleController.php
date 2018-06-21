@@ -44,7 +44,6 @@ class VehicleController extends Controller
 
             'vehicle_type'=>'required',
             'brand'=>'required',
-            'mileage'=>'required',
             'engine_no'=>'required',
             'chasis_no'=>'required',
             'registered_date'=>'required',
@@ -54,7 +53,9 @@ class VehicleController extends Controller
         $vehicle = new  Vehicle;
         $vehicle->type = \request('vehicle_type');
         $vehicle->brand = \request('brand');
-        $vehicle->mileage = \request('mileage');
+        if(\request('mileage')){
+            $vehicle->mileage = \request('mileage');
+        }
         $vehicle->engine_no = \request('engine_no');
         $vehicle->chassis_no = \request('chasis_no');
         $vehicle->registered_date = date( \request('registered_date'));
@@ -105,7 +106,6 @@ class VehicleController extends Controller
         $this->validate($request,[
         'vehicle_type'=>'required',
             'brand'=>'required',
-            'mileage'=>'required',
             'engine_no'=>'required',
             'chasis_no'=>'required',
             'registered_date'=>'required',
@@ -115,7 +115,9 @@ class VehicleController extends Controller
         $vehicle = Vehicle::findOrfail($id);
         $vehicle->type = \request('vehicle_type');
         $vehicle->brand = \request('brand');
-        $vehicle->mileage = \request('mileage');
+        if(\request('mileage')){
+            $vehicle->mileage = \request('mileage');
+        }
         $vehicle->engine_no = \request('engine_no');
         $vehicle->chassis_no = \request('chasis_no');
         $vehicle->registered_date = date( \request('registered_date'));

@@ -15,7 +15,7 @@
 
                                         <select name="staff"   tabindex="2" class="form-control" required autofocus>
                                         <option value="">Select one...</option>
-                                        @foreach($staff as $type)
+                                        @foreach($staffs as $type)
                                         <option value='{{$type->id}}'> {{$type->name}} </option>";
                                         @endforeach
                                         </select>
@@ -72,7 +72,7 @@
                             </div>
                                 <div class="col-md-4">
                                     <div class="{{ $errors->has('mileage') ? ' has-error' : '' }}">
-                                        <label for="mileage" class="col-md-6 control-label"> Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                        <label for="mileage" class="col-md-8 control-label"> Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
 
                                         <input id="mileage" type="text" tabindex="3" class="form-control " name="mileage" value="" required autofocus>
 
@@ -131,6 +131,16 @@
                                     </div>
                                 </div>
                             </div>
+                            @foreach($services as $service)
+                                <div class="col-md-6">
+                                    <div >
+                                        <label for="driver" class="col-md-6 control-label">{{$service->name}} [litre/month]</label>
+                                        <div class="col-md-12">
+                                            <input  type="float" tabindex="3" class="form-control " name="{{$service->id}}" value="" >
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
 
                         </div>
 
@@ -142,9 +152,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <button type="reset" tabindex="9" class="btn btn-warning reset">
-                                    Reset
-                                </button>
+                                <a href="{{url('admin/staff_vehicle')}}" tabindex="9" class="btn btn-warning reset">
+                                    Back
+                                </a>
                             </div>
                         </div>
 
