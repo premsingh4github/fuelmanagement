@@ -17,41 +17,44 @@
                             <tr>
                                 <th>SN</th>
                                 <th>Name</th>
-                                <th>Designation</th>
-                                <th>Joining Date</th>
-                                <th>Licence No</th>
+                                <th>Ownership</th>
+                                <th>Driver</th>
                                 <th>Action</th>
+
                             </tr>
-                            {{--@foreach($staffs as $user)--}}
-                                {{--<tr>--}}
-                                    {{--<td>{{$loop->iteration}}</td>--}}
-                                    {{--<td>{{$user->name}}</td>--}}
-                                    {{--<td>{{$user->designation->name}}</td>--}}
-                                    {{--<td>{{$user->joining_date}}</td>--}}
-                                    {{--<td>{{$user->licence_no}}</td>--}}
+                            @foreach($staff_veh as $user)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$user->staff->name}}</td>
+                                    <td> @if ($user->ownership == '1')
+                                            <div>Personal</div>
+                                        @else
+                                            <div>Official</div>
+                                        @endif</td>
+                                    <td>{{$user->driver->name}}</td>
 
 
-                                    {{--<td>--}}
-                                        {{--<a href="{{ url('admin/staff/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>--}}
+                                    <td>
+                                        <a href="{{ url('admin/staff_vehicle/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 
-                                        {{--<a href="{{url('admin/staff/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>--}}
+                                        <a href="{{url('admin/staff_vehicle/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
 
 
-                                        {{--{!! Form::open([--}}
-                                                     {{--'method'=>'DELETE',--}}
-                                                     {{--'url' => ['admin/staff', $user->id],--}}
-                                                     {{--'style' => 'display:inline'--}}
-                                                     {{--]) !!}--}}
-                                        {{--{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(--}}
-                                    {{--'type' => 'submit',--}}
-                                    {{--'class' => 'btn btn-danger btn-xs',--}}
-                                    {{--'title' => 'Delete',--}}
-                                    {{--'onclick'=>'return confirm("Confirm delete?")'--}}
-                            {{--)) !!}--}}
-                                        {{--{!! Form::close() !!}--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
+                                        {!! Form::open([
+                                                     'method'=>'DELETE',
+                                                     'url' => ['admin/staff_vehicle', $user->id],
+                                                     'style' => 'display:inline'
+                                                     ]) !!}
+                                        {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(
+                                    'type' => 'submit',
+                                    'class' => 'btn btn-danger btn-xs',
+                                    'title' => 'Delete',
+                                    'onclick'=>'return confirm("Confirm delete?")'
+                            )) !!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                         {{--{!! $branches !!}--}}
 

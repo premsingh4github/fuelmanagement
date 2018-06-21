@@ -16,8 +16,8 @@ class CreatePersonalVehiclesTable extends Migration
         Schema::create('personal_vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staff_vehicle_id')->unsiged();
-            $table->string('brand');
-            $table->string('number');
+            $table->string('vehicle_brand');
+            $table->string('vehicle_no');
             $table->float('mileage');
             $table->timestamps();
         });

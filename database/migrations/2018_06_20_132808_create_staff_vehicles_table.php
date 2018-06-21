@@ -16,8 +16,8 @@ class CreateStaffVehiclesTable extends Migration
         Schema::create('staff_vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staff_id')->unsigned();
-            $table->integer('vehicle_id')->unsigned();
-            $table->enum('ownership',['p','0']);
+            $table->integer('vehicle_id')->nullable();
+            $table->enum('ownership',['1','2']);
             $table->integer('driver_id')->nullable();
             $table->timestamps();
         });
