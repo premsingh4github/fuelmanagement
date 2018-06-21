@@ -10,7 +10,7 @@
 
     <title>Darta Chalani</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{url('images/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('favicon.ico')}}">
 
     <!-- Styles -->
     {!! Html::style('/css/app.css') !!}
