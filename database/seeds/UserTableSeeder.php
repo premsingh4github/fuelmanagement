@@ -16,15 +16,15 @@ class UserTableSeeder extends Seeder
                 'name' => 'Admin',
                 'email'=>'admin@localhost.com',
                 'password'=>bcrypt('password'),
-
+                'status'=>'1',
                 'type'=>'1',
             ]
             ,[
                 'name'=>'User ',
                 'email'=>'user@localhost.com',
                 'password'=>bcrypt('password'),
-
-                'type'=>'2'
+                'type'=>'2',
+                'status'=>'1',
             ]
 
         ]);
