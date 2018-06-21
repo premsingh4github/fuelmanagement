@@ -11,8 +11,8 @@ return [
         '3'=>'Bus'
     ],
     'status'=>[
-        '1'=> 'Enable',
-        '2'=>'Disable'
+        '0'=> 'Enable',
+        '1'=>'Disable'
     ],
     'nepali_months'=>[
     '1'=>'Baishakh',

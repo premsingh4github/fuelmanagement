@@ -61,127 +61,22 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="{{ $errors->has('vehicle_ownership') ? ' has-error' : '' }} ui-widget">
-                                    <label for="document_type_id" class="col-md-8 ">Vehicle OwnerShip: </label>
-
+                                <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                    <label for="licence_no" class="col-md-6 ">Status   </label>
                                     <div class="col-md-12">
-                                        {{ config('custom.vehicle_ownership')[$staff->vehicle_ownership]}}
+                                        {{config('custom.status')[$staff->status]}}
+                                        @if ($errors->has('licence_no'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                                     </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="{{ $errors->has('vehicle_type') ? ' has-error' : '' }} ui-widget">
-                                    <label for="vehicle_type" class="col-md-8 ">Vehicle Type: </label>
-
-                                    <div class="col-md-12">
-                                        {{config('custom.vehicle_type')[$staff->vehicle_type]}}
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="official">
-                                    <div class="{{ $errors->has('office_vehicle') ? ' has-error' : '' }}">
-                                        <label for="office_vehicle" class="col-md-6 ">Vehicle: </label>
 
-                                        <div class="col-md-12">
-                                            {{$staff->office_vehicle}}
 
-                                        @if ($errors->has('office_vehicle'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('office_vehicle') }}</strong>
-                                                         </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="personal_vehicle">
-                                    <div class="{{ $errors->has('vehicle_brand') ? ' has-error' : '' }} ui-widget">
-                                        <label for="vehicle_brand" class="col-md-8 ">Vehicle Brand & No:</label>
-
-                                        <div class="col-md-12">
-                                            {{$staff->vehicle_brand}}
-                                        @if ($errors->has('vehicle_brand'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('vehicle_brand') }}</strong>
-                                                     </span>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="{{ $errors->has('mileage') ? ' has-error' : '' }} ui-widget">
-                                    <label for="mileage" class="col-md-8 ">Mileage: </label>
-
-                                    <div class="col-md-12">
-                                        {{$staff->mileage}}
-                                        @if ($errors->has('mileage'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('mileage') }}</strong>
-                                                     </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="{{ $errors->has('monthly_kota') ? ' has-error' : '' }}">
-                                    <label for="monthly_kota" class="col-md-6 ">Monthly Kota:   </label>
-                                    <div class="col-md-12">
-                                        {{$staff->monthly_kota}}
-                                    @if ($errors->has('monthly_kota'))
-                                            <span class="help-block">
-                                                    <strong>{{ $errors->first('monthly_kota') }}</strong>
-                                                         </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4">
-
-                                <div class="{{ $errors->has('engine_oil') ? ' has-error' : '' }} ui-widget">
-                                    <label for="engine_oil" class="col-md-8 ">Engine Oil: </label>
-
-                                    <div class="col-md-12">
-                                       {{$staff->engine_oil}}
-                                        @if ($errors->has('engine_oil'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('engine_oil') }}</strong>
-                                                     </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="{{ $errors->has('driving_person_name') ? ' has-error' : '' }} ui-widget">
-                                    <label for="driving_person_name" class="col-md-8 ">Driving Person Name: </label>
-
-                                    <div class="col-md-12">
-                                      {{$staff->driving_person_name}}
-                                        @if ($errors->has('driving_person_name'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('driving_person_name') }}</strong>
-                                                     </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <br>
                         <br>
                         <div class="form-group">
