@@ -32,7 +32,11 @@ class StaffVehicleController extends Controller
     {
        $staff = Staff::all();
        $vehicle = Vehicle::all();
-        return view('admin.staffvehicle.create',compact('staff','vehicle'));
+       $drivers =  Staff::whereHas('designation',function ($q){
+           $q->where('name','Driver');
+       })->get();
+
+        return view('admin.staffvehicle.create',compact('staff','vehicle','drivers'));
     }
 
     /**

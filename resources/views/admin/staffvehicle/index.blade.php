@@ -31,7 +31,7 @@
                                         @else
                                             <div>Official</div>
                                         @endif</td>
-                                    <td>{{$user->driver->name}}</td>
+                                    <td>{{$user->driver?$user->driver->name:'Self'}}</td>
 
 
                                     <td>

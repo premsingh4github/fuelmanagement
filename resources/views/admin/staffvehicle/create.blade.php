@@ -116,7 +116,9 @@
 
                                         <select name="driver"   tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
-                                            @foreach($staff as $type)
+                                            <option value='0'> Self </option>";
+                                            @foreach($drivers as $type)
+
                                                 <option value='{{$type->id}}'> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
