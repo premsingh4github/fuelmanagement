@@ -160,12 +160,13 @@ class StaffVehicleController extends Controller
 
     public function getvehicledetail()
     {
-        dd(99);
+//        dd(99);
 
         $this->validate(\request(),[
             'vehicle_id'=>'required'
         ]);
+//        dd(\request('vehicle_id'));
         $vehicle = Vehicle::findOrFail(\request('vehicle_id'));
-        return view('ajax.vehicledetail',compact('vehicle'));
+        return view('admin.ajax.vehicledetail',compact('vehicle'));
     }
 }

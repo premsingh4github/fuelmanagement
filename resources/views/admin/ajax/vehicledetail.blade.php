@@ -13,7 +13,7 @@
                                 <div class="col-md-4">
                                     <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="date" class="col-md-6 control-label">Type  :   </label>
-                                        {{config('custon.vehicle_type')[$vehicle->type]}}
+                                        {{ config('custom.vehicle_type')[$vehicle->type]}}
                                     </div>
                                 </div>
                                 <div class="col-md-4">

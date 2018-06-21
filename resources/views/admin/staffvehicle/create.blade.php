@@ -189,8 +189,7 @@
                 debugger
                 $.ajax({
                     type:"GET",
-                    // url:window.Laravel.base_url+'/getstaffdetail',
-                    url:window.Laravel.base_url+'getvehicledetail',
+                    url:window.Laravel.base_url+'/admin/staff_vehicle/getvehicledetail',
                     data:{vehicle_id: vehicle_id},
                     success:function (data) {
                         $('.ajax').html(data);
