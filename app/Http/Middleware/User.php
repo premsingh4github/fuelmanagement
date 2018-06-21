@@ -17,10 +17,8 @@ class User
     public function handle($request, Closure $next)
     {
         if (Auth::check()&& Auth::user()->type == 2){
-
-        return $next ($request);
-    }
-
+            return $next ($request);
+        }
         return redirect('');
     }
 }

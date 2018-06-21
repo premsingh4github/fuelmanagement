@@ -20,9 +20,6 @@ class Admin
         if (Auth::check()&& Auth::user()->type == 1){
             return $next ($request);
         }
-
         return redirect('login');
-
-
     }
 }

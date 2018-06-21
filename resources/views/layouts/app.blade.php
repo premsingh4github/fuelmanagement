@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="base_url" content="{{ url('') }}">
 
-    <title>Darta Chalani</title>
+    <title>{{config('app.APP_NAME')}}</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{url('favicon.ico')}}">
 
@@ -110,7 +110,7 @@
                         {{--@elseif(Auth::check() && (Auth::user()->type == array_search('Officer',config('custom.user_types')) ))--}}
                         {{--@else--}}
                             <h5>Government of Nepal</h5>
-                            <h3>Darta Chalani</h3>
+                            <h3>{{config('app.name')}}</h3>
                             <h4>Nepal</h4>
                             {{--<h5>Government of Nepal</h5>--}}
                             {{--<h3>Department of Consular Services</h3>--}}
@@ -133,8 +133,7 @@
                         <li  ><a href="{{ url('') }}">Manage Branch</a></li>
                         <li  ><a href="{{ url('') }}">Manage Users</a></li>
                         <li  ><a href="{{ url('') }}">Reports</a></li>
-                        <li  ><a href="{{ url('') }}">PetrolPump Name</a></li>
-                        <li  ><a href="{{ url('') }}">Description</a></li>
+                        <li  ><a href="{{ url('') }}">Petrolpump</a></li>
                     @endif
 
                 </ul>

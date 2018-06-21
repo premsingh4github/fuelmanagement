@@ -34,10 +34,7 @@ class HomeController extends Controller
 
     public function postlogin()
     {
-//        dd(99);
-
-        if (Auth::attempt(['email' => \request('email'),'password'=> \request('password')])){
-
+        if (Auth::attempt(['email' => \request('email'),'password'=> \request('password'),'status'=>'1'])){
             if (Auth::check()){
                 if (Auth::user()->type ==1) {
                     return redirect('admin');
@@ -45,12 +42,10 @@ class HomeController extends Controller
                 if (Auth::user()->type ==2) {
                     return redirect('user');
                 }
-
-
             }
         }
         else{
-            return"ERROR LOGIN";
+            return redirect()->back()->withErrors(['email'=>'These credentials do not match our records.'])->withInput(request()->only('email'));
         }
     }
 
