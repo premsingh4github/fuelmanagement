@@ -31,8 +31,7 @@ class StaffController extends Controller
     public function create()
     {
         $des =Designation::all();
-        $vehicle =Vehicle::all();
-       return view('admin.staff.create',compact('des','vehicle'));
+       return view('admin.staff.create',compact('des',''));
     }
 
     /**
@@ -48,25 +47,17 @@ class StaffController extends Controller
             'name'=>'required',
             'designation'=>'required',
             'joining_date'=>'required',
-            'vehicle_ownership'=>'required',
-            'vehicle_type'=>'required',
-            'monthly_kota'=>'required',
-
-
+            'licence_no'=>'required',
+            'status'=>'required'
         ]);
+
+
         $staff = new Staff;
         $staff->name = \request('name');
         $staff->designation_id = \request('designation');
         $staff->joining_date = date('Y-m-d',strtotime(\request('joining_date')));
         $staff->licence_no = \request('licence_no');
-        $staff->vehicle_ownership = \request('vehicle_ownership');
-        $staff->vehicle_type = \request('vehicle_type');
-        $staff->office_vehicle = \request('office_vehicle');
-        $staff->vehicle_brand = \request('vehicle_brand');
-        $staff->mileage = \request('mileage');
-        $staff->monthly_kota = \request('monthly_kota');
-        $staff->engine_oil = \request('engine_oil');
-        $staff->driving_person_name = \request('driving_person_name');
+        $staff->status = \request('status');
         $staff->save();
 
         Session::flash('success_message',"Staff added");
@@ -96,7 +87,7 @@ class StaffController extends Controller
     {
         $staff = Staff::findOrfail($id);
         $des = Designation::all();
-        $vehicle = Vehicle::all();
+
         return view('admin.staff.edit',compact('staff','des','vehicle'));
     }
 
@@ -114,25 +105,17 @@ class StaffController extends Controller
             'name'=>'required',
             'designation'=>'required',
             'joining_date'=>'required',
-            'vehicle_ownership'=>'required',
-            'vehicle_type'=>'required',
-            'monthly_kota'=>'required',
+
 
 
         ]);
+//        dd($request->all());
         $staff = Staff::findOrfail($id);
         $staff->name = \request('name');
         $staff->designation_id = \request('designation');
         $staff->joining_date = date('Y-m-d',strtotime(\request('joining_date')));
         $staff->licence_no = \request('licence_no');
-        $staff->vehicle_ownership = \request('vehicle_ownership');
-        $staff->vehicle_type = \request('vehicle_type');
-        $staff->office_vehicle = \request('office_vehicle');
-        $staff->vehicle_brand = \request('vehicle_brand');
-        $staff->mileage = \request('mileage');
-        $staff->monthly_kota = \request('monthly_kota');
-        $staff->engine_oil = \request('engine_oil');
-        $staff->driving_person_name = \request('driving_person_name');
+        $staff->status = \request('status');
         $staff->save();
 
         Session::flash('success_message',"Staff Updated");

@@ -18,8 +18,8 @@
                                     <th>SN</th>
                                     <th>Name</th>
                                     <th>Designation</th>
-                                    <th>Vehicle Ownership</th>
-                                    <th>Vehicle type</th>
+                                    <th>Joining Date</th>
+                                    <th>Licence No</th>
                                     <th>Action</th>
                                 </tr>
                                 @foreach($staffs as $user)
@@ -27,10 +27,11 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->designation->name}}</td>
-                                        <td>{{config('custom.vehicle_ownership')[$user->vehicle_ownership]}}</td>
-                                        <td>{{config('custom.vehicle_type')[$user->vehicle_type]}}</td>
+                                        <td>{{$user->joining_date}}</td>
+                                        <td>{{$user->licence_no}}</td>
 
-                                        <td>
+
+                                    <td>
                                             <a href="{{ url('admin/staff/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
 
                                             <a href="{{url('admin/staff/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
