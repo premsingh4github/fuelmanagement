@@ -10,6 +10,10 @@ return [
         '2'=>'car',
         '3'=>'Bus'
     ],
+    'status'=>[
+        '1'=> 'Enable',
+        '2'=>'Disable'
+    ],
     'nepali_months'=>[
     '1'=>'Baishakh',
     '2'=>'Jestha',

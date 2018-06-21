@@ -31,7 +31,6 @@ class StaffController extends Controller
     public function create()
     {
         $des =Designation::all();
-        $vehicle =Vehicle::all();
        return view('admin.staff.create',compact('des','vehicle'));
     }
 

@@ -34,7 +34,7 @@ class HomeController extends Controller
 
     public function postlogin()
     {
-//        dd(99);
+//        dd(\request()->all());
 
         if (Auth::attempt(['email' => \request('email'),'password'=> \request('password')])){
 
