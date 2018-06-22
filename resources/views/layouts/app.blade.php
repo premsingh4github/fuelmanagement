@@ -643,7 +643,7 @@
     function petrolpumpChange() {
         var type = $('#petrolpump_name').val()
         $('.other_petrolpump').hide();
-        if(type == '1')
+        if(type == '0')
         {
             $('.other_petrolpump').show();
             $('#other').attr('required','true');

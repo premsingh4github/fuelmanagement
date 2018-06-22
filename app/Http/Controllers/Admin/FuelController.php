@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Fuel;
 use App\FuelService;
+use App\Petrolpump;
 use App\Staff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,11 +31,12 @@ class FuelController extends Controller
      */
     public function create()
     {
+        $pump = Petrolpump::all();
         $staff = Staff::whereHas('staff_vehicles')->get();
         $staffs = Staff::all();
         $cal = new \Nepali_Calendar();
         $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
-        return view('admin.fuel.create',compact('staff','today_nepali','staffs'));
+        return view('admin.fuel.create',compact('staff','today_nepali','staffs','pump'));
     }
 
     /**
@@ -102,13 +104,13 @@ class FuelController extends Controller
      */
     public function edit($id)
     {
-
+        $pump = Petrolpump::all();
         $staff = Staff::whereHas('vehicles')->get();
         $staffs = Staff::all();
         $cal = new \Nepali_Calendar();
         $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel = Fuel::findOrfail($id);
-        return view('admin.fuel.edit',compact('staff','today_nepali','staffs','fuel'));
+        return view('admin.fuel.edit',compact('staff','today_nepali','staffs','fuel','pump'));
 
 
     }

@@ -92,8 +92,10 @@
                                     <div class="col-md-12">
                                         <select name="petrolpump_name" id ='petrolpump_name'   onchange="petrolpumpChange()" tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
-                                            @Foreach(config('custom.petrolpumps') as $type => $item)
-                                                <option value='{{$type}}'> {{$item}} </option>";
+                                            {{--<option value='0'> OTHERS </option>";--}}
+
+                                        @foreach($pump as $type)
+                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
                                     </div>

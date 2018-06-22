@@ -91,10 +91,11 @@
                                 <div class="{{ $errors->has('petrolpump_name') ? ' has-error' : '' }} ui-widget">
                                     <label for="petrolpump_name" class="col-md-8 control-label">PetrolPump Name <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <select name="petrolpump_name" id ='petrolpump_name'   onchange="petrolpumpChange()" tabindex="6" class="form-control"  required autofocus>
+                                        <select name="petrolpump_name" id ='petrolpump_name'  tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
-                                            @Foreach(config('custom.petrolpumps') as $type => $item)
-                                                <option value='{{$type}}' @if($type == $fuel->petrolpump_id) selected @endif> {{$item}} </option>";
+                                            {{--<option value='0'> OTHERS </option>";--}}
+                                            @foreach($pump as $type)
+                                                <option value='{{$type->id}}' @if($type->id == $fuel->petrolpump_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
                                     </div>
