@@ -35,6 +35,9 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
     Route::resource('staff_vehicle','Admin\StaffVehicleController');
     Route::get('staff_services','Admin\FuelController@staff_services');
     Route::resource('petrolpump','Admin\PetrolpumpController');
+    Route::get('report','Admin\ReportController@getreport');
+    Route::get('getreport','Admin\ReportController@getreport_ajax');
+
 
 
 

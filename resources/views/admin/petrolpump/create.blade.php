@@ -20,11 +20,19 @@
                                     </span>
                                         @endif
                                     </div>
+                                    <div class="form-group-sm-6">
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                        </button>
+
+
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-sm-6">
+                                    <div class="form-group col-sm-1">
                                         <input type="submit" name="submit" id="submit" value="Add" class="form-control btn btn-success">
                                     </div>
+
                                 </div>
                             </form>
                         </div>
