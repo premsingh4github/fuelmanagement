@@ -32,7 +32,7 @@ class FuelController extends Controller
     public function create()
     {
         $pump = Petrolpump::all();
-        $staff = Staff::whereHas('staff_vehicles')->get();
+        $staff = Staff::select('staff.id','staff.name')->whereHas('staff_vehicles')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','ASC')->get();
         $staffs = Staff::all();
         $cal = new \Nepali_Calendar();
         $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
