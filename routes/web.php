@@ -50,3 +50,4 @@ Route::group(['middleware'=>'user','prefix'=>'user'],function (){
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('excel','HomeController@excel');
