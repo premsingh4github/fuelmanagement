@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports;
 
 class HomeController extends Controller
 {
@@ -57,5 +60,10 @@ class HomeController extends Controller
     {
         Auth::logout();
         return redirect('');
+    }
+
+    public function excel(Excel $excel)
+    {
+
     }
 }

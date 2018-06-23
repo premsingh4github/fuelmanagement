@@ -26,7 +26,7 @@
                                 <div class="{{ $errors->has('staff_name') ? ' has-error' : '' }}">
                                     <label for="staff_id" class="col-md-6 control-label">Staff Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select onchange="updateService()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
+                                        <select onchange="getStaffdetail()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staff as $type)
                                                 <option value='{{$type->id}}'> {{$type->name}} </option>";
@@ -39,6 +39,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div id="staff_detail">
+
+                            </div>
+                        </div>
+                        <div class="row">
 
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('month') ? ' has-error' : '' }}">
@@ -92,8 +99,10 @@
                                     <div class="col-md-12">
                                         <select name="petrolpump_name" id ='petrolpump_name'   onchange="petrolpumpChange()" tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
-                                            @Foreach(config('custom.petrolpumps') as $type => $item)
-                                                <option value='{{$type}}'> {{$item}} </option>";
+                                            {{--<option value='0'> OTHERS </option>";--}}
+
+                                        @foreach($pump as $type)
+                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
                                     </div>

@@ -18,7 +18,7 @@ class CreateStaffTable extends Migration
             $table->string('name');
             $table->integer('designation_id');
             $table->date('joining_date');
-            $table->string('licence_no') ;
+            $table->string('licence_no')->nullable();
             $table->enum('status',['0','1']);
             $table->timestamps();
         });

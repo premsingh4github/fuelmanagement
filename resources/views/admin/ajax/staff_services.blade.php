@@ -3,7 +3,7 @@
         <div >
             <label for="driver" class="col-md-8 control-label">{{$service->service->name}} [litre/month] max- {{$service->quota}}</label>
             <div class="col-md-12">
-                <input name="service[{{$service->id}}]"  type="float"  class="form-control "  value="" >
+                <input name="service[{{$service->id}}]"  type="float"  class="form-control "  value="" autofocus >
 
 
             </div>

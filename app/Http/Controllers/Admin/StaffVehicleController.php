@@ -180,13 +180,19 @@ class StaffVehicleController extends Controller
 
     public function getvehicledetail()
     {
-//        dd(99);
-
         $this->validate(\request(),[
             'vehicle_id'=>'required'
         ]);
-//        dd(\request('vehicle_id'));
         $vehicle = Vehicle::findOrFail(\request('vehicle_id'));
         return view('admin.ajax.vehicledetail',compact('vehicle'));
+    }
+
+    public function getStaffdetail()
+    {
+        $this->validate(\request(),[
+            'staff_id'=>'required'
+        ]);
+        $staff = Staff::findOrFail(\request('staff_id'));
+        return view('admin.ajax.staffdetail',compact('staff'));
     }
 }

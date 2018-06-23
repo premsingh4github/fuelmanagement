@@ -123,17 +123,17 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li  ><a href="{{ url('') }}">Home</a></li>
+                    <li class="<?php if(Request::segment(2) ==''){echo 'active';}?>"  ><a href="{{ url('') }}">Home</a></li>
                     {{--{{Auth::user()->type}}--}}
                     @if(  isset(Auth::user()->type) && Auth::user()->type == 1)
-                        <li  ><a href="{{ url('admin/staff') }}">Staffs</a></li>
-                    <li  ><a href="{{ url('admin/designation') }}">Designation</a></li>
-                        <li  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
-                        <li  ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
-                        <li  ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
-                        <li  ><a href="{{ url('') }}">Manage Users</a></li>
-                        <li  ><a href="{{ url('') }}">Reports</a></li>
-                        <li  ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
+                        <li class="<?php if(Request::segment(2) =='staff'){echo 'active';}?>"  ><a href="{{ url('admin/staff') }}">Staffs</a></li>
+                    <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
+                        <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
+                        <li class="<?php if(Request::segment(2) =='vehicle'){echo 'active';}?>" ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
+                        <li  class="<?php if(Request::segment(2) =='staff_vehicle'){echo 'active';}?>" ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
+                        <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('') }}">Manage Users</a></li>
+{{--                        <li  ><a href="{{ url('admin/report') }}">Reports</a></li>--}}
+                        <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
                     @endif
 
                 </ul>
@@ -643,7 +643,7 @@
     function petrolpumpChange() {
         var type = $('#petrolpump_name').val()
         $('.other_petrolpump').hide();
-        if(type == '1')
+        if(type == '0')
         {
             $('.other_petrolpump').show();
             $('#other').attr('required','true');
@@ -685,6 +685,50 @@ debugger;
             });
         }else{
             $('#services').html("");
+        }
+    }
+
+    function getVehicleinfo() {
+        var vehicle_id = $('#ovehicle').val()
+        if (vehicle_id >0 ){
+            $.ajax({
+                type:"GET",
+                url:window.Laravel.base_url+'/admin/staff_vehicle/getvehicledetail',
+                data:{vehicle_id: vehicle_id},
+                success:function (data) {
+                    $('.ajax').html(data);
+                },
+                error:function (error) {
+                    debugger
+
+                }
+            });
+        }
+        else {
+            $(".ajax").html("");
+
+        }
+
+    }
+
+    function getStaffdetail() {
+        var staff_id = $('#staff_id').val();
+        if(staff_id > 0){
+            $.ajax({
+                type:"GET",
+                url:window.Laravel.base_url+'/admin/staff_vehicle/getStaffdetail',
+                data:{staff_id: staff_id},
+                success:function (data) {
+                    $('#staff_detail').html(data);
+                },
+                error:function (error) {
+                    debugger
+
+                }
+            });
+        }
+        else{
+            $('#staff_detail').html("");
         }
     }
 

@@ -46,7 +46,6 @@ class StaffController extends Controller
             'name'=>'required',
             'designation'=>'required',
             'joining_date'=>'required',
-            'licence_no'=>'required',
         ]);
 
 
@@ -54,7 +53,9 @@ class StaffController extends Controller
         $staff->name = \request('name');
         $staff->designation_id = \request('designation');
         $staff->joining_date = date('Y-m-d',strtotime(\request('joining_date')));
-        $staff->licence_no = \request('licence_no');
+        if(\request('licence_no')){
+            $staff->licence_no = \request('licence_no');
+        }
         $staff->status = '1';
         $staff->save();
 

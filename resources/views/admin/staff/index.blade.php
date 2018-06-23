@@ -36,7 +36,7 @@
 
                                             <a href="{{url('admin/staff/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
 
-
+                                        @if($user->staff_vehicles()->count() == 0 )
                                             {!! Form::open([
                                                          'method'=>'DELETE',
                                                          'url' => ['admin/staff', $user->id],
@@ -49,6 +49,7 @@
                                         'onclick'=>'return confirm("Confirm delete?")'
                                 )) !!}
                                             {!! Form::close() !!}
+                                        @endif
                                         </td>
                                     </tr>
                                 @endforeach
