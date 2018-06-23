@@ -126,14 +126,18 @@
                     <li class="<?php if(Request::segment(2) ==''){echo 'active';}?>"  ><a href="{{ url('') }}">Home</a></li>
                     {{--{{Auth::user()->type}}--}}
                     @if(  isset(Auth::user()->type) && Auth::user()->type == 1)
-                        <li class="<?php if(Request::segment(2) =='staff'){echo 'active';}?>"  ><a href="{{ url('admin/staff') }}">Staffs</a></li>
-                    <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
-                        <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
-                        <li class="<?php if(Request::segment(2) =='vehicle'){echo 'active';}?>" ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
-                        <li  class="<?php if(Request::segment(2) =='staff_vehicle'){echo 'active';}?>" ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
-                        <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('') }}">Manage Users</a></li>
+
 {{--                        <li  ><a href="{{ url('admin/report') }}">Reports</a></li>--}}
+                        <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
+
+                        <li  class="<?php if(Request::segment(2) =='staff_vehicle'){echo 'active';}?>" ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
+
+                        <li class="<?php if(Request::segment(2) =='staff'){echo 'active';}?>"  ><a href="{{ url('admin/staff') }}">Staffs</a></li>
+
+                        <li class="<?php if(Request::segment(2) =='vehicle'){echo 'active';}?>" ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
                         <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
+                        <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
+                        <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('') }}">Manage Users</a></li>
                     @endif
 
                 </ul>
