@@ -13,7 +13,7 @@
                                     <label for="date" class="col-md-6 control-label">Staff  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
 
-                                        <select name="staff"   tabindex="2" class="form-control" required autofocus>
+                                        <select id="staff_id" name="staff"   tabindex="2" class="form-control" onchange="getStaffdetail()" required autofocus>
                                         <option value="">Select one...</option>
                                         @foreach($staffs as $type)
                                         <option value='{{$type->id}}'> {{$type->name}} </option>";
@@ -45,6 +45,11 @@
                                         @endif
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="staff_detail">
+
                             </div>
                         </div>
                         <div class="row">
@@ -87,7 +92,7 @@
                                         <label for="ovehicle" class="col-md-6 control-label">Vehicle  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                         <div class="col-md-12">
 
-                                            <select name="ovehicle"   id="ovehicle" tabindex="2" class="form-control" onchange=getinfo() required autofocus>
+                                            <select name="ovehicle"   id="ovehicle" tabindex="2" class="form-control" onchange=getVehicleinfo() required autofocus>
                                                 <option value="">Select one...</option>
                                                 @foreach($vehicle as $type)
                                                     <option value='{{$type->id}}'> {{config('custom.vehicle_type')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
@@ -194,31 +199,7 @@
             }
         }
 
-        function getinfo() {
-            var vehicle_id = $('#ovehicle').val()
-            debugger
-            if (vehicle_id >0 ){
-                debugger
-                $.ajax({
-                    type:"GET",
-                    url:window.Laravel.base_url+'/admin/staff_vehicle/getvehicledetail',
-                    data:{vehicle_id: vehicle_id},
-                    success:function (data) {
-                        $('.ajax').html(data);
-                        debugger
-                    },
-                    error:function (error) {
-                        debugger
 
-                    }
-                });
-            }
-            else {
-                $(".staffdetail").html("");
-
-            }
-
-        }
 
     </script>
 

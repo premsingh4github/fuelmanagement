@@ -20,13 +20,6 @@
                                     </span>
                                         @endif
                                     </div>
-                                    <div class="form-group-sm-6">
-                                        <button type="button" class="btn btn-default btn-sm">
-                                            <span class="glyphicon glyphicon-ok"></span>
-                                        </button>
-
-
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-sm-1">

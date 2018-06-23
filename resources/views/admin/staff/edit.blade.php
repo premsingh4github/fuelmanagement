@@ -56,9 +56,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-6 control-label">Licence No  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="licence_no" class="col-md-6 control-label">Licence No   </label>
                                     <div class="col-md-12">
-                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="{{$staff->licence_no}}" required autofocus>
+                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="{{$staff->licence_no}}" >
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>

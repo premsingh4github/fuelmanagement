@@ -25,8 +25,6 @@
                                 <div class="{{ $errors->has('designation') ? ' has-error' : '' }}">
                                     <label for="designation" class="col-md-6 control-label">Designation  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-
-
                                         <select name="designation"   tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($des as $type)
@@ -41,7 +39,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('joining_date') ? ' has-error' : '' }}">
                                     <label for="joining_date" class="col-md-6 control-label">Joining Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
@@ -59,9 +56,9 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-8 control-label"> Driving Licence<span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="licence_no" class="col-md-8 control-label"> Driving Licence </label>
                                     <div class="col-md-12">
-                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="" required autofocus>
+                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="">
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>
@@ -71,8 +68,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <br>
                         <br>
                         <div class="form-group">

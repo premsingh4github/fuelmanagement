@@ -136,9 +136,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Submit
                                 </button>
-                                <button type="reset" tabindex="9" class="btn btn-warning reset">
-                                    Reset
-                                </button>
+                                <a  href="{{url('admin/vehicle')}}" tabindex="9" class="btn btn-warning reset">
+                                    Back
+                                </a>
                             </div>
                         </div>
 
