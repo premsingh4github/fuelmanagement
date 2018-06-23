@@ -132,8 +132,8 @@
                         <li  ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
                         <li  ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
                         <li  ><a href="{{ url('') }}">Manage Users</a></li>
-                        <li  ><a href="{{ url('') }}">Reports</a></li>
-                        <li  ><a href="{{ url('') }}">Petrolpump</a></li>
+                        <li  ><a href="{{ url('admin/report') }}">Reports</a></li>
+                        <li  ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
                     @endif
 
                 </ul>
@@ -643,7 +643,7 @@
     function petrolpumpChange() {
         var type = $('#petrolpump_name').val()
         $('.other_petrolpump').hide();
-        if(type == '1')
+        if(type == '0')
         {
             $('.other_petrolpump').show();
             $('#other').attr('required','true');

@@ -13,15 +13,8 @@
                                     <a href="{{url('/admin/designation/create')}}" class="btn-sm btn-success" >Add Designation</a>
                                 </div>
                             </div>
-                            {!! Form::open(['method'=>'get']) !!}
-                            <div class="input-group">
-                                <input type="text"  class="form-control" value="{{request('name')}}" name="name" id="name" placeholder="Name">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
-                            <br>
+
+
                             <table class="table table-striped table-bordered table-hover dataTable no-footer">
                                 <tr>
                                     <th>SN</th>

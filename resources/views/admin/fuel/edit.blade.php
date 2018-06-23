@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {!! Form::open(['url'=>url('admin/fuel'),'method'=>'POST','class'=>'form-horizontal','id'=>'myform']) !!}
+                        {!! Form::open(['url'=>url('admin/fuel/'.$fuel->id),'method'=>'PUT','class'=>'form-horizontal','id'=>'myform']) !!}
 
                         <div class="row">
                             <div class="col-md-6">
@@ -29,7 +29,7 @@
                                         <select onchange="updateService()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staff as $type)
-                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
+                                                <option value='{{$type->id}}' @if($type->id == $fuel->staff_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
                                         </select> @if ($errors->has('staff_id'))
                                             <span class="help-block">
@@ -47,7 +47,7 @@
                                         <select name="month" id="month"  tabindex="4" class="form-control"   required autofocus>
                                             <option value="">Select one...</option>
                                             @Foreach(config('custom.nepali_months') as $type => $item)
-                                                <option value='{{$type}}'> {{$item}} </option>";
+                                                <option value='{{$type}}' @if($type == $fuel->month_id) selected @endif> {{$item}} </option>";
 
                                             @endforeach
                                         </select>
@@ -64,7 +64,8 @@
                                     <label for="mode" class="col-md-6 control-label">Mode <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
                                         <input type="radio" name="mode" value="Cash" onclick=getamount()> Cash
-                                        <input type="radio" name="mode" value="Copon" onclick=hideamount()> Copon<br> @if ($errors->has('mode'))
+                                        <input type="radio" name="mode" value="Copon" onclick=hideamount()> Copon<br>
+                                        @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
                                                      </span>
@@ -80,7 +81,7 @@
                                         <label for="amount" class="col-md-8 control-label">Amount <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                         <div class="col-md-12">
-                                            <input id="amount" type="number" class="form-control " name="amount" value="" required autofocus>
+                                            <input id="amount" type="number" class="form-control " name="amount" value="{{$fuel->amount}}" required autofocus>
 
                                         </div>
                                     </div>
@@ -90,12 +91,11 @@
                                 <div class="{{ $errors->has('petrolpump_name') ? ' has-error' : '' }} ui-widget">
                                     <label for="petrolpump_name" class="col-md-8 control-label">PetrolPump Name <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <select name="petrolpump_name" id ='petrolpump_name'   onchange="petrolpumpChange()" tabindex="6" class="form-control"  required autofocus>
+                                        <select name="petrolpump_name" id ='petrolpump_name'  tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
                                             {{--<option value='0'> OTHERS </option>";--}}
-
-                                        @foreach($pump as $type)
-                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
+                                            @foreach($pump as $type)
+                                                <option value='{{$type->id}}' @if($type->id == $fuel->petrolpump_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
                                         </select>
                                     </div>
@@ -103,20 +103,20 @@
                             </div>
 
 
-                                <div class="col-md-6 other_petrolpump" style="display: none">
-                                    <div class="{{ $errors->has('other') ? ' has-error' : '' }}">
-                                        <label for="office_vehicle" class="col-md-6 control-label">Other PetrolPump Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                        <div class="col-md-12">
-                                            <input id="other" type="text" tabindex="1" class="form-control " name="other" value="" required autofocus>
+                            <div class="col-md-6 other_petrolpump" style="display: none">
+                                <div class="{{ $errors->has('other') ? ' has-error' : '' }}">
+                                    <label for="office_vehicle" class="col-md-6 control-label">Other PetrolPump Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <div class="col-md-12">
+                                        <input id="other" type="text" tabindex="1" class="form-control " name="other" value="{{$fuel->other}}" required autofocus>
 
                                         @if ($errors->has('other'))
-                                                <span class="help-block">
+                                            <span class="help-block">
                                                     <strong>{{ $errors->first('other') }}</strong>
                                                          </span>
-                                            @endif
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
+                            </div>
 
                         </div>
                         <div class="ajax">
@@ -128,7 +128,7 @@
                                     <label for="mileage" class="col-md-8 control-label">Current Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                     <div class="col-md-12">
-                                        <input id="current_km" type="number" tabindex="3" class="form-control " name="current_km" value="" required autofocus>
+                                        <input id="current_km" type="number" tabindex="3" class="form-control " name="current_km" value="{{$fuel->current_km}}" required autofocus>
                                         @if ($errors->has('current_km'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('current_km') }}</strong>
@@ -142,7 +142,7 @@
                                 <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
                                     <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="" required autofocus>
+                                        <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="{{$fuel->previous_km}}" required autofocus>
                                         @if ($errors->has('previous_km'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('previous_km') }}</strong>
@@ -161,7 +161,7 @@
                                         <select name="receiver_id" id="receiver_id"  class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staffs as $type)
-                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
+                                                <option value='{{$type->id}}' @if($type->id == $fuel->receiver_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
                                         </select> @if ($errors->has('receiver_id'))
                                             <span class="help-block">

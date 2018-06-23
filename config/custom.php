@@ -4,6 +4,14 @@ return [
       '1'=>'Admin',
       '2'=>'Member'
     ],
+    'report_field'=>[
+        '1'=>'Staffs',
+        '2'=>'Designation',
+        '3'=>'Fuels',
+        '4'=>'Vehicles',
+        '5'=>'Staff Vehicles',
+        '6'=>'Petrol Pump'
+    ],
     'vehicle_ownership'=>[
         '1'=>'Personal',
         '2'=>'Offical'
