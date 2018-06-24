@@ -5,14 +5,14 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {!! Form::open(['url'=>url('admin/staff'),'method'=>'POST','class'=>'form-horizontal']) !!}
+                        {!! Form::open(['url'=>url('admin/users'),'method'=>'POST','class'=>'form-horizontal']) !!}
 
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="date" class="col-md-6 control-label">Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input id="name" type="text" tabindex="1" class="form-control" name="name" value="" required autofocus>
+                                        <input id="name" type="text" tabindex="1" class="form-control" name="name" value="{{old('name')}}" required autofocus>
                                         @if ($errors->has('name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('name') }}</strong>
@@ -22,47 +22,43 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="{{ $errors->has('designation') ? ' has-error' : '' }}">
-                                    <label for="designation" class="col-md-6 control-label">Designation  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <label for="date" class="col-md-6 control-label">Email <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select id="designation" onchange="designationChange()" name="designation"   tabindex="2" class="form-control" required autofocus>
-                                            <option value="">Select one...</option>
-                                            @foreach($des as $type)
-                                            <option value='{{$type->id}}'> {{$type->name}} </option>";
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('designation'))
+                                        <input id="email" type="email" tabindex="1" class="form-control" name="email" value="{{old('email')}}" required autofocus>
+                                        @if ($errors->has('email'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('designation') }}</strong>
+                                                <strong>{{ $errors->first('email') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="{{ $errors->has('joining_date') ? ' has-error' : '' }}">
-                                    <label for="joining_date" class="col-md-6 control-label">Joining Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                <div class="{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="date" class="col-md-6 control-label">Password <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input id="joining_date" type="text" tabindex="3" class="form-control nepali_date_past" name="joining_date" value="" required autofocus>
-                                        @if ($errors->has('joining_date'))
+                                        <input id="password" type="password" tabindex="1" class="form-control" name="password" value="" required autofocus>
+                                        @if ($errors->has('password'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('joining_date') }}</strong>
-                                                     </span>
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div id="row">
+
                             <div class="col-md-4">
-                                <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-8 control-label" id="licence_no_label"> Driving Licence </label>
+                                <div class="{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                    <label for="date" class="col-md-8 control-label">Confirm-Password <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="">
-                                        @if ($errors->has('licence_no'))
+                                        <input id="password_confirmation" type="password" tabindex="1" class="form-control" name="password_confirmation" value="" required autofocus>
+                                        @if ($errors->has('password_confirmation'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('licence_no') }}</strong>
-                                                     </span>
+                                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>

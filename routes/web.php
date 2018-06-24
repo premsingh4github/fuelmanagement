@@ -30,16 +30,18 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
     Route::resource('designation','Admin\DesignationController');
     Route::resource('vehicle','Admin\VehicleController');
     Route::get('checkquantity','Admin\FuelController@checkquantity');
-    Route::resource('fuel','Admin\FuelController');
+
 
 
     Route::get('staff_vehicle/getvehicledetail','Admin\StaffVehicleController@getvehicledetail');
-    Route::get('staff_vehicle/getStaffdetail','Admin\StaffVehicleController@getStaffdetail');
+
     Route::resource('staff_vehicle','Admin\StaffVehicleController');
     Route::get('staff_services','Admin\FuelController@staff_services');
     Route::resource('petrolpump','Admin\PetrolpumpController');
     Route::get('report','Admin\ReportController@getreport');
     Route::get('getreport','Admin\ReportController@getreport_ajax');
+
+    Route::resource('users','Admin\UserController');
 
 
 
@@ -53,6 +55,15 @@ Route::group(['middleware'=>'user','prefix'=>'user'],function (){
     Route::get('','user\UserController@index');
 });
 
+Route::group(['middleware'=>'auth'],function (){
+    Route::get('profile','HomeController@profile');
+    Route::post('profile','HomeController@updateProfile');
+
+    Route::resource('admin/fuel','Admin\FuelController');
+
+    Route::get('admin/getStaffdetail','Admin\StaffVehicleController@getStaffdetail');
+
+});
 
 
 

@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {!! Form::open(['url'=>url('admin/staff_vehicle'),'method'=>'POST','class'=>'form-horizontal']) !!}
+                        {!! Form::open(['url'=>url('admin/staff_vehicle'),'method'=>'POST','class'=>'form-horizontal','id'=>'myform']) !!}
 
                         <div class="row">
                             <div class="col-md-6">
@@ -34,7 +34,7 @@
 
                                         <select name="ownership"  id="ownership" tabindex="2" class="form-control" onchange=changetype() required autofocus>
                                             <option value="">Select one...</option>
-                                            @foreach(config('custom.vehicle_ownership') as $type=> $index)
+                                            @foreach(config('custom.vehicle_ownerships') as $type=> $index)
                                                 <option value='{{$type}}'> {{$index}} </option>";
                                             @endforeach
                                         </select>
@@ -91,11 +91,10 @@
                                     <div class="{{ $errors->has('ovehicle') ? ' has-error' : '' }}">
                                         <label for="ovehicle" class="col-md-6 control-label">Vehicle  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                         <div class="col-md-12">
-
-                                            <select name="ovehicle"   id="ovehicle" tabindex="2" class="form-control" onchange=getVehicleinfo() required autofocus>
+                                            <select name="vehicle_id"   id="vehicle_id" tabindex="2" class="form-control" onchange=getVehicleinfo() required autofocus>
                                                 <option value="">Select one...</option>
                                                 @foreach($vehicle as $type)
-                                                    <option value='{{$type->id}}'> {{config('custom.vehicle_type')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
+                                                    <option value='{{$type->id}}'> {{config('custom.vehicle_types')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('staff'))
@@ -114,38 +113,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="{{ $errors->has('driver') ? ' has-error' : '' }}">
-                                    <label for="driver" class="col-md-6 control-label">Driver  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                    <div class="col-md-12">
 
-                                        <select name="driver"   tabindex="2" class="form-control" required autofocus>
-                                            <option value="">Select one...</option>
-                                            <option value='0'> Self </option>";
-                                            @foreach($drivers as $type)
 
-                                                <option value='{{$type->id}}'> {{$type->name}} </option>";
-                                            @endforeach
-                                        </select>
-                                        </select>
-                                        @if ($errors->has('staff'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('staff') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            @foreach($services as $service)
-                                <div class="col-md-6">
-                                    <div >
-                                        <label for="driver" class="col-md-6 control-label">{{$service->name}} [litre/month]</label>
-                                        <div class="col-md-12">
-                                            <input  type="float" tabindex="3" class="form-control " name="{{$service->id}}" value="" >
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
 
                         </div>
 
@@ -175,9 +144,7 @@
 @section('script')
     <script>
         function changetype() {
-            debugger;
             var type = $('#ownership').val()
-            debugger;
             if(type == '1')
             {
                 $('.offical').hide();

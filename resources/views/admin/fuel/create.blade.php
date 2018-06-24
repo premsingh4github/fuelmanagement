@@ -7,7 +7,11 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         {!! Form::open(['url'=>url('admin/fuel'),'method'=>'POST','class'=>'form-horizontal','id'=>'myform']) !!}
-
+                        <div class="row">
+                            <div class="form-group col-sm-6 col-sm-offset-2">
+                                <a href="{{url('admin/fuel')}}" class=" btn btn-sm  btn-warning" >Back</a>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
@@ -26,7 +30,7 @@
                                 <div class="{{ $errors->has('staff_name') ? ' has-error' : '' }}">
                                     <label for="staff_id" class="col-md-6 control-label">Staff Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select onchange="getStaffdetail()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
+                                        <select onchange="getStaffdetailforfuel()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staff as $type)
                                                 <option value='{{$type->id}}'> {{$type->name}} </option>";
@@ -51,7 +55,7 @@
                                 <div class="{{ $errors->has('month') ? ' has-error' : '' }}">
                                     <label for="month" class="col-md-6 control-label">Month <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select name="month" id="month"  tabindex="4" class="form-control"   required autofocus>
+                                        <select name="month" id="month" onchange="updateService()"  tabindex="4" class="form-control"   required autofocus>
                                             <option value="">Select one...</option>
                                             @Foreach(config('custom.nepali_months') as $type => $item)
                                                 <option value='{{$type}}'> {{$item}} </option>";
@@ -129,37 +133,7 @@
                         <div class="ajax">
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="{{ $errors->has('current_km') ? ' has-error' : '' }} ui-widget">
-                                    <label for="mileage" class="col-md-8 control-label">Current Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
-                                    <div class="col-md-12">
-                                        <input id="current_km" type="number" tabindex="3" class="form-control " name="current_km" value="" required autofocus>
-                                        @if ($errors->has('current_km'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('current_km') }}</strong>
-                                                     </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
-                                    <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
-                                    <div class="col-md-12">
-                                        <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="" required autofocus>
-                                        @if ($errors->has('previous_km'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('previous_km') }}</strong>
-                                                     </span>
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('reciver_name') ? ' has-error' : '' }} ui-widget">
@@ -210,7 +184,6 @@
     <script>
 
         function  checkQuantity() {
-            debugger
             var staff_id = $('#staff_name').val();
             var month_id = $('#month').val();
             var quantity = $('#quantity').val();
@@ -229,6 +202,10 @@
                     }
                 });
             }
+        }
+        function getStaffdetailforfuel() {
+            getStaffdetail();
+            updateService();
         }
 
 

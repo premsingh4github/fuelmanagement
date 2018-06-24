@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StaffVehicle extends Model
 {
+    use SoftDeletes;
 
     public function staff()
     {
@@ -29,5 +31,4 @@ class StaffVehicle extends Model
     public function vehicle_services(){
         return $this->hasMany(VehicleService::class);
     }
-
 }

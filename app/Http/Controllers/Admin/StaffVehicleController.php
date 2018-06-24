@@ -55,14 +55,15 @@ class StaffVehicleController extends Controller
             'staff'=>'required',
         'ownership'=>'required',
         ]);
+        $staff_veh_old = StaffVehicle::where('staff_id',\request('staff'))->delete();
 
         $staff_veh = new StaffVehicle;
         $staff_veh->staff_id = \request('staff');
         $staff_veh->ownership = \request('ownership');
         $staff_veh->driver_id = \request('driver');
-        if(\request('ovehicle'))
+        if(\request('vehicle_id'))
         {
-            $staff_veh->vehicle_id  = \request('ovehicle');
+            $staff_veh->vehicle_id  = \request('vehicle_id');
         }
         $staff_veh->save();
         if (\request('vehicle_brand')){
@@ -119,7 +120,8 @@ class StaffVehicleController extends Controller
         $drivers =  Staff::whereHas('designation',function ($q){
             $q->where('name','Driver');
         })->get();
-        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicle','drivers'));
+        $services = Service::all();
+        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicle','drivers','services'));
 
     }
 
@@ -132,30 +134,34 @@ class StaffVehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request->all());
         $this->validate($request,[
             'staff'=>'required',
             'ownership'=>'required',
         ]);
-
         $staff_veh =StaffVehicle::findOrfail($id);
         $staff_veh->staff_id = \request('staff');
         $staff_veh->ownership = \request('ownership');
         $staff_veh->driver_id = \request('driver');
+
         if(\request('ovehicle'))
         {
             $staff_veh->vehicle_id  = \request('ovehicle');
         }
         $staff_veh->save();
-        if (\request('vehicle_brand')){
 
-            $personal_veh =PersonalVehicle::findOrfail($staff_veh->id);
+        if (\request('vehicle_brand')){
+            $personal_veh = PersonalVehicle::firstOrNew(['staff_vehicle_id'=>$staff_veh->id]);
             $personal_veh->vehicle_brand = \request('vehicle_brand');
             $personal_veh->vehicle_no = \request('vehicle_no');
             $personal_veh->mileage = \request('mileage');
-            $personal_veh->staff_vehicle_id = $staff_veh->id;
             $personal_veh->save();
-
+        }
+        if(\request('services')){
+            foreach (\request('services') as $key => $value){
+                $vehicleService =VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
+                $vehicleService->quota = $value;
+                $vehicleService->save();
+            }
         }
         Session::flash('success_message','Staff Vehicle Updated');
         return redirect('admin/staff_vehicle');
@@ -184,7 +190,11 @@ class StaffVehicleController extends Controller
             'vehicle_id'=>'required'
         ]);
         $vehicle = Vehicle::findOrFail(\request('vehicle_id'));
-        return view('admin.ajax.vehicledetail',compact('vehicle'));
+        $drivers =  Staff::whereHas('designation',function ($q){
+            $q->where('name','Driver');
+        })->get();
+        $services = Service::all();
+        return view('admin.ajax.vehicledetail',compact('vehicle','drivers','services'));
     }
 
     public function getStaffdetail()
@@ -193,6 +203,7 @@ class StaffVehicleController extends Controller
             'staff_id'=>'required'
         ]);
         $staff = Staff::findOrFail(\request('staff_id'));
+
         return view('admin.ajax.staffdetail',compact('staff'));
     }
 }

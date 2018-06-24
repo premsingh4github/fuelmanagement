@@ -19,6 +19,7 @@ class CreateStaffVehiclesTable extends Migration
             $table->integer('vehicle_id')->nullable();
             $table->enum('ownership',['1','2']);
             $table->integer('driver_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

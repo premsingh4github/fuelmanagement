@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalVehicle extends Model
 {
+    protected $fillable = ['staff_vehicle_id '];
 
 //    public function Person_veh(){
 //

@@ -8,6 +8,7 @@ use App\Petrolpump;
 use App\Staff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class FuelController extends Controller
@@ -53,6 +54,7 @@ class FuelController extends Controller
             'mode'=>'required',
             'petrolpump_name'=>'required',
         ]);
+        $staff = Staff::findOrFail(\request('staff_id'));
         $fuel= new  Fuel;
         $cal = new \Nepali_Calendar();
         $fuel->date = $cal->eng_to_nepali_date(date('Y-m-d'));
@@ -65,8 +67,9 @@ class FuelController extends Controller
             $fuel->other = \request('other');
         }
         $fuel->current_km = \request('current_km');
-        $fuel->previous_km = \request('previous_km');
+        $fuel->previous_km = $staff->previous_km();
         $fuel->receiver_id = \request('receiver_id');
+        $fuel->user_id = Auth::user()->id;
         $fuel->save();
 
         if(\request('service')){

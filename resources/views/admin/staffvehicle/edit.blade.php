@@ -36,7 +36,7 @@
 
                                         <select name="ownership"  id="ownership" tabindex="2" class="form-control" onchange=changetype() required autofocus>
                                             <option value="">Select one...</option>
-                                            @foreach(config('custom.vehicle_ownership') as $type=> $index)
+                                            @foreach(config('custom.vehicle_ownerships') as $type=> $index)
                                                 <option value='{{$type}}' @if($type == $staff_veh->ownership) selected @endif> {{$index}} </option>";
                                             @endforeach
                                         </select>
@@ -139,6 +139,16 @@
                                     </div>
                                 </div>
                             </div>
+                            @foreach($services as $service)
+                                <div class="col-md-6">
+                                    <div >
+                                        <label for="driver" class="col-md-6 control-label">{{$service->name}} [litre/month]</label>
+                                        <div class="col-md-12">
+                                            <input  type="float" tabindex="3" class="form-control " name="services[{{$service->id}}]" value="{{$service->quotaByStaffVehicleId($staff_veh->id)}}" >
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
 
                         </div>
 

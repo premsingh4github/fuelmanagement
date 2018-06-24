@@ -5,14 +5,16 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        {!! Form::open(['url'=>url('admin/staff/'.$staff->id),'method'=>'PUT','class'=>'form-horizontal']) !!}
+                        {!! Form::open(['url'=>url('admin/staff'),'method'=>'POST','class'=>'form-horizontal']) !!}
 
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label for="date" class="col-md-6 control-label">Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                    <div class="col-md-12">
-                                        <input id="name" type="text" tabindex="1" class="form-control" name="name" value="{{$staff->name}}" required autofocus>
+                                    <label for="date" class="col-md-6 ">Name:  </label>
+                                    {{--<label>Name:</label>--}}
+                                    <div class="col-md-9">
+                                        {{$staff->name}}
+
                                         @if ($errors->has('name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('name') }}</strong>
@@ -23,33 +25,22 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('designation') ? ' has-error' : '' }}">
-                                    <label for="designation" class="col-md-6 control-label">Designation  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="designation" class="col-md-6 ">Designation:   </label>
                                     <div class="col-md-12">
-                                        <select id="designation" name="designation" onchange="designationChange()"  tabindex="2" class="form-control" required autofocus>
-                                            <option value="">Select one...</option>
-
-                                            @foreach($des as $type )
-                                                <option value='{{$type->id}}' @if($type == $staff->designation) selected @endif> {{$type->name}} </option>";
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('designation'))
-                                            <span>
-                                                <strong>{{ $errors->first('designation') }}</strong>
-                                            </span>
-                                        @endif
+                                        {{$staff->designation->name}}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('joining_date') ? ' has-error' : '' }}">
-                                    <label for="joining_date" class="col-md-6 control-label">Joining Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="joining_date" class="col-md-6 ">Joining Date: </label>
                                     <div class="col-md-12">
-                                        <input id="joining_date" type="text" tabindex="3" class="form-control nepali_date_past " name="joining_date" value="{{$staff->joining_date}}" required autofocus>
-                                        @if ($errors->has('joining_date'))
+                                        {{$staff->joining_date}}
+                                    @if ($errors->has('joining_date'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('joining_date') }}</strong>
-                                             </span>
+                                                     </span>
                                         @endif
                                     </div>
                                 </div>
@@ -58,39 +49,39 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
-                                    <label for="licence_no" class="col-md-8 control-label" id="licence_no_label">Licence No   </label>
+                                    <label for="licence_no" class="col-md-6 ">Licence No:   </label>
                                     <div class="col-md-12">
-                                        <input id="licence_no" type="text" tabindex="3" class="form-control " name="licence_no" value="{{$staff->licence_no}}" >
+                                        {{$staff->licence_no}}
                                         @if ($errors->has('licence_no'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('licence_no') }}</strong>
-                                             </span>
+                                                     </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="{{ $errors->has('status') ? ' has-error' : '' }} ui-widget">
-                                    <label for="document_type_id" class="col-md-8 control-label">Status <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
-
+                                <div class="{{ $errors->has('licence_no') ? ' has-error' : '' }}">
+                                    <label for="licence_no" class="col-md-6 ">Status   </label>
                                     <div class="col-md-12">
-                                        <select name="status" id="status"  tabindex="4" class="form-control"  onchange=change() required autofocus>
-                                            <option value="">Select one...</option>
-                                            @foreach(config('custom.status') as $type => $item)
-                                                <option value='{{$type}}' @if($type == $staff->status) selected @endif> {{$item}} </option>";
-                                            @endforeach
-                                        </select>
+                                        {{config('custom.status')[$staff->status]}}
+                                        @if ($errors->has('licence_no'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('licence_no') }}</strong>
+                                                     </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
+
                         <br>
                         <br>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Update
-                                </button>
+
                                 <a href="{{url('/admin/staff')}}" class="btn btn-warning reset">
 
                                     Back

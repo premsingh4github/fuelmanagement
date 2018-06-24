@@ -32,6 +32,14 @@ class HomeController extends Controller
 
     public function getlogin()
     {
+        if(Auth::check()){
+            if (Auth::user()->type ==1) {
+                return redirect('admin');
+            }
+            if (Auth::user()->type ==2) {
+                return redirect('user');
+            }
+        }
        return view('login');
     }
 
@@ -55,7 +63,14 @@ class HomeController extends Controller
             return redirect()->back()->withErrors(['email'=>'These credentials do not match our records.'])->withInput(request()->only('email'));
         }
     }
+    public function updateProfile(){
 
+    }
+
+    public function profile()
+    {
+        return view('profile');
+    }
     public function logout()
     {
         Auth::logout();
