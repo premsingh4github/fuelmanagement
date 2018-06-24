@@ -194,3 +194,4 @@ class FuelController extends Controller
         return view('admin.ajax.staff_services',compact('staff'));
     }
 }
+
