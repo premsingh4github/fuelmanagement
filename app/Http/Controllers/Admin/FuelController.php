@@ -8,6 +8,7 @@ use App\Petrolpump;
 use App\Staff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class FuelController extends Controller
@@ -67,6 +68,7 @@ class FuelController extends Controller
         $fuel->current_km = \request('current_km');
         $fuel->previous_km = \request('previous_km');
         $fuel->receiver_id = \request('receiver_id');
+        $fuel->user_id = Auth::user()->id;
         $fuel->save();
 
         if(\request('service')){
@@ -191,3 +193,4 @@ class FuelController extends Controller
         return view('admin.ajax.staff_services',compact('staff'));
     }
 }
+
