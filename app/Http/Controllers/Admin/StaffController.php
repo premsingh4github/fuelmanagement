@@ -30,7 +30,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        $des =Designation::all();
+        $des =Designation::orderBy('level','ASC')->get();
        return view('admin.staff.create',compact('des',''));
     }
 
@@ -85,7 +85,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         $staff = Staff::findOrfail($id);
-        $des = Designation::all();
+        $des =Designation::orderBy('level','ASC')->get();
 
         return view('admin.staff.edit',compact('staff','des','vehicle'));
     }

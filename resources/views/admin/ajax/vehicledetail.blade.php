@@ -68,8 +68,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="{{ $errors->has('montly_mileage') ? ' has-error' : '' }}">
-                                        <label for="montly_mileage" class="col-md-6 control-label">Register Date:  </label>
-                                        <div class="col-md-6 control-label">
+                                        <label for="montly_mileage" class="col-md-8 control-label">Register Date:  </label>
+                                        <div class="col-md-4 control-label">
                                             {{$vehicle->registered_date}}
                                         </div>
 
@@ -104,9 +104,10 @@
     </div>
 </div>
 @foreach($services as $service)
+
     <div class="col-md-6">
         <div >
-            <label for="driver" class="col-md-6 control-label">{{$service->name}} [litre/month]</label>
+            <label for="driver" class="col-md-6 control-label">{{$service->name}} @if($service->id == 3) [litre/ 4 month] @else [litre/month] @endif</label>
             <div class="col-md-12">
                 <input  type="float" tabindex="3" class="form-control " name="{{$service->id}}" value="" >
             </div>
@@ -118,7 +119,7 @@
         @if($service->id != 2)
         <div class="col-md-6">
             <div >
-                <label for="driver" class="col-md-6 control-label">{{$service->name}} [litre/month]</label>
+                <label for="driver" class="col-md-6 control-label">{{$service->name}} @if($service->id == 3) [litre/ 4 month] @else [litre/month] @endif</label>
                 <div class="col-md-12">
                     <input  type="float" tabindex="3" class="form-control " name="{{$service->id}}" value="" >
                 </div>
