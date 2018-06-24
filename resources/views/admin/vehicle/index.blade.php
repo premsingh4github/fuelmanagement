@@ -25,7 +25,7 @@
                             @foreach($vehicle as $user)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{config('custom.vehicle_type')[$user->type]}}</td>
+                                    <td>{{config('custom.vehicle_types')[$user->type]}}</td>
                                     <td>{{$user->brand}}</td>
                                     <td>{{$user->engine_no}}</td>
                                     <td>{{$user->vehicle_no}}</td>

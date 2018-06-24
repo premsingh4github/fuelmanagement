@@ -14,7 +14,7 @@
                                     <div class="col-md-12">
                                         <select onchange="valueChange('vehicle_type','mileage')" name="vehicle_type" id ='vehicle_type'   tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
-                                            @Foreach(config('custom.vehicle_type') as $type => $item)
+                                            @foreach(config('custom.vehicle_types') as $type => $item)
                                                 <option value='{{$type}}' @if($type == $vehicle->type) selected @endif> {{$item}} </option>;
                                             @endforeach
                                         </select>  @if ($errors->has('name'))

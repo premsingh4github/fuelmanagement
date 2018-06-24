@@ -9,7 +9,7 @@ class Vehicle extends Model
     public function previous_km()
     {
         if($this->staff_vehicles()->count() > 0){
-            return $this->staff_vehicles()->first()->staff->fuels()->orderBy('id','DESC')->first()->current_km;
+            return $this->staff_vehicles()->first()->staff->previous_km();
         }
         else{
             return $this->current_km;
