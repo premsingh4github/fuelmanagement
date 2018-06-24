@@ -137,7 +137,9 @@
                         <li class="<?php if(Request::segment(2) =='vehicle'){echo 'active';}?>" ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
                         <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
                         <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
-                        <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('') }}">Manage Users</a></li>
+                        <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('admin/users') }}">Manage Users</a></li>
+                    @elseif(isset(Auth::user()->type) && Auth::user()->type == 2)
+                            <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
                     @endif
 
                 </ul>
@@ -323,6 +325,11 @@
         }
 
         $('.nepali-calender').nepaliDatePicker({
+            npdMonth: true,
+            npdYear: true,
+        });
+        $('.nepali_date_past').nepaliDatePicker({
+            disableAfter: getNepaliDate().substr(5,2)+'/'+(getNepaliDate().substr(8,2) - 2)+'/'+getNepaliDate().substr(0,4),
             npdMonth: true,
             npdYear: true,
         });
@@ -693,12 +700,12 @@ debugger;
     }
 
     function getVehicleinfo() {
-        var vehicle_id = $('#ovehicle').val()
+        var vehicle_id = $('#vehicle_id').val()
         if (vehicle_id >0 ){
             $.ajax({
                 type:"GET",
                 url:window.Laravel.base_url+'/admin/staff_vehicle/getvehicledetail',
-                data:{vehicle_id: vehicle_id},
+                data:$("#myform").serialize(),
                 success:function (data) {
                     $('.ajax').html(data);
                 },
@@ -720,7 +727,7 @@ debugger;
         if(staff_id > 0){
             $.ajax({
                 type:"GET",
-                url:window.Laravel.base_url+'/admin/staff_vehicle/getStaffdetail',
+                url:window.Laravel.base_url+'/admin/getStaffdetail',
                 data:{staff_id: staff_id},
                 success:function (data) {
                     $('#staff_detail').html(data);
@@ -733,6 +740,16 @@ debugger;
         }
         else{
             $('#staff_detail').html("");
+        }
+    }
+    function designationChange() {
+        if($('#designation').val() == '1'){
+            $('#licence_no_label').html(' Driving Licence <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span>');
+            $('#licence_no').attr('required','true');
+        }
+        else{
+            $('#licence_no_label').html(' Driving Licence ');
+            $('#licence_no').removeAttr("required")
         }
     }
 

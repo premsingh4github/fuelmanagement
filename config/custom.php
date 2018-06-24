@@ -12,15 +12,11 @@ return [
         '5'=>'Staff Vehicles',
         '6'=>'Petrol Pump'
     ],
-    'vehicle_ownership'=>[
-        '1'=>'Personal',
-        '2'=>'Offical'
-    ],
     'vehicle_ownerships'=>[
         '1'=>'Personal',
         '2'=>'Offical'
     ],
-    'vehicle_type'=>[
+    'vehicle_types'=>[
         '1'=>'Bike',
         '2'=>'car',
         '3'=>'Bus'

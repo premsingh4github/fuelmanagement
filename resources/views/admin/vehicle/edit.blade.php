@@ -85,7 +85,7 @@
                                     <label for="registered_date" class="col-md-8 control-label">Registered Date <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                     <div class="col-md-12">
-                                        <input id="registered_date" type="text" tabindex="3" class="form-control nepali-calender " name="registered_date" value="{{$vehicle->registered_date}}" required autofocus>
+                                        <input id="registered_date" type="text" tabindex="3" class="form-control nepali_date_past " name="registered_date" value="{{$vehicle->registered_date}}" required autofocus>
 
                                     </div>
                                 </div>
