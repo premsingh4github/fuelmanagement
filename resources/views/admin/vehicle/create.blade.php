@@ -26,6 +26,23 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
+                                <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
+                                    <label for="type" class="col-md-6 control-label">Ownership  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <div class="col-md-12">
+                                        <select  name="ownership" id ='ownership'   tabindex="6" class="form-control"  required autofocus>
+                                            <option value="">Select one...</option>
+                                           <option value="1">Official</option>
+                                           <option value="0">Personal</option>
+                                        </select>
+                                        @if ($errors->has('ownership'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('ownership') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
                                     <label for="brand" class="col-md-6 control-label">Brand  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
@@ -54,8 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('engine_no') ? ' has-error' : '' }}">
                                     <label for="engine_no" class="col-md-6 control-label">Engine No  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
@@ -79,7 +95,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('registered_date') ? ' has-error' : '' }} ui-widget">
                                     <label for="registered_date" class="col-md-8 control-label">Registered Date <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>

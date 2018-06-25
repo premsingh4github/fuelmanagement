@@ -135,11 +135,11 @@
                         <li class="<?php if(Request::segment(2) =='staff'){echo 'active';}?>"  ><a href="{{ url('admin/staff') }}">Staffs</a></li>
 
                         <li class="<?php if(Request::segment(2) =='vehicle'){echo 'active';}?>" ><a href="{{ url('admin/vehicle') }}">Vehicles</a></li>
-                        <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrolpump</a></li>
+                        <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrol Pump</a></li>
                         <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
                         <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('admin/users') }}">Manage Users</a></li>
                     @elseif(isset(Auth::user()->type) && Auth::user()->type == 2)
-                            <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
+                            <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuel</a></li>
                     @endif
 
                 </ul>
@@ -704,7 +704,7 @@ debugger;
         if (vehicle_id >0 ){
             $.ajax({
                 type:"GET",
-                url:window.Laravel.base_url+'/admin/staff_vehicle/getvehicledetail',
+                url:window.Laravel.base_url+'/admin/vehicledetail',
                 data:$("#myform").serialize(),
                 success:function (data) {
                     $('.ajax').html(data);
@@ -750,6 +750,25 @@ debugger;
         else{
             $('#licence_no_label').html(' Driving Licence ');
             $('#licence_no').removeAttr("required")
+        }
+    }
+    function ownershipChanged() {
+        debugger;
+        if($('#ownership').val() == '1' || $('#ownership').val() == '0'){
+            $.ajax({
+                type:"GET",
+                url:window.Laravel.base_url+'/admin/getvehicles',
+                data:{ownership_id: $('#ownership').val()},
+                success:function (data) {
+                    $('#vehicle_container').html(data);
+                },
+                error:function (error) {
+                    debugger
+
+                }
+            });
+        }else {
+            $('#vehicle_container').html("");
         }
     }
 

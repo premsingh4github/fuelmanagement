@@ -33,7 +33,7 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
 
 
 
-    Route::get('staff_vehicle/getvehicledetail','Admin\StaffVehicleController@getvehicledetail');
+
 
     Route::resource('staff_vehicle','Admin\StaffVehicleController');
     Route::resource('petrolpump','Admin\PetrolpumpController');
@@ -62,6 +62,9 @@ Route::group(['middleware'=>'auth'],function (){
 
     Route::get('admin/getStaffdetail','Admin\StaffVehicleController@getStaffdetail');
     Route::get('admin/staff_services','Admin\FuelController@staff_services');
+    Route::get('admin/getvehicles','Admin\VehicleController@getvehicles');
+    Route::get('admin/vehicledetail','Admin\StaffVehicleController@getvehicledetail');
+
 
 
 });

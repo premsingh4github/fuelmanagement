@@ -32,11 +32,10 @@
                                     <label for="ownership" class="col-md-6 control-label">Ownership  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
 
-                                        <select name="ownership"  id="ownership" tabindex="2" class="form-control" onchange=changetype() required autofocus>
+                                        <select name="ownership"  id="ownership" tabindex="2" class="form-control" onchange="ownershipChanged()" required autofocus>
                                             <option value="">Select one...</option>
-                                            @foreach(config('custom.vehicle_ownerships') as $type=> $index)
-                                                <option value='{{$type}}'> {{$index}} </option>";
-                                            @endforeach
+                                            <option value="1">Official</option>
+                                            <option value="0">Personal</option>
                                         </select>
                                         @if ($errors->has('ownership'))
                                             <span class="help-block">
@@ -85,29 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="offical" style=" display: none">
-                                <div class="col-md-6">
-                                    <div class="{{ $errors->has('ovehicle') ? ' has-error' : '' }}">
-                                        <label for="ovehicle" class="col-md-6 control-label">Vehicle  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                        <div class="col-md-12">
-                                            <select name="vehicle_id"   id="vehicle_id" tabindex="2" class="form-control" onchange=getVehicleinfo() required autofocus>
-                                                <option value="">Select one...</option>
-                                                @foreach($vehicle as $type)
-                                                    <option value='{{$type->id}}'> {{config('custom.vehicle_types')[$type->type]}}__{{$type->brand}}__{{$type->vehicle_no}} </option>";
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('staff'))
-                                                <span class="help-block">
-                                                <strong>{{ $errors->first('staff') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+                        <div class="row" id="vehicle_container">
                             <div class="ajax">
                                 @foreach($services as $service)
                                     <div class="col-md-6">
@@ -120,6 +97,9 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                        <div class="row">
+
                         </div>
                         <div class="row">
 

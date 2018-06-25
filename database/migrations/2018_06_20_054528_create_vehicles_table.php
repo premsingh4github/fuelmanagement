@@ -23,6 +23,7 @@ class CreateVehiclesTable extends Migration
             $table->date('registered_date');
             $table->string('vehicle_no');
             $table->integer('current_km');
+            $table->enum('official',['1','0'])->default('1');
             $table->timestamps();
         });
     }

@@ -49,6 +49,7 @@ class VehicleController extends Controller
             'registered_date'=>'required',
             'vehicle_no'=>'required',
             'current_km'=>'required',
+            'ownership'=>'required'
         ]);
         $vehicle = new  Vehicle;
         $vehicle->type = \request('vehicle_type');
@@ -61,6 +62,7 @@ class VehicleController extends Controller
         $vehicle->registered_date = date( \request('registered_date'));
         $vehicle->vehicle_no = \request('vehicle_no');
         $vehicle->current_km = \request('current_km');
+        $vehicle->official = \request('ownership');
         $vehicle->save();
 
         Session::flash('success_message','Vehicle Added');
@@ -123,6 +125,7 @@ class VehicleController extends Controller
         $vehicle->registered_date = date( \request('registered_date'));
         $vehicle->vehicle_no = \request('vehicle_no');
         $vehicle->current_km = \request('current_km');
+        $vehicle->official = \request('ownership');
         $vehicle->save();
 
         Session::flash('success_message','Vehicle Updated');
@@ -142,5 +145,14 @@ class VehicleController extends Controller
         $vehicle->delete();
         Session::flash('success_message','Vehicle Deleted');
         return redirect('admin/vehicle');
+    }
+
+    public function getvehicles()
+    {
+        \request()->validate([
+            'ownership_id'=>'required'
+        ]);
+        $vehicles = Vehicle::where('official',\request('ownership_id'))->get();
+        return view('admin.ajax.vehicles',compact('vehicles'));
     }
 }

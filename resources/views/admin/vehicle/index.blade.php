@@ -16,7 +16,8 @@
                         <table class="table table-striped table-bordered table-hover dataTable no-footer">
                             <tr>
                                 <th>SN</th>
-                                <th>Type</th>
+                                <th>Vehicle Type</th>
+                                <th>Official/Personal</th>
                                 <th>Brand</th>
                                 <th>Engine No</th>
                                 <th>Vehicle No</th>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{config('custom.vehicle_types')[$user->type]}}</td>
+                                    <td>{{($user->official)? 'Official' : "Personal"}}</td>
                                     <td>{{$user->brand}}</td>
                                     <td>{{$user->engine_no}}</td>
                                     <td>{{$user->vehicle_no}}</td>

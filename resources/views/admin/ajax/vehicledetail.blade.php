@@ -99,6 +99,7 @@
 
                         <option value='{{$type->id}}'> {{$type->name}} </option>"
                     @endforeach
+                <option value="0">Self</option>
             </select>
         </div>
     </div>
@@ -107,7 +108,7 @@
 
     <div class="col-md-6">
         <div >
-            <label for="driver" class="col-md-6 control-label">{{$service->name}} @if($service->id == 3) [litre/ 4 month] @else [litre/month] @endif</label>
+            <label for="driver" class="col-md-6 control-label">{{$service->name}}  [litre/month] </label>
             <div class="col-md-12">
                 <input  type="float" tabindex="3" class="form-control " name="{{$service->id}}" value="" >
             </div>

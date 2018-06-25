@@ -192,7 +192,7 @@ class StaffVehicleController extends Controller
         $vehicle = Vehicle::findOrFail(\request('vehicle_id'));
         $drivers =  Staff::whereHas('designation',function ($q){
             $q->where('name','Driver');
-        })->get();
+        })->with('designation')->get();
         $services = Service::all();
         return view('admin.ajax.vehicledetail',compact('vehicle','drivers','services'));
     }

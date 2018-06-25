@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
-                                    <label for="type" class="col-md-6 control-label">Type  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="type" class="col-md-6 control-label">Vehicle Type  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
                                         <select onchange="valueChange('vehicle_type','mileage')" name="vehicle_type" id ='vehicle_type'   tabindex="6" class="form-control"  required autofocus>
                                             <option value="">Select one...</option>
@@ -20,6 +20,22 @@
                                         </select>  @if ($errors->has('name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
+                                    <label for="type" class="col-md-6 control-label">Ownership  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <div class="col-md-12">
+                                        <select  name="ownership" id ='ownership'   tabindex="6" class="form-control"  required autofocus>
+                                            <option value="">Select one...</option>
+                                            <option value="1" @if($vehicle->official == '1') selected @endif >Official</option>
+                                            <option value="0" @if($vehicle->official == '0') selected @endif>Personal</option>
+                                        </select>  @if ($errors->has('ownership'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('ownership') }}</strong>
                                             </span>
                                         @endif
                                     </div>
