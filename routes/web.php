@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('login','HomeController@getlogin');
+Route::get('login','HomeController@getlogin')->name('login');
 Route::post('login','HomeController@postlogin');
 
 
@@ -64,12 +64,13 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('admin/staff_services','Admin\FuelController@staff_services');
     Route::get('admin/getvehicles','Admin\VehicleController@getvehicles');
     Route::get('admin/vehicledetail','Admin\StaffVehicleController@getvehicledetail');
+    Route::get('getcurrentmeter','Admin\StaffVehicleController@getcurrentmeter');
 
-
+    Route::get('/home', 'HomeController@index')->name('home');
 
 });
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('excel','HomeController@excel');

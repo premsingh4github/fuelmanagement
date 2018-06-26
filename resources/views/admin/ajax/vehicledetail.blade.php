@@ -129,3 +129,34 @@
         @endif
     @endforeach
 @endif
+<div class="row">
+    <div class="col-md-6">
+        <div class="{{ $errors->has('current_km') ? ' has-error' : '' }} ui-widget">
+            <label for="mileage" class="col-md-8 control-label">Current Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
+
+            <div class="col-md-12">
+                <input id="current_km" type="number" tabindex="3" min="{{$vehicle->previous_km()}}" class="form-control " name="current_km" value="" required autofocus>
+                @if ($errors->has('current_km'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('current_km') }}</strong>
+                    </span>
+                @endif
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
+            <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
+            <div class="col-md-12">
+                <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="{{$vehicle->previous_km()}}" disabled >
+                @if ($errors->has('previous_km'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('previous_km') }}</strong>
+                     </span>
+                @endif
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@ class DesignationsTableSeeder extends Seeder
             [
                 'id' => '1',
                 'name'=> 'Driver',
-                'level'=>'2'
+                'level'=>'6'
             ]
         ]);
     }

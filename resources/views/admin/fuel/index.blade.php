@@ -10,7 +10,7 @@
                         @endif
                         <div class="row">
                             <div class="form-group col-sm-6">
-                                <a href="{{url('admin/fuel/create')}}" class="btn-sm btn-success" >Add Fuels</a>
+                                <a href="{{url('admin/fuel/create')}}" class="btn-sm btn-success" >Add Fuel</a>
                             </div>
                         </div>
                         <table class="table table-striped table-bordered table-hover dataTable no-footer">

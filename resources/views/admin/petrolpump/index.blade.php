@@ -28,18 +28,18 @@
                                         <a href="{{url('admin/petrolpump/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
 
 
-                                        {!! Form::open([
-                                                     'method'=>'DELETE',
-                                                     'url' => ['admin/petrolpump', $user->id],
-                                                     'style' => 'display:inline'
-                                                     ]) !!}
-                                        {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(
-                                    'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete',
-                                    'onclick'=>'return confirm("Confirm delete?")'
-                            )) !!}
-                                        {!! Form::close() !!}
+                                        {{--{!! Form::open([--}}
+                                                     {{--'method'=>'DELETE',--}}
+                                                     {{--'url' => ['admin/petrolpump', $user->id],--}}
+                                                     {{--'style' => 'display:inline'--}}
+                                                     {{--]) !!}--}}
+                                        {{--{!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete " />', array(--}}
+                                    {{--'type' => 'submit',--}}
+                                    {{--'class' => 'btn btn-danger btn-xs',--}}
+                                    {{--'title' => 'Delete',--}}
+                                    {{--'onclick'=>'return confirm("Confirm delete?")'--}}
+                            {{--)) !!}--}}
+                                        {{--{!! Form::close() !!}--}}
                                     </td>
                                 </tr>
                             @endforeach

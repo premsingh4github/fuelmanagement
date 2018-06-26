@@ -26,8 +26,8 @@ class CreateFuelsTable extends Migration
             $table->double('previous_km');
             $table->integer('receiver_id')->unsigned();
             $table->foreign('receiver_id')->references('id')->on('staff');
-            $table->integer('user')->unsigned();
-            $table->foreign('user')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

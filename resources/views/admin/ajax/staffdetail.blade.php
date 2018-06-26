@@ -123,9 +123,9 @@
                                         <div class="col-md-4">
                                             <div class="personal_vehicle">
                                                 <div class="{{ $errors->has('current_km') ? ' has-error' : '' }} ui-widget">
-                                                    <label for="current_km" class="col-md-6 control-label">Previous KM <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
+                                                    <label for="current_km" class="col-md-6 control-label">Starting  KM <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                                     <div class="col-md-6 control-label">
-                                                        {{$vehicle->previous_km()}}
+                                                        {{$staff->staff_vehicles()->first()->current_meter}}
                                                     </div>
 
                                                 </div>
@@ -134,35 +134,7 @@
 
 
                                     </div>
-                                @else
-                                    <?php $vehicle = $staff->staff_vehicles()->first()->person_veh; ?>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
-                                                <label for="brand" class="col-md-6 control-label">Brand   </label>
-                                                <div class="col-md-4 control-label">
-                                                    {{$vehicle->vehicle_brand}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="{{ $errors->has('brand') ? ' has-error' : '' }}">
-                                                <label for="brand" class="col-md-6 control-label">Vehicle No.   </label>
-                                                <div class="col-md-4 control-label">
-                                                    {{$vehicle->vehicle_no}}
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-4">
-                                            <div class="{{ $errors->has('mileage') ? ' has-error' : '' }}">
-                                                <label for="mileage" class="col-md-8 control-label">Mileage(Km/L)  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
-                                                <div class="col-md-4 control-label">
-                                                    {{$vehicle->mileage}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 @endif
 
                             @endif
@@ -178,34 +150,4 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="{{ $errors->has('current_km') ? ' has-error' : '' }} ui-widget">
-            <label for="mileage" class="col-md-8 control-label">Current Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
-            <div class="col-md-12">
-                <input id="current_km" type="number" tabindex="3" min="{{$staff->previous_km()}}" class="form-control " name="current_km" value="" required autofocus>
-                @if ($errors->has('current_km'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('current_km') }}</strong>
-                    </span>
-                @endif
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
-            <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
-            <div class="col-md-12">
-                <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="{{$staff->previous_km()}}" disabled >
-                @if ($errors->has('previous_km'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('previous_km') }}</strong>
-                     </span>
-                @endif
-
-            </div>
-        </div>
-    </div>
-</div>

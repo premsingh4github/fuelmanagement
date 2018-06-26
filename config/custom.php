@@ -13,8 +13,8 @@ return [
         '6'=>'Petrol Pump'
     ],
     'vehicle_ownerships'=>[
-        '1'=>'Personal',
-        '2'=>'Offical'
+        '0'=>'Personal',
+        '1'=>'Offical'
     ],
     'vehicle_types'=>[
         '1'=>'Bike',

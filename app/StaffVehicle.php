@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class StaffVehicle extends Model
 {
     use SoftDeletes;
+    protected $fillable = ['staff_id','vehicle_id'];
 
     public function staff()
     {

@@ -24,6 +24,8 @@ class CreateVehiclesTable extends Migration
             $table->string('vehicle_no');
             $table->integer('current_km');
             $table->enum('official',['1','0'])->default('1');
+            $table->enum('status',['1','0']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

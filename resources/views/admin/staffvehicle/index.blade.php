@@ -27,9 +27,9 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$user->staff->name}}</td>
                                     <td> @if ($user->ownership == '1')
-                                            <div>Personal</div>
-                                        @else
                                             <div>Official</div>
+                                        @else
+                                            <div>Personal</div>
                                         @endif</td>
                                     <td>{{$user->driver?$user->driver->name:'Self'}}</td>
 

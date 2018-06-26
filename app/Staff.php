@@ -34,7 +34,8 @@ class Staff extends Model
                 return $this->fuels()->orderBy('id','DESC')->first()->current_km;
             }
             else{
-                return $this->staff_vehicles()->first()->vehicle->current_km;
+//                return $this->staff_vehicles()->first();
+                return $this->staff_vehicles()->first()->current_meter;
             }
 
         }

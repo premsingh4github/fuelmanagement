@@ -53,18 +53,23 @@ class StaffVehicleController extends Controller
 //        dd($request->all());
         $this->validate($request,[
             'staff'=>'required',
-        'ownership'=>'required',
+            'ownership'=>'required',
+            'current_km'=>'required',
+            'vehicle_id'=>'required',
         ]);
         $staff_veh_old = StaffVehicle::where('staff_id',\request('staff'))->delete();
 
-        $staff_veh = new StaffVehicle;
+        $vehicle = Vehicle::findOrFail(\request('vehicle_id'));
+
+        $staff_veh = StaffVehicle::firstOrNew(['staff_id'=>\request('staff'),'vehicle_id'=>\request('vehicle_id')]);
         $staff_veh->staff_id = \request('staff');
         $staff_veh->ownership = \request('ownership');
-        $staff_veh->driver_id = \request('driver');
-        if(\request('vehicle_id'))
-        {
-            $staff_veh->vehicle_id  = \request('vehicle_id');
+        if(\request('driver')){
+            $staff_veh->driver_id = \request('driver');
         }
+        $staff_veh->current_meter = \request('current_km');
+        $staff_veh->previous_meter = $vehicle->previous_km();
+        $staff_veh->vehicle_id  = \request('vehicle_id');
         $staff_veh->save();
         if (\request('vehicle_brand')){
 
@@ -116,12 +121,16 @@ class StaffVehicleController extends Controller
     {
         $staff_veh = StaffVehicle::findOrfail($id);
         $staff = Staff::select('staff.id','staff.name')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','DESC')->get();
-        $vehicle = Vehicle::all();
+        $vehicles = Vehicle::all();
         $drivers =  Staff::whereHas('designation',function ($q){
             $q->where('name','Driver');
         })->get();
-        $services = Service::all();
-        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicle','drivers','services'));
+        $services = Service::orderBy('id','DESC');
+        if($staff_veh->vehicle->type == 1){
+            $services->where('id','!=','2');
+        }
+        $services = $services->get();
+        return view('admin.staffvehicle.edit',compact('staff_veh','staff','vehicles','drivers','services'));
 
     }
 
@@ -137,28 +146,21 @@ class StaffVehicleController extends Controller
         $this->validate($request,[
             'staff'=>'required',
             'ownership'=>'required',
+            'current_km'=>'required',
+            'vehicle_id'=>'required',
         ]);
-        $staff_veh =StaffVehicle::findOrfail($id);
+        $staff_veh = StaffVehicle::findOrfail($id);
         $staff_veh->staff_id = \request('staff');
         $staff_veh->ownership = \request('ownership');
-        $staff_veh->driver_id = \request('driver');
-
-        if(\request('ovehicle'))
-        {
-            $staff_veh->vehicle_id  = \request('ovehicle');
+        if(\request('driver')){
+            $staff_veh->driver_id = \request('driver');
         }
+        $staff_veh->current_km = \request('current_km');
+        $staff_veh->vehicle_id  = \request('vehicle_id');
         $staff_veh->save();
-
-        if (\request('vehicle_brand')){
-            $personal_veh = PersonalVehicle::firstOrNew(['staff_vehicle_id'=>$staff_veh->id]);
-            $personal_veh->vehicle_brand = \request('vehicle_brand');
-            $personal_veh->vehicle_no = \request('vehicle_no');
-            $personal_veh->mileage = \request('mileage');
-            $personal_veh->save();
-        }
         if(\request('services')){
             foreach (\request('services') as $key => $value){
-                $vehicleService =VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
+                $vehicleService = VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
                 $vehicleService->quota = $value;
                 $vehicleService->save();
             }
@@ -177,6 +179,7 @@ class StaffVehicleController extends Controller
 
     {
         $staff_veh = StaffVehicle::findOrfail($id);
+        if($staff_veh)
         $staff_veh->delete();
         Session::flash('success_message','Staff Vehical Delete');
 
@@ -205,5 +208,12 @@ class StaffVehicleController extends Controller
         $staff = Staff::findOrFail(\request('staff_id'));
 
         return view('admin.ajax.staffdetail',compact('staff'));
+    }
+    public function getcurrentmeter(){
+        \request()->validate([
+            'staff_id'=>'required'
+        ]);
+        $previous_meter = Staff::findOrFail(\request('staff_id'))->previous_km();
+        return view('admin.ajax.meters',compact('previous_meter'));
     }
 }

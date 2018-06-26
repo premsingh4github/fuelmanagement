@@ -93,7 +93,7 @@
                                         <label for="amount" class="col-md-8 control-label">Amount <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                         <div class="col-md-12">
-                                            <input id="amount" type="number" class="form-control " name="amount" value="" required autofocus>
+                                            <input id="amount" type="number" class="form-control " name="amount" value="" >
 
                                         </div>
                                     </div>
@@ -159,6 +159,10 @@
 
                         </div>
 
+                        <div class="row" id="meters_container">
+
+                        </div>
+
 
                         <br>
                         <br>
@@ -184,12 +188,10 @@
 @endsection
 @section('script')
     <script>
-
         function  checkQuantity() {
             var staff_id = $('#staff_name').val();
             var month_id = $('#month').val();
             var quantity = $('#quantity').val();
-            debugger
             if( (staff_id > 0) && (month_id > 0) && (quantity > 0) ){
                 $.ajax({
                     type: "GET",
@@ -208,9 +210,8 @@
         function getStaffdetailforfuel() {
             getStaffdetail();
             updateService();
+            getCurrentMeters();
         }
-
-
     </script>
 
 

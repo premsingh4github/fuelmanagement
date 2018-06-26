@@ -9,6 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
+     return redirect('admin/fuel');
         return view('user.index');
     }
 }

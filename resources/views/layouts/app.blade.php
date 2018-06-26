@@ -123,12 +123,14 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li class="<?php if(Request::segment(2) ==''){echo 'active';}?>"  ><a href="{{ url('') }}">Home</a></li>
+                    <li class="<?php if(Request::segment(2) ==''){echo 'active';}?>"  >
+                        {{--<a href="{{ url('') }}">Home</a>--}}
+                    </li>
                     {{--{{Auth::user()->type}}--}}
                     @if(  isset(Auth::user()->type) && Auth::user()->type == 1)
 
 {{--                        <li  ><a href="{{ url('admin/report') }}">Reports</a></li>--}}
-                        <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuels</a></li>
+                        <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuel</a></li>
 
                         <li  class="<?php if(Request::segment(2) =='staff_vehicle'){echo 'active';}?>" ><a href="{{ url('admin/staff_vehicle') }}">Staff Vehicles</a></li>
 
@@ -533,7 +535,6 @@
         xhttp.onreadystatechange = function () {
             if(this.readyState == 4 && this.status ==200){
                 console.log(this.response);
-                debugger;
             }
         }
         xhttp.open("POST",window.Laravel.base_url+'/myadmin/update',true);
@@ -594,7 +595,6 @@
                 data: {staff_id: staff_id,month_id: month_id, quantity: quantity},
                 success:function (data) {
                     $('#message').html(data);
-                    debugger
                 },
                 error:function (error) {
                     debugger
@@ -603,7 +603,6 @@
         }
 
         if (staff_id >0 ){
-            debugger
             $.ajax({
                 type:"GET",
                 url:window.Laravel.base_url+'/getstaffdetail',
@@ -666,19 +665,16 @@
     }
 
     function getamount() {
-        debugger;
         $('#amount_container').slideDown();
         $('#amount').attr('required','true')
 
     }
     function hideamount() {
-debugger;
         $('#amount').removeAttr('required');
         $('#amount_container').slideUp()
     }
 
     function  updateService() {
-        debugger;
         var staff_id = $('#staff_id').val();
         var month_id = $('#month').val();
         if( (staff_id > 0)){
@@ -688,7 +684,6 @@ debugger;
                 data: $("#myform").serialize(),
                 success:function (data) {
                     $('#services').html(data);
-                    debugger
                 },
                 error:function (error) {
                     debugger
@@ -701,6 +696,7 @@ debugger;
 
     function getVehicleinfo() {
         var vehicle_id = $('#vehicle_id').val()
+        debugger;
         if (vehicle_id >0 ){
             $.ajax({
                 type:"GET",
@@ -753,7 +749,6 @@ debugger;
         }
     }
     function ownershipChanged() {
-        debugger;
         if($('#ownership').val() == '1' || $('#ownership').val() == '0'){
             $.ajax({
                 type:"GET",
@@ -769,6 +764,24 @@ debugger;
             });
         }else {
             $('#vehicle_container').html("");
+        }
+    }
+    function getCurrentMeters() {
+        if($('#staff_id').val() > 0 ){
+            $.ajax({
+                type:"GET",
+                url:window.Laravel.base_url+'/getcurrentmeter',
+                data:{staff_id: $('#staff_id').val()},
+                success:function (data) {
+                    $('#meters_container').html(data);
+                },
+                error:function (error) {
+                    debugger
+
+                }
+            });
+        }else {
+            $('#meters_container').html("");
         }
     }
 

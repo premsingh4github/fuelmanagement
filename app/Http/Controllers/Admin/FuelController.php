@@ -74,11 +74,14 @@ class FuelController extends Controller
 
         if(\request('service')){
             foreach (\request('service') as $key => $value){
-                $fuel_service = new FuelService;
-                $fuel_service->quantity = $value;
-                $fuel_service->vehicle_service_id = $key;
-                $fuel_service->fuel_id = $fuel->id;
-                $fuel_service->save();
+                if($value > 0){
+                    $fuel_service = new FuelService;
+                    $fuel_service->quantity = $value;
+                    $fuel_service->vehicle_service_id = $key;
+                    $fuel_service->fuel_id = $fuel->id;
+                    $fuel_service->save();
+                }
+
             }
         }
 
