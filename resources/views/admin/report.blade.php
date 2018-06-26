@@ -8,6 +8,19 @@
                         {!! Form::open(['url'=>url('admin/report'),'method'=>'POST','class'=>'form-horizontal']) !!}
 
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
+                                    <label for="date" class="col-md-6 control-label">Joining Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <div class="col-md-12">
+                                        <input id="date" type="text" tabindex="3" class="form-control nepali_date_past" name="date" value="" required autofocus>
+                                        @if ($errors->has('date'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('date') }}</strong>
+                                                     </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
                                     <label for="type" class="col-md-6 control-label">Field  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
@@ -31,8 +44,8 @@
                         <br>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Submit
+                                <button type="submit"   class="btn btn-primary">
+                                    Export
                                 </button>
                                 <button type="reset" tabindex="9" class="btn btn-warning reset">
                                     Reset
@@ -51,6 +64,10 @@
 @endsection
 @section('script')
     <script>
+        function getexcel() {
+
+
+        }
     function docu() {
         debugger
         var field = $('#field').val()

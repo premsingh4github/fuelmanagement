@@ -4,16 +4,16 @@
             S.N.
         </th>
         <th class="text-center">
-           Staff Name
+            Name
         </th>
 
 
+
     </tr>
-    @foreach($staffs as $staff)
+    @foreach($petrolpump as $petrolpum)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$staff->name}}</td>
-
+            <td>{{$petrolpum}}</td>
         </tr>
     @endforeach
 </table>

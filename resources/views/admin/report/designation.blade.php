@@ -4,15 +4,20 @@
             S.N.
         </th>
         <th class="text-center">
-           Staff Name
+            Name
+        </th>
+        <th class="text-center">
+            Level
         </th>
 
 
     </tr>
-    @foreach($staffs as $staff)
+    @foreach($designation as $designatio)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$staff->name}}</td>
+            <td>{{$designatio->name}}</td>
+            <td>{{$designatio->level}}</td>
+
 
         </tr>
     @endforeach

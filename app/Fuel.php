@@ -20,4 +20,10 @@ class Fuel extends Model
     {
         return $this->belongsTo(Staff::class,'receiver_id');
     }
+
+    public function petrolpump()
+    {
+        return $this->belongsTo(Petrolpump::class,'petrolpump_id');
+
+    }
 }

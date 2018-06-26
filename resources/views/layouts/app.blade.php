@@ -140,6 +140,7 @@
                         <li  class="<?php if(Request::segment(2) =='petrolpump'){echo 'active';}?>" ><a href="{{ url('admin/petrolpump') }}">Petrol Pump</a></li>
                         <li  class="<?php if(Request::segment(2) =='designation'){echo 'active';}?>" ><a href="{{ url('admin/designation') }}">Designation</a></li>
                         <li class="<?php if(Request::segment(2) =='users'){echo 'active';}?>" ><a href="{{ url('admin/users') }}">Manage Users</a></li>
+                        <li class="<?php if(Request::segment(2) =='report'){echo 'active';}?>" ><a href="{{ url('admin/report') }}">Reports</a></li>
                     @elseif(isset(Auth::user()->type) && Auth::user()->type == 2)
                             <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuel</a></li>
                     @endif
