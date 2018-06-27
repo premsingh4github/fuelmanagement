@@ -37,6 +37,12 @@ class ReportController extends Controller
                 return Excel::download(new Staff, $date.'_'.'staff.csv');
 
 
+                $staffs = Staff::where('joining_date',$date)->get();
+                $rep = Excel::create($date.'_'.'staff',function ($excel)use($staffs){
+                    $excel->sheet('Sheet 1',function ($sheet) use ($staffs){
+                        $sheet->loadView('admin.report.staff',compact('staffs'));
+                    });
+                })->export('xls');
             }
             if (\request('vehicle_type')=='2'){
                 return Excel::download(new Designation, $date.'_'.'designation.xls');
