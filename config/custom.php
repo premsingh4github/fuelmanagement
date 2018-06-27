@@ -10,7 +10,8 @@ return [
         '3'=>'Fuels',
         '4'=>'Vehicles',
         '5'=>'Staff Vehicles',
-        '6'=>'Petrol Pump'
+        '6'=>'Petrol Pump',
+        '7'=> 'Users'
     ],
     'vehicle_ownerships'=>[
         '0'=>'Personal',

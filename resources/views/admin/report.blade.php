@@ -7,10 +7,14 @@
                     <div class="panel-body">
                         {!! Form::open(['url'=>url('admin/report'),'method'=>'POST','class'=>'form-horizontal']) !!}
 
+                        @if (Session::has('success_message'))
+                            <div class="alert alert-success">{{ Session::get('success_message') }}</div>
+                        @endif
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
-                                    <label for="date" class="col-md-6 control-label">Joining Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
+                                    <label for="date" class="col-md-6 control-label"> Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
                                         <input id="date" type="text" tabindex="3" class="form-control nepali_date_past" name="date" value="" required autofocus>
                                         @if ($errors->has('date'))
