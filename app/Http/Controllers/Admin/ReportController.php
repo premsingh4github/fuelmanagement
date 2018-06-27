@@ -34,9 +34,7 @@ class ReportController extends Controller
                     $excel->sheet('Sheet 1',function ($sheet) use ($staffs){
                         $sheet->loadView('admin.report.staff',compact('staffs'));
                     });
-                })->export('csv');
-
-
+                })->export('xls');
             }
             if (\request('vehicle_type')=='2'){
                 $designation = Designation::all();
