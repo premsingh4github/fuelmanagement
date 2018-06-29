@@ -31,20 +31,6 @@ class ReportController extends Controller
         $enddate = \request('end_date');
 
 
-        if (\request('staff_id')){
-            $fuels =Fuel::where('staff_id','staff_id');
-        }
-        if (\request('mode')){
-            $fuels = Fuel::where('mode','mode');
-        }
-        if (\request('petrolpump_name')){
-            $fuels= Fuel::where('petrolpump_id','petrolpump_name');
-        }
-        if (\request('receiver_id')){
-            $fuels = Fuel::where('receiver_id','receiver_id');
-        }
-        $fuels =$fuels->get();
-
 
 
 
