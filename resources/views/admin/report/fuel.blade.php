@@ -7,7 +7,7 @@
             Date
         </th>
         <th class="text-center">
-             Staff Name
+            Staff Name
         </th>
         <th class="text-center">
             Month
@@ -15,11 +15,18 @@
         <th class="text-center">
             Mode
         </th>
-        <th class="text-center">
-            Amount
-        </th>
+
         <th class="text-center">
             PetrolPump
+        </th>
+        <th class="text-center">
+            Petrol
+        </th>
+        <th class="text-center">
+            Diseal
+        </th>
+        <th class="text-center">
+            Engine Oil
         </th>
 
 
@@ -33,8 +40,24 @@
             <td>{{$fuel->staff->name}}</td>
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
             <td>{{$fuel->mode}}</td>
-            <td>{{$fuel->amount}}</td>
             <td>{{$fuel->petrolpump->name}}</td>
+            <td>
+                {{$fuel->service}}
+                @foreach($fuel->fuel_services  as  $service)
+
+                    {{--@if($fuel->service == $service->vehicle_service_id )--}}
+                    {{$service->quantity}}
+                    {{--@endif--}}
+                @endforeach
+
+            </td>
+            <td>@foreach($fuel->fuel_services  as  $service)
+                    {{$service->quantity}}
+                @endforeach
+
+            </td>
+
+
 
 
 

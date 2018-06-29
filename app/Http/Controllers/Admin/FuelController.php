@@ -35,7 +35,7 @@ class FuelController extends Controller
         $pump = Petrolpump::all();
         $staff = Staff::select('staff.id','staff.name')->whereHas('staff_vehicles')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','ASC')->get();
         $staffs = Staff::all();
-        $cal = new \Nepali_Calendar();
+        $cal = new \Nepali_Calendar11();
         $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
         return view('admin.fuel.create',compact('staff','today_nepali','staffs','pump'));
     }
@@ -56,7 +56,7 @@ class FuelController extends Controller
         ]);
         $staff = Staff::findOrFail(\request('staff_id'));
         $fuel= new  Fuel;
-        $cal = new \Nepali_Calendar();
+        $cal = new \Nepali_Calendar11();
         $fuel->date = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel->staff_id = \request('staff_id');
         $fuel->month_id = \request('month');
@@ -113,7 +113,7 @@ class FuelController extends Controller
         $pump = Petrolpump::all();
         $staff = Staff::whereHas('vehicles')->get();
         $staffs = Staff::all();
-        $cal = new \Nepali_Calendar();
+        $cal = new \Nepali_Calendar11();
         $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel = Fuel::findOrfail($id);
         return view('admin.fuel.edit',compact('staff','today_nepali','staffs','fuel','pump'));
@@ -138,7 +138,7 @@ class FuelController extends Controller
             'petrolpump_name'=>'required',
         ]);
         $fuel= Fuel::findOrfail($id);
-        $cal = new \Nepali_Calendar();
+        $cal = new \Nepali_Calendar11();
         $fuel->date = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel->staff_id = \request('staff_id');
         $fuel->month_id = \request('month');
