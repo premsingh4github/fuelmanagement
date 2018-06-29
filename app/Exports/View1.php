@@ -18,10 +18,7 @@ class view1 implements FromView
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
-
-
-            $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
-
+        $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
 
         if (\request('staff_id')){
             $fuels =Fuel::where('staff_id',\request('staff_id'));
@@ -36,6 +33,7 @@ class view1 implements FromView
         if (\request('receiver_id')){
             $fuels = Fuel::where('receiver_id',\request('receiver_id'));
         }
+
         $fuels =$fuels->get();
 
         return view('admin.report.fuel', [
