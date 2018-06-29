@@ -30,10 +30,6 @@ class ReportController extends Controller
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
-
-
-
-
         return Excel::download(new View1, "fuel_$startdate _ $enddate.xls");
 
 

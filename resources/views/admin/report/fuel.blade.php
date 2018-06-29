@@ -20,6 +20,9 @@
             PetrolPump
         </th>
         <th class="text-center">
+            Reciver
+        </th>
+        <th class="text-center">
             Petrol
         </th>
         <th class="text-center">
@@ -41,10 +44,14 @@
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
             <td>{{$fuel->mode}}</td>
             <td>{{$fuel->petrolpump->name}}</td>
+            <td>{{$fuel->receiver->name}}</td>
             <td>
-                @foreach($fuel->fuel_services as $service)
-                    {{$service->name}}
-                    @endforeach
+                {{--@if($fuel->fuel_services->vehicle_service_id == 1)--}}
+                    {{--@foreach($fuel->fuel_services  as  $service)--}}
+                        {{--{{$service->quantity}}--}}
+                        {{--@endforeach--}}
+                {{--@endif--}}
+                {{$fuel->fuel_services}}
 
             </td>
             <td>@foreach($fuel->fuel_services  as  $service)
