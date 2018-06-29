@@ -26,4 +26,16 @@ class Fuel extends Model
         return $this->belongsTo(Petrolpump::class,'petrolpump_id');
 
     }
+
+    public function service_quantity($service_id)
+    {
+        $fuel_service = $this->fuel_services()->whereHas('vehicle_service',function ($q) use ($service_id){
+            $q->where('service_id',$service_id);
+        });
+        if($fuel_service->count() > 0){
+            return $fuel_service->orderBy('id','DESC')->first()->quantity;
+        }
+        return 0;
+
+    }
 }

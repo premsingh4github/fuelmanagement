@@ -41,17 +41,13 @@
             <td>{{$fuel->petrolpump->name}}</td>
             <td>{{$fuel->receiver->name}}</td>
             <td>
-                @foreach($fuel->fuel_services  as  $service)
-                    {{$service->vehicle_service->service}}
-
-                @endforeach
-
-
+                {{$fuel->service_quantity(1)}}
             </td>
-            <td>@foreach($fuel->fuel_services  as  $service)
-                    {{$service->quantity}}
-                @endforeach
-
+            <td>
+                {{$fuel->service_quantity(2)}}
+            </td>
+            <td>
+                {{$fuel->service_quantity(3)}}
             </td>
         </tr>
     @endforeach
