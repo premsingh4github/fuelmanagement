@@ -19,19 +19,21 @@ class view1 implements FromView
         $enddate = \request('end_date');
 
 
-        if (\request('staff_id')){
-            $fuels =Fuel::where('staff_id','staff_id');
-        }
-        if (\request('mode')){
-            $fuels = Fuel::where('mode','mode');
-        }
-        if (\request('petrolpump_name')){
-            $fuels= Fuel::where('petrolpump_id','petrolpump_name');
-        }
-        if (\request('receiver_id')){
-            $fuels = Fuel::where('receiver_id','receiver_id');
-        }
+//        if (\request('staff_id')){
+//            $fuels =Fuel::where('staff_id','staff_id');
+//        }
+//        if (\request('mode')){
+//            $fuels = Fuel::where('mode','mode');
+//        }
+//        if (\request('petrolpump_name')){
+//            $fuels= Fuel::where('petrolpump_id','petrolpump_name');
+//        }
+//        if (\request('receiver_id')){
+//            $fuels = Fuel::where('receiver_id','receiver_id');
+//        }
+        $fuels = Fuel::orderBy('id','DESC');
         $fuels =$fuels->get();
+        dd($fuels[0]->service(1));
         return view('admin.report.fuel', [
             'fuels' => $fuels
         ]);
