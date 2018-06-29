@@ -42,13 +42,9 @@
             <td>{{$fuel->mode}}</td>
             <td>{{$fuel->petrolpump->name}}</td>
             <td>
-                {{$fuel->service}}
-                @foreach($fuel->fuel_services  as  $service)
-
-                    {{--@if($fuel->service == $service->vehicle_service_id )--}}
-                    {{$service->quantity}}
-                    {{--@endif--}}
-                @endforeach
+                @foreach($fuel->fuel_services as $service)
+                    {{$service->name}}
+                    @endforeach
 
             </td>
             <td>@foreach($fuel->fuel_services  as  $service)

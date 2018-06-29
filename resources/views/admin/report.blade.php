@@ -61,13 +61,18 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('mode') ? ' has-error' : '' }}">
                                     <label for="mode" class="col-md-6 control-label">Mode  </label>
                                     <div class="col-md-12">
-                                        <input type="radio"  name="mode" value="Copon" onclick="hideamount()" checked /> Coupon
-                                        <input type="radio" name="mode" value="Cash" onclick="getamount()"> Cash
-                                        <br>
+                                        <select  name="mode" id="mode"  tabindex="2" class="form-control"  autofocus>
+                                            <option value="">Select one...</option>
+
+                                                <option value='copon'> Copon </option>";
+                                                  <option value='cash'> Cash </option>";
+
+                                        </select>
                                         @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
