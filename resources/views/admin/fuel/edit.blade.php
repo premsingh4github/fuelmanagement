@@ -26,17 +26,23 @@
                                 <div class="{{ $errors->has('staff_name') ? ' has-error' : '' }}">
                                     <label for="staff_id" class="col-md-6 control-label">Staff Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <select onchange="updateService()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
+                                        <select  onchange="getStaffdetailforfuel()" name="staff_id" id="staff_id"  tabindex="2" class="form-control" required autofocus>
                                             <option value="">Select one...</option>
                                             @foreach($staff as $type)
                                                 <option value='{{$type->id}}' @if($type->id == $fuel->staff_id) selected @endif> {{$type->name}} </option>";
                                             @endforeach
-                                        </select> @if ($errors->has('staff_id'))
+                                        </select>
+                                        @if ($errors->has('staff_id'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('staff_id') }}</strong>
                                             </span>
                                         @endif
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="staff_detail">
+
                                 </div>
                             </div>
 
@@ -60,11 +66,13 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+
                                 <div class="{{ $errors->has('mode') ? ' has-error' : '' }}">
                                     <label for="mode" class="col-md-6 control-label">Mode <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input type="radio" name="mode" value="Cash" onclick=getamount()> Cash
-                                        <input type="radio" name="mode" value="Copon" onclick=hideamount()> Copon<br>
+                                        <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount()  @if($fuel->mode =="Cash") checked   @endif> Cash
+                                        <input type="radio" id="mode" name="mode" value="Copon" onclick=hideamount()  @if($fuel->mode == 'Copon')checked  @endif> Copon<br>
+
                                         @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
@@ -77,6 +85,7 @@
                         <div class="row" >
                             <div class="col-md-6" style="display: none"id="amount_container" >
                                 <div class="amountt"  >
+                                    @if($fuel->mode =="Cash")
                                     <div class="{{ $errors->has('amount') ? ' has-error' : '' }} ui-widget">
                                         <label for="amount" class="col-md-8 control-label">Amount <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
@@ -85,6 +94,7 @@
 
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -201,6 +211,29 @@
 @endsection
 @section('script')
     <script>
+        $(document).ready(function () {
+            getStaffdetailforfuel();
+            var  mode_id = $('#mode').val();
+            debugger;
+            if(mode_id=='Cash'){
+                debugger
+                $('#amount_container').slideDown();
+            }
+            // getVehicleinfo();
+            debugger;
+        });
+
+        function getamount_edit() {
+         var  mode_id = $('#mode').val();
+         debugger;
+      if(mode_id=='Cash'){
+          debugger
+          $('#amount_container').slideDown();
+      }
+                $('#amount_container').slideDown();
+                $('#amount').attr('required','true')
+
+        }
 
         function  checkQuantity() {
             debugger
@@ -222,6 +255,11 @@
                     }
                 });
             }
+        }
+        function getStaffdetailforfuel() {
+            getStaffdetail();
+            updateService();
+            getCurrentMeters();
         }
 
 

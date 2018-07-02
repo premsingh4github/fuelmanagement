@@ -30,6 +30,9 @@
         <th class="text-center">
             Engine Oil
         </th>
+        <th class="text-center">
+            Servicing
+        </th>
     </tr>
     @foreach($fuels as $fuel)
         <tr>
@@ -49,6 +52,7 @@
             <td>
                 {{$fuel->service_quantity(3)}}
             </td>
+            <td>{{$fuel}}</td>
         </tr>
     @endforeach
 </table>
