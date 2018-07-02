@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Excel;
 
 use App\Exports\View1;
+use App\Exports\FuelExport;
 
 class ReportController extends Controller
 {
@@ -30,7 +31,7 @@ class ReportController extends Controller
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
-        return Excel::download(new View1, "fuel_$startdate _ $enddate.xls");
+        return Excel::download(new FuelExport, "fuel_$startdate _ $enddate.xls");
 
 
 
