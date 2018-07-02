@@ -33,7 +33,7 @@ class view1 implements FromView
 //        }
 //        $fuels = Fuel::orderBy('id','DESC');
 //        $fuels =$fuels->get();
-//        dd($fuels[0]->service(1));
+//        dd($fuels[0]->service(1));`
 
             $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
 
