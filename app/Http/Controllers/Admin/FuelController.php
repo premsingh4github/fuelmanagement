@@ -48,6 +48,7 @@ class FuelController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request,[
             'staff_id'=>'required',
             'month'=>'required',
@@ -70,6 +71,9 @@ class FuelController extends Controller
         $fuel->previous_km = $staff->previous_km();
         $fuel->receiver_id = \request('receiver_id');
         $fuel->user_id = Auth::user()->id;
+        if(\request('other')){
+            $fuel->other = \request('other');
+        }
         $fuel->save();
 
         if(\request('service')){
