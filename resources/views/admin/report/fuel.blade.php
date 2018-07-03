@@ -30,9 +30,11 @@
         <th class="text-center">
             Engine Oil
         </th>
+        {{--@if($fuel->servicing)--}}
         <th class="text-center">
             Servicing
         </th>
+            {{--@endif--}}
     </tr>
     @foreach($fuels as $fuel)
         <tr>
@@ -52,7 +54,13 @@
             <td>
                 {{$fuel->service_quantity(3)}}
             </td>
-            <td>{{$fuel}}</td>
+            @if($fuel->servicing)
+            <td>@if($fuel->servicing == '1') <div> For Servicing</div>
+                @elseif($fuel->servicing == '2') <div> For Monthly Use</div>
+
+                    @endif
+            </td>
+                @endif
         </tr>
     @endforeach
 </table>
