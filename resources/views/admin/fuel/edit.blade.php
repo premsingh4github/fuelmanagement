@@ -13,7 +13,7 @@
                                 <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
                                     <label for="date" class="col-md-6 control-label">Date  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input  type="text" tabindex="1" class="form-control " name="date" value="{{$today_nepali}}" required autofocus disabled="disabled">
+                                        <input  type="text" tabindex="1" class="form-control " name="date" value="{{$fuel->date}}" required autofocus disabled="disabled">
                                         @if ($errors->has('date'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('date') }}</strong>
@@ -54,13 +54,12 @@
                                             <option value="">Select one...</option>
                                             @Foreach(config('custom.nepali_months') as $type => $item)
                                                 <option value='{{$type}}' @if($type == $fuel->month_id) selected @endif> {{$item}} </option>";
-
                                             @endforeach
                                         </select>
                                         @if ($errors->has('month'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('month') }}</strong>
-                                                     </span>
+                                             </span>
                                         @endif
                                     </div>
                                 </div>
@@ -76,7 +75,7 @@
                                         @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
-                                                     </span>
+                                             </span>
                                         @endif
                                     </div>
                                 </div>
@@ -134,15 +133,13 @@
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('current_km') ? ' has-error' : '' }} ui-widget">
                                     <label for="mileage" class="col-md-8 control-label">Current Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
-
                                     <div class="col-md-12">
-                                        <input id="current_km" type="number" tabindex="3" class="form-control " name="current_km" value="{{$fuel->current_km}}" required autofocus>
+                                        <input id="current_km" min="{{$fuel->previous_km}}" type="number" tabindex="3" class="form-control " name="current_km" value="{{$fuel->current_km}}" required autofocus>
                                         @if ($errors->has('current_km'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('current_km') }}</strong>
-                                                     </span>
+                                             </span>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
@@ -150,13 +147,12 @@
                                 <div class="{{ $errors->has('previous_km') ? ' has-error' : '' }} ui-widget">
                                     <label for="previous_km" class="col-md-8 control-label">Previous Km <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                                     <div class="col-md-12">
-                                        <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="{{$fuel->previous_km}}" required autofocus>
+                                        <input id="previous_km" type="number" tabindex="3" class="form-control " name="previous_km" value="{{$fuel->previous_km}}" disabled="disabled">
                                         @if ($errors->has('previous_km'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('previous_km') }}</strong>
-                                                     </span>
+                                             </span>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
@@ -181,26 +177,17 @@
                             </div>
                         </div>
                         <div class="row" id="services">
-
-                            @foreach($fuel->fuel_services as $service )
+                            @foreach($fuel->fuel_services as $fuel_service )
                                 <div class="col-md-6">
                                     <div >
-                                        <label for="driver" class="col-md-8 control-label">{{$service->vehicle_service->service->name}} [litre/month] max- {{$service->quota}}</label>
+                                        <label  class="col-md-8 control-label">{{$fuel_service->vehicle_service->service->name}} [litre/month] max- {{$fuel_service->vehicle_service->quota}}</label>
                                         <div class="col-md-12">
-                                            <input name="service[{{$service->id}}]"  type="float"  class="form-control "  value="{{$fuel->service_quantity($service->vehicle_service->service->id)}}" onchange="updateService()" autofocus >
-                                            @if($service->vehicle_service->service->id == '3')
-                                                <input type="radio"  name="servicing" value="1" @if($fuel->servicing == '1') checked @endif   /> For Servicing
-                                                <input type="radio"  name="servicing" value="2"   @if($fuel->servicing != '1') checked @endif /> For Monthly Uses
-                                            @endif
-
+                                            <input name="service[{{$fuel_service->vehicle_service->id}}]"  type="float"  class="form-control "  value="{{$fuel->service_quantity($fuel_service->vehicle_service->service->id)}}" onchange="updateService()" autofocus >
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
-
-
                         <br>
                         <br>
                         <div class="form-group">

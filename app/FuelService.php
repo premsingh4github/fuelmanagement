@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FuelService extends Model
 {
     use SoftDeletes;
+    protected $fillable = ['fuel_id','vehicle_service_id'];
 
     public function fuel()
     {

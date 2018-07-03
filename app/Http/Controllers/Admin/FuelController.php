@@ -117,8 +117,6 @@ class FuelController extends Controller
         $pump = Petrolpump::all();
         $staff = Staff::whereHas('vehicles')->get();
         $staffs = Staff::all();
-        $cal = new \NepaliCalendar();
-        $today_nepali = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel = Fuel::findOrfail($id);
         return view('admin.fuel.edit',compact('staff','today_nepali','staffs','fuel','pump'));
 
@@ -143,30 +141,29 @@ class FuelController extends Controller
             'petrolpump_name'=>'required',
         ]);
         $fuel= Fuel::findOrfail($id);
-        $cal = new \NepaliCalendar();
-        $fuel->date = $cal->eng_to_nepali_date(date('Y-m-d'));
         $fuel->staff_id = \request('staff_id');
         $fuel->month_id = \request('month');
         $fuel->mode = \request('mode');
-        $fuel->amount = \request('amount');
+        if(\request('mode')){
+            $fuel->amount = \request('amount');
+        }
         $fuel->petrolpump_id = \request('petrolpump_name');
         if(\request('other')){
             $fuel->other = \request('other');
         }
+        if(\request('servicing')){
+            $fuel->servicing = \request('servicing');
+        }
         $fuel->current_km = \request('current_km');
-        $fuel->previous_km = \request('previous_km');
         $fuel->receiver_id = \request('receiver_id');
         if(\request('servicing')){
             $fuel->servicing = \request('servicing');
         }
         $fuel->save();
-
         if(\request('service')){
             foreach (\request('service') as $key => $value){
-                $fuel_service = FuelService::findOrfail($fuel->id);
+                $fuel_service = FuelService::firstOrNew(['vehicle_service_id'=>$key,'fuel_id'=>$fuel->id]);
                 $fuel_service->quantity = $value;
-                $fuel_service->vehicle_service_id = $key;
-                $fuel_service->fuel_id = $fuel->id;
                 $fuel_service->save();
             }
         }
