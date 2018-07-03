@@ -49,11 +49,7 @@
                                     <label for="date" class="col-md-8 ">Petrolpump Name:  </label>
                                     {{--<label>Name:</label>--}}
                                     <div class="col-md-9">
-                                        @if($fuel->petrolpump_id != '1')
-                                            {{config('custom.petrolpumps')[$fuel->petrolpump_id]}}
-                                        @else
-                                            {{$fuel->other}}
-                                        @endif
+                                        {{$fuel->petrolpump->name}}
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +59,7 @@
                                         <label for="date" class="col-md-8 ">{{$service->vehicle_service->service->name}}:  </label>
                                         {{--<label>Name:</label>--}}
                                         <div class="col-md-9">
-                                            {{$service->quantity}}
+                                            {{$service->quantity}} Litre
                                         </div>
                                     </div>
                                 </div>
