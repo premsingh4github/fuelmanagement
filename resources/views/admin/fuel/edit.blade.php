@@ -83,18 +83,17 @@
                             </div>
                         </div>
                         <div class="row" >
-                            <div class="col-md-6" style="display: none"id="amount_container" >
+                            <div class="col-md-6" @if($fuel->mode == 'coupon') style="display: none" @endif id="amount_container" >
                                 <div class="amountt"  >
-                                    @if($fuel->mode =="Cash")
+
                                     <div class="{{ $errors->has('amount') ? ' has-error' : '' }} ui-widget">
                                         <label for="amount" class="col-md-8 control-label">Amount <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
 
                                         <div class="col-md-12">
-                                            <input id="amount" type="number" class="form-control " name="amount" value="{{$fuel->amount}}" required autofocus>
+                                            <input id="amount" type="number" class="form-control " name="amount" value="{{$fuel->amount}}" @if($fuel->mode == 'Cash') required autofocus @endif >
 
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -117,12 +116,11 @@
                                 <div class="{{ $errors->has('other') ? ' has-error' : '' }}">
                                     <label for="office_vehicle" class="col-md-6 control-label">Other PetrolPump Name  <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input id="other" type="text" tabindex="1" class="form-control " name="other" value="{{$fuel->other}}" required autofocus>
-
+                                        <input id="other" type="text" tabindex="1" class="form-control " name="other" value="{{$fuel->other}}" >
                                         @if ($errors->has('other'))
                                             <span class="help-block">
-                                                    <strong>{{ $errors->first('other') }}</strong>
-                                                         </span>
+                                                <strong>{{ $errors->first('other') }}</strong>
+                                             </span>
                                         @endif
                                     </div>
                                 </div>
@@ -184,6 +182,22 @@
                         </div>
                         <div class="row" id="services">
 
+                            @foreach($fuel->fuel_services as $service )
+                                <div class="col-md-6">
+                                    <div >
+                                        <label for="driver" class="col-md-8 control-label">{{$service->vehicle_service->service->name}} [litre/month] max- {{$service->quota}}</label>
+                                        <div class="col-md-12">
+                                            <input name="service[{{$service->id}}]"  type="float"  class="form-control "  value="{{$fuel->service_quantity($service->vehicle_service->service->id)}}" onchange="updateService()" autofocus >
+                                            @if($service->vehicle_service->service->id == '3')
+                                                <input type="radio"  name="servicing" value="1" @if($fuel->servicing == '1') checked @endif   /> For Servicing
+                                                <input type="radio"  name="servicing" value="2"   @if($fuel->servicing != '1') checked @endif /> For Monthly Uses
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </div>
 
 
@@ -213,31 +227,25 @@
     <script>
         $(document).ready(function () {
             getStaffdetailforfuel();
-            var  mode_id = $('#mode').val();
-            debugger;
-            if(mode_id=='Cash'){
-                debugger
-                $('#amount_container').slideDown();
-            }
-            // getVehicleinfo();
-            debugger;
         });
 
         function getamount_edit() {
          var  mode_id = $('#mode').val();
          debugger;
 
+            var  mode_id = $('#mode').val();
+              if(mode_id=='Cash'){
+                  $('#amount_container').slideDown();
+              }
                 $('#amount_container').slideDown();
                 $('#amount').attr('required','true')
 
         }
 
         function  checkQuantity() {
-            debugger
             var staff_id = $('#staff_name').val();
             var month_id = $('#month').val();
             var quantity = $('#quantity').val();
-            debugger
             if( (staff_id > 0) && (month_id > 0) && (quantity > 0) ){
                 $.ajax({
                     type: "GET",
@@ -245,7 +253,6 @@
                     data: {staff_id: staff_id,month_id: month_id, quantity: quantity},
                     success:function (data) {
                         $('#message').html(data);
-                        debugger
                     },
                     error:function (error) {
                         debugger
@@ -255,7 +262,7 @@
         }
         function getStaffdetailforfuel() {
             getStaffdetail();
-            updateService();
+            //updateService();
             getCurrentMeters();
         }
 

@@ -56,6 +56,13 @@
                                         <div class="col-md-9">
                                             {{$fuel->mode}}
                                         </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div >
+                                    <label for="date" class="col-md-8 ">Petrolpump Name:  </label>
+                                    {{--<label>Name:</label>--}}
+                                    <div class="col-md-9">
+                                        {{$fuel->petrolpump->name}}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -68,6 +75,7 @@
                                             {{--@else--}}
                                                 {{--{{$fuel->other}}--}}
                                             {{--@endif--}}
+                                            {{$service->quantity}} Litre
                                         </div>
                                     </div>
                                 </div>

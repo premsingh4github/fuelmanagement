@@ -20,7 +20,6 @@ class CreateFuelsTable extends Migration
             $table->integer('month_id');
             $table->string('mode');
             $table->integer('amount')->nullable();
-
             $table->integer('petrolpump_id')->unsigned();
             $table->string('other')->nullable();
             $table->double('current_km');
@@ -29,7 +28,7 @@ class CreateFuelsTable extends Migration
             $table->foreign('receiver_id')->references('id')->on('staff');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('servicing')->nullable();
+            $table->enum('servicing',['0','1']);
             $table->timestamps();
         });
     }
