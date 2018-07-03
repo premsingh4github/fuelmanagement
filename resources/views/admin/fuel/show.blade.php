@@ -13,14 +13,7 @@
 
 
                         <div class="alert alert-info" >
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
 
-
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div >
@@ -49,6 +42,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div >
                                         <label for="date" class="col-md-6 ">Mode:  </label>
@@ -56,13 +51,15 @@
                                         <div class="col-md-9">
                                             {{$fuel->mode}}
                                         </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div >
-                                    <label for="date" class="col-md-8 ">Petrolpump Name:  </label>
-                                    {{--<label>Name:</label>--}}
-                                    <div class="col-md-9">
-                                        {{$fuel->petrolpump->name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div >
+                                        <label for="date" class="col-md-8 ">Petrolpump Name:  </label>
+                                        {{--<label>Name:</label>--}}
+                                        <div class="col-md-9">
+                                            {{$fuel->petrolpump->name}}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -71,14 +68,18 @@
                                         {{--<label>Name:</label>--}}
                                         <div class="col-md-9">
                                             {{--@if($fuel->petrolpump_id != '1')--}}
-                                                {{$fuel->petrolpump->name}}
+                                            {{$fuel->petrolpump->name}}
                                             {{--@else--}}
-                                                {{--{{$fuel->other}}--}}
+                                            {{--{{$fuel->other}}--}}
                                             {{--@endif--}}
-                                            {{$service->quantity}} Litre
+                                            {{--{{$service->quantity}} Litre--}}
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+
+
                                 @foreach($fuel->fuel_services as $service)
                                     <div class="col-md-4">
                                         <div >
@@ -102,10 +103,8 @@
 
                             </div>
                         </div>
-                        <div>
 
 
-                        </div>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
 

@@ -135,6 +135,7 @@ class FuelController extends Controller
     public function update(Request $request, $id)
     {
 
+//        dd($request->all());
         $this->validate($request,[
             'staff_id'=>'required',
             'month'=>'required',
