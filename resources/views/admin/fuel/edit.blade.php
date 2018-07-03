@@ -70,7 +70,7 @@
                                 <div class="{{ $errors->has('mode') ? ' has-error' : '' }}">
                                     <label for="mode" class="col-md-6 control-label">Mode <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount()  @if($fuel->mode =="Cash") checked   @endif> Cash
+                                        <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount_edit()  @if($fuel->mode =="Cash") checked   @endif> Cash
                                         <input type="radio" id="mode" name="mode" value="Copon" onclick=hideamount()  @if($fuel->mode == 'Copon')checked  @endif> Copon<br>
 
                                         @if ($errors->has('mode'))
@@ -226,10 +226,7 @@
         function getamount_edit() {
          var  mode_id = $('#mode').val();
          debugger;
-      if(mode_id=='Cash'){
-          debugger
-          $('#amount_container').slideDown();
-      }
+
                 $('#amount_container').slideDown();
                 $('#amount').attr('required','true')
 

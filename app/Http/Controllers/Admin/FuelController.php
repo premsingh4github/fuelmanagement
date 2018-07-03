@@ -155,6 +155,9 @@ class FuelController extends Controller
         $fuel->current_km = \request('current_km');
         $fuel->previous_km = \request('previous_km');
         $fuel->receiver_id = \request('receiver_id');
+        if(\request('servicing')){
+            $fuel->servicing = \request('servicing');
+        }
         $fuel->save();
 
         if(\request('service')){

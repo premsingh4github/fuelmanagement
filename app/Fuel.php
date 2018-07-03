@@ -13,7 +13,7 @@ class Fuel extends Model
 
     public function fuel_services()
     {
-        return $this->hasMany(FuelService::class);
+        return $this->hasMany(FuelService::class,'fuel_id');
     }
 
     public function receiver()

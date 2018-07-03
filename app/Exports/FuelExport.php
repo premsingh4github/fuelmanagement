@@ -18,6 +18,8 @@ class FuelExport implements FromView
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
+        dd(request()->end_date);
+
         $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
 
 
