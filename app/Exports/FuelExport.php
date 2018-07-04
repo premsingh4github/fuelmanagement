@@ -19,6 +19,13 @@ class FuelExport implements FromView
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
+//        $eng_startdate =  new nep_to_eng_date($enddate);
+//        dd($eng_startdate);
+        $cal = new \NepaliCalendar();
+        $eng_startdate = $cal->nep_to_eng_date(date('Y-m-d'));
+        dd($eng_startdate);
+
+
 //        dd(request()->end_date);
 
         $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
