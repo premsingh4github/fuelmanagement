@@ -256,7 +256,6 @@
         $(document).ready(function () {
             getStaffdetail();
             // getVehicleinfo();
-            debugger;
         });
     </script>
 @endsection

@@ -158,12 +158,13 @@ class FuelController extends Controller
         $fuel->save();
         if(\request('service')){
             foreach (\request('service') as $key => $value){
-                $fuel_service = FuelService::firstOrNew(['vehicle_service_id'=>$key,'fuel_id'=>$fuel->id]);
-                $fuel_service->quantity = $value;
-                $fuel_service->save();
+                if($value > 0){
+                    $fuel_service = FuelService::firstOrNew(['vehicle_service_id'=>$key,'fuel_id'=>$fuel->id]);
+                    $fuel_service->quantity = $value;
+                    $fuel_service->save();
+                }
             }
         }
-
         Session::flash('success_message','Fuel Updated succefully');
         return redirect('admin\fuel');
     }
@@ -196,6 +197,11 @@ class FuelController extends Controller
         ]);
         $staff = Staff::findOrFail(\request('staff_id'));
         return view('admin.ajax.staff_services',compact('staff'));
+    }
+
+    public function meterdetail()
+    {
+        
     }
 }
 

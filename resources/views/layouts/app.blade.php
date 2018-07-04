@@ -610,7 +610,6 @@
                 data:{staff_id: staff_id},
                 success:function (data) {
                     $('.staffdetail').html(data);
-                    debugger
                 },
                 error:function (error) {
                     debugger
@@ -697,7 +696,6 @@
 
     function getVehicleinfo() {
         var vehicle_id = $('#vehicle_id').val()
-        debugger;
         if (vehicle_id >0 ){
             $.ajax({
                 type:"GET",
@@ -783,6 +781,27 @@
             });
         }else {
             $('#meters_container').html("");
+        }
+    }
+    function getMeterDetail() {
+        var vehicle_id = $('#vehicle_id').val()
+        if (vehicle_id >0 ){
+            $.ajax({
+                type:"GET",
+                url:window.Laravel.base_url+'/meterdetail',
+                data:$("#myform").serialize(),
+                success:function (data) {
+                    $('.ajax').html(data);
+                },
+                error:function (error) {
+                    debugger
+
+                }
+            });
+        }
+        else {
+            $(".ajax").html("");
+
         }
     }
 

@@ -69,6 +69,8 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('admin/vehicledetail','Admin\StaffVehicleController@getvehicledetail');
     Route::get('getcurrentmeter','Admin\StaffVehicleController@getcurrentmeter');
 
+    Route::get('meterdetail','Admin\FuelController@meterdetail');
+
     Route::get('/home', 'HomeController@index')->name('home');
 
 });

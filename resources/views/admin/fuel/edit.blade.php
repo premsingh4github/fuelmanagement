@@ -7,7 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         {!! Form::open(['url'=>url('admin/fuel/'.$fuel->id),'method'=>'PUT','class'=>'form-horizontal','id'=>'myform']) !!}
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="{{ $errors->has('date') ? ' has-error' : '' }}">
@@ -65,12 +64,12 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-
                                 <div class="{{ $errors->has('mode') ? ' has-error' : '' }}">
                                     <label for="mode" class="col-md-6 control-label">Mode <span class="glyphicon glyphicon-asterisk" style="color: red; "> </span> </label>
                                     <div class="col-md-12">
-                                        <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount()  @if($fuel->mode =="cash") checked   @endif> Cash
-                                        <input type="radio" id="mode" name="mode" value="Copon" onclick=hideamount()  @if($fuel->mode == 'coupon')checked  @endif> Coupon<br>
+                                        <input type="radio" id="mode" name="mode" value="Copon" onclick=hideamount()  @if($fuel->mode == 'coupon')checked  @endif> Coupon
+                                        <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount()  @if($fuel->mode =="cash") checked   @endif> Cash <br>
+
 
                                         @if ($errors->has('mode'))
                                             <span class="help-block">
@@ -177,15 +176,15 @@
                             </div>
                         </div>
                         <div class="row" id="services">
-                            @foreach($fuel->fuel_services as $fuel_service )
-                                <div class="col-md-6">
-                                    <div >
-                                        <label  class="col-md-8 control-label">{{$fuel_service->vehicle_service->service->name}} [litre/month] max- {{$fuel_service->vehicle_service->quota}}</label>
-                                        <div class="col-md-12">
-                                            <input name="service[{{$fuel_service->vehicle_service->id}}]"  type="float"  class="form-control "  value="{{$fuel->service_quantity($fuel_service->vehicle_service->service->id)}}" onchange="updateService()" autofocus >
+                            @foreach($fuel->staff->staff_vehicles()->first()->vehicle_services as $vehicle_service)
+                                    <div class="col-md-6">
+                                        <div >
+                                            <label  class="col-md-8 control-label">{{$vehicle_service->service->name}} [litre/month] max- {{$vehicle_service->quota}}</label>
+                                            <div class="col-md-12">
+                                                <input name="service[{{$vehicle_service->id}}]"  type="float"  class="form-control "  value="{{$fuel->service_quantity($vehicle_service->service->id)}}" onchange="updateService()" autofocus >
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                             @endforeach
                         </div>
                         <br>

@@ -133,6 +133,12 @@
                                 </div>
 
                         </div>
+                        <div class="row" id="meters_container">
+
+                        </div>
+                        <div class="row" id="meters_detail">
+
+                        </div>
                         <div class="ajax">
 
                         </div>
@@ -160,9 +166,7 @@
 
                         </div>
 
-                        <div class="row" id="meters_container">
 
-                        </div>
 
                         <br>
                         <br>
