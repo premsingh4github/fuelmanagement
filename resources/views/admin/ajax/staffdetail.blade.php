@@ -7,6 +7,7 @@
 
                 <div class="panel-heading ">
                     <div class="panel-body">
+
                         <div class="alert alert-info">
 
                         <div class="row">

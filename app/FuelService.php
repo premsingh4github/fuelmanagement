@@ -12,7 +12,7 @@ class FuelService extends Model
 
     public function fuel()
     {
-        return $this->belongsTo(Fuel::class);
+        return $this->belongsTo(Fuel::class,'fuel_id');
     }
     public function vehicle_service(){
         return $this->belongsTo(VehicleService::class);

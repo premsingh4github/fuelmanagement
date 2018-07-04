@@ -1,9 +1,9 @@
 <table>
     <tr>
-        <th class="text-center">
+        <th class="text-center" >
             S.N.
         </th>
-        <th class="text-center">
+        <th class="text-center" width="50%">
             Date
         </th>
         <th class="text-center">
@@ -30,16 +30,16 @@
         <th class="text-center">
             Engine Oil
         </th>
-        {{--@if($fuel->servicing)--}}
+
         <th class="text-center">
             Servicing
         </th>
-            {{--@endif--}}
+
     </tr>
     @foreach($fuels as $fuel)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$fuel->date}}</td>
+            <td width="500" >{{$fuel->date}}</td>
             <td>{{$fuel->staff->name}}</td>
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
             <td>{{$fuel->mode}}</td>
@@ -54,13 +54,13 @@
             <td>
                 {{$fuel->service_quantity(3)}}
             </td>
-            @if($fuel->servicing)
-            <td>@if($fuel->servicing == '1') <div> For Servicing</div>
-                @elseif($fuel->servicing == '2') <div> For Monthly Use</div>
-
-                    @endif
-            </td>
+            <td>
+                @if($fuel->servicing == '1')
+                    Yes
+                @else
+                    No
                 @endif
+            </td>
         </tr>
     @endforeach
 </table>

@@ -69,8 +69,6 @@
                                     <div class="col-md-12">
                                         <input type="radio" id="mode" name="mode" value="Copon" onclick=hideamount()  @if($fuel->mode == 'coupon')checked  @endif> Coupon
                                         <input type="radio"  id="mode" name="mode" value="Cash" onclick=getamount()  @if($fuel->mode =="cash") checked   @endif> Cash <br>
-
-
                                         @if ($errors->has('mode'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('mode') }}</strong>
@@ -214,6 +212,20 @@
         $(document).ready(function () {
             getStaffdetailforfuel();
         });
+
+        function getamount_edit() {
+         var  mode_id = $('#mode').val();
+         debugger;
+
+            var  mode_id = $('#mode').val();
+              if(mode_id=='Cash'){
+                  $('#amount_container').slideDown();
+              }
+                $('#amount_container').slideDown();
+                $('#amount').attr('required','true')
+
+        }
+
         function  checkQuantity() {
             var staff_id = $('#staff_name').val();
             var month_id = $('#month').val();

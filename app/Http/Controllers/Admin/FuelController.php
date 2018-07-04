@@ -133,6 +133,7 @@ class FuelController extends Controller
     public function update(Request $request, $id)
     {
 
+//        dd($request->all());
         $this->validate($request,[
             'staff_id'=>'required',
             'month'=>'required',
@@ -155,6 +156,9 @@ class FuelController extends Controller
         }
         $fuel->current_km = \request('current_km');
         $fuel->receiver_id = \request('receiver_id');
+        if(\request('servicing')){
+            $fuel->servicing = \request('servicing');
+        }
         $fuel->save();
         if(\request('service')){
             foreach (\request('service') as $key => $value){
