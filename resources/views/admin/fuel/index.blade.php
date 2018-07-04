@@ -32,10 +32,8 @@
 
                                     <td>
                                         <a href="{{ url('admin/fuel/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-
+                                    @if(Auth::user()->type == '1')
                                         <a href="{{url('admin/fuel/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
-
-
                                         {!! Form::open([
                                                      'method'=>'DELETE',
                                                      'url' => ['admin/fuel', $user->id],
@@ -48,6 +46,7 @@
                                     'onclick'=>'return confirm("Confirm delete?")'
                             )) !!}
                                         {!! Form::close() !!}
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

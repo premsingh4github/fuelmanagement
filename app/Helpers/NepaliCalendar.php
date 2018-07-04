@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hari
- * Date: 6/29/18
- * Time: 5:29 PM
- */
 
-class NepaliCalendar
+class Nepali_Calendar
 {
-
+    // Data for nepali date
     private $_bs = array(
         0 => array(2000,30,32,31,32,31,30,30,30,29,30,29,31),
         1 => array(2001,31,31,32,31,31,31,30,29,30,29,30,30),
@@ -621,16 +615,21 @@ class NepaliCalendar
      */
     public function nep_to_eng_date($fromdate)
     {
-        $cal = new \NepaliCalendar();
+        $cal = new \Nepali_Calendar();
         $eng_date =  $cal->nep_to_eng(substr($fromdate,0,4),substr($fromdate,5,2),substr($fromdate,8,2));
 
         return $eng_date['year'].'-'.$eng_date['month'].'-'.$eng_date['date'];
     }
     public function eng_to_nepali_date($fromdate)
     {
-        $cal = new \NepaliCalendar();
+        $cal = new \Nepali_Calendar();
         $eng_date =  $cal->eng_to_nep(substr($fromdate,0,4),substr($fromdate,5,2),substr($fromdate,8,2));
 
         return $eng_date['year'].'-'.$eng_date['month'].'-'.$eng_date['date'];
     }
 }
+
+//  Example:
+//	$cal = new Nepali_Calendar();
+//	print_r ($cal->eng_to_nep(2008,11,23));
+//	print_r($cal->nep_to_eng(2065,8,8));

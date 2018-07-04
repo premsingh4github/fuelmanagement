@@ -14,7 +14,6 @@
 
     <!-- Styles -->
     {!! Html::style('/css/app.css') !!}
-    {!! Html::style('/css/footer.css') !!}
     {!! Html::style('/css/daterangepicker.css') !!}
     {!! Html::style('/css/jquery-ui.min.css') !!}
     {!! Html::style('/css/khoj.css') !!}
@@ -27,6 +26,9 @@
         ]) !!};
     </script>
     <style>
+        #app{
+            min-height: 700px;
+        }
         .custom-combobox-input{
             width: 96%;
             display: inline;
@@ -37,6 +39,14 @@
         }
         .navbar-logo-text {
             text-align: center;
+        }
+        .footer {
+         //   position:absolute;
+            bottom:0;
+            width:100%;
+            height:50px;   /* Height of the footer */
+            background-color: #ffffff;
+            line-height: 50px;
         }
 
         @media print{
@@ -184,9 +194,8 @@
 </div>
 
 
-<div class="footer">
-    <div class="col-md-9">©  Copyright 2018.All Right Reserve.Fuel Management System</div>
-    <div class="col-md-3">Design and Developed By : <a href="https://www.omniitworld.com" target="_new"> OmniIT World </a></div>
+<div class="footer text-center">
+    <div>©  Copyright {{date('Y')}}.All Right Reserve. <a href="http://www.webvisionaryitsol.com/" target="_new"> Web Visionary I. T. Solution </a></div>
 </div>
 
 <div class="modal fade" id="modal">
