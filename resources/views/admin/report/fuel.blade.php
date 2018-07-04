@@ -1,9 +1,9 @@
 <table>
     <tr>
-        <th class="text-center">
+        <th class="text-center" >
             S.N.
         </th>
-        <th class="text-center">
+        <th class="text-center" width="50%">
             Date
         </th>
         <th class="text-center">
@@ -39,7 +39,7 @@
     @foreach($fuels as $fuel)
         <tr>
             <td>{{$loop->iteration}}</td>
-            <td>{{$fuel->date}}</td>
+            <td width="500" >{{$fuel->date}}</td>
             <td>{{$fuel->staff->name}}</td>
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
             <td>{{$fuel->mode}}</td>

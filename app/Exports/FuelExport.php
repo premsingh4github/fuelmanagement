@@ -9,6 +9,7 @@
 namespace App\Exports;
 use App\Fuel;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\FromView;
 
 class FuelExport implements FromView
@@ -18,7 +19,7 @@ class FuelExport implements FromView
         $startdate = \request('start_date');
         $enddate = \request('end_date');
 
-        dd(request()->end_date);
+//        dd(request()->end_date);
 
         $fuels = Fuel::whereBetween('date',[$startdate ,$enddate]);
 

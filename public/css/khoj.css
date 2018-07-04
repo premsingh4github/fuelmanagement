@@ -3,16 +3,20 @@
 	margin: 0;
 }
 
+
 h3, h4 {
 	line-height: 2;
 }
 .container{
 	max-width: 960px;
 }
+
+
 .navbar-brand{
 	height: auto;
 
 }
+
 .navbar-brand img{
 	max-width: 100px;
 }
@@ -37,6 +41,10 @@ h3, h4 {
 .navbar-logo-text > h3, h4{
 	/*color: #1414ff;*/
 	font-weight: 600;
+}
+.footer{
+
+	color: green;
 }
 .header-body{
 	max-width: 960px;
@@ -170,6 +178,8 @@ p{
 	float: right;
 	text-align: right;
 }
+
+
 
 .footer-head-right input{
 	width: 15px;
@@ -486,5 +496,5 @@ ul.dashboardItems li a:hover {
 	.header-mid img{
 		width: 75%;
 	}
-	
+
 }
