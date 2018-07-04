@@ -14,7 +14,6 @@
 
     <!-- Styles -->
     {!! Html::style('/css/app.css') !!}
-    {!! Html::style('/css/footer.css') !!}
     {!! Html::style('/css/daterangepicker.css') !!}
     {!! Html::style('/css/jquery-ui.min.css') !!}
     {!! Html::style('/css/khoj.css') !!}
@@ -76,7 +75,6 @@
 </head>
 <body>
 <div id="app">
-
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -182,9 +180,7 @@
     </nav>
     @yield('content')
 </div>
-
-
-<div class="footer">
+<div class="footer" id="footer">
     <div class="col-md-9">©  Copyright 2018.All Right Reserve.Fuel Management System</div>
     <div class="col-md-3">Design and Developed By : <a href="https://www.omniitworld.com" target="_new"> OmniIT World </a></div>
 </div>
@@ -241,6 +237,7 @@
         </div>
     </div>
 </div>
+
 <div class="loading">Loading&#8230;</div>
 <!-- Scripts -->
 
