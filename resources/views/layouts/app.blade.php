@@ -180,10 +180,10 @@
     </nav>
     @yield('content')
 </div>
-<div class="footer" id="footer">
-    <div class="col-md-9">©  Copyright 2018.All Right Reserve.Fuel Management System</div>
-    <div class="col-md-3">Design and Developed By : <a href="https://www.omniitworld.com" target="_new"> OmniIT World </a></div>
-</div>
+{{--<div class="footer" id="footer">--}}
+    {{--<div class="col-md-9">©  Copyright 2018.All Right Reserve.Fuel Management System</div>--}}
+    {{--<div class="col-md-3">Design and Developed By : <a href="https://www.omniitworld.com" target="_new"> OmniIT World </a></div>--}}
+{{--</div>--}}
 
 <div class="modal fade" id="modal">
     <div class="modal-dialog" role="document">

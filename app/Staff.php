@@ -13,6 +13,7 @@ class Staff extends Model
 
     }
 
+
     public function vehicles()
     {
         return $this->belongsToMany(Vehicle::class,'staff_vehicles')->orderBy('id','DESC');

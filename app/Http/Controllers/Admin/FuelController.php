@@ -6,6 +6,7 @@ use App\Fuel;
 use App\FuelService;
 use App\Petrolpump;
 use App\Staff;
+use App\VehicleFuel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,7 @@ class FuelController extends Controller
         $fuel->previous_km = $staff->previous_km();
         $fuel->receiver_id = \request('receiver_id');
         $fuel->user_id = Auth::user()->id;
+//        $fuel->vehicle_id =
         if(\request('servicing')){
             $fuel->servicing = \request('servicing');
         }
@@ -88,6 +90,23 @@ class FuelController extends Controller
 
             }
         }
+        $vehicle_fuel = new VehicleFuel;
+        $vehicle_fuel->fuel_id =$fuel->id;
+
+        $current_km = (float) $fuel->current_km ;
+        $previous_km = (float)$fuel->previous_km;
+
+        $me= (float)$fuel->staff->vehicles()->first()->mileage;
+
+
+        $v_fuel =  (float)(($current_km - $previous_km) / ($me));
+
+        $vehicle_fuel->fuel= "$v_fuel";
+        $vehicle_fuel->mileage = "$me";
+        $vehicle_fuel->user_id= Auth::id();
+        $vehicle_fuel->vehicle_id =$fuel->staff->vehicles()->first()->id;
+
+        $vehicle_fuel->save();
 
         Session::flash('success_message','Fuel Added');
         return redirect('admin\fuel');
