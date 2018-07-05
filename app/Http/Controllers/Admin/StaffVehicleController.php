@@ -155,7 +155,7 @@ class StaffVehicleController extends Controller
         if(\request('driver')){
             $staff_veh->driver_id = \request('driver');
         }
-        $staff_veh->current_km = \request('current_km');
+        $staff_veh->current_meter = \request('current_km');
         $staff_veh->vehicle_id  = \request('vehicle_id');
         $staff_veh->save();
         if(\request('services')){

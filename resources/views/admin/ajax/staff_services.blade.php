@@ -1,5 +1,5 @@
 
-@foreach($staff->staff_vehicles()->first()->vehicle_services as $service)
+@foreach($staff->staff_vehicles()->first()->vehicle_services()->where('quota','>',0)->get() as $service)
     <div class="col-md-6">
         <div >
             <label for="driver" class="col-md-8 control-label">{{$service->service->name}} [litre/month] max- {{$service->quota}}</label>

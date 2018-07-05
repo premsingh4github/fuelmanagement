@@ -16,10 +16,11 @@ class CreateVehicleFuelsTable extends Migration
         Schema::create('vehicle_fuels', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('fuel_id');
-            $table->integer('fuel');
+            $table->integer('quantity');
             $table->integer('mileage');
             $table->integer('user_id');
             $table->integer('vehicle_id');
+            $table->integer('service_id');
 
             $table->timestamps();
         });
