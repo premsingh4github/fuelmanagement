@@ -88,12 +88,13 @@ class FuelController extends Controller
                     $fuel_service->save();
                 }
                 $vehicle_service = VehicleService::findOrFail($key);
-                if($vehicle_service->service_id != 3 ){
+                $vehicle = $fuel->staff->vehicles()->first();
+                if( ($vehicle_service->service_id != 3) && ($vehicle->type != 1) ){
                         $vehicle_fuel = new VehicleFuel;
                         $vehicle_fuel->fuel_id = $fuel->id;
                         $vehicle_fuel->service_id = $vehicle_service->service_id;
                         $vehicle_fuel->mileage= (float) $fuel->staff->vehicles()->first()->mileage;
-                        $vehicle_fuel->vehicle_id =$fuel->staff->vehicles()->first()->id;
+                        $vehicle_fuel->vehicle_id = $vehicle->id;
                         $vehicle_fuel->user_id = Auth::user()->id;
 
                         $old_quantity = 0;
@@ -228,6 +229,9 @@ class FuelController extends Controller
         $staff = Staff::findOrFail(\request('staff_id'));
         $staff->previous_km();
         $vehicle = $staff->vehicles()->first();
+        if($vehicle->type == '1'){
+            return "";
+        }
         return view('admin.ajax.old_fuel',compact('vehicle','staff'));
     }
 }
