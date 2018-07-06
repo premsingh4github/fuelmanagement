@@ -798,14 +798,13 @@
         }
     }
     function getMeterDetail() {
-        var vehicle_id = $('#vehicle_id').val()
-        if (vehicle_id >0 ){
+        if ($('#staff_id').val() >0 ){
             $.ajax({
                 type:"GET",
                 url:window.Laravel.base_url+'/meterdetail',
                 data:$("#myform").serialize(),
                 success:function (data) {
-                    $('.ajax').html(data);
+                    $('#old_fuel').html(data);
                 },
                 error:function (error) {
                     debugger
@@ -814,7 +813,7 @@
             });
         }
         else {
-            $(".ajax").html("");
+            $("#old_fuel").html("");
 
         }
     }

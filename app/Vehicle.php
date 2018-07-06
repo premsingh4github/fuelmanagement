@@ -24,4 +24,13 @@ class Vehicle extends Model
     {
         return $this->hasMany(StaffVehicle::class)->orderBy('id','DESC');
     }
+
+    public function current_fuel($service_id)
+    {
+        $quantity = 0;
+        if($vehicle_fuel_old = VehicleFuel::select('quantity')->where('service_id',$service_id)->where('vehicle_id',$this->id)->orderBy('id','DESC')->first()){
+            $quantity = $vehicle_fuel_old->quantity;
+        }
+        return $quantity;
+    }
 }

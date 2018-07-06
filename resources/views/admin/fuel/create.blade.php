@@ -142,6 +142,9 @@
                         <div class="ajax">
 
                         </div>
+                        <div id="old_fuel">
+
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">

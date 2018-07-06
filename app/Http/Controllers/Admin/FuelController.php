@@ -224,7 +224,11 @@ class FuelController extends Controller
 
     public function meterdetail()
     {
-        
+        $this->validate(\request(),['staff_id'=>'required']);
+        $staff = Staff::findOrFail(\request('staff_id'));
+        $staff->previous_km();
+        $vehicle = $staff->vehicles()->first();
+        return view('admin.ajax.old_fuel',compact('vehicle','staff'));
     }
 }
 
