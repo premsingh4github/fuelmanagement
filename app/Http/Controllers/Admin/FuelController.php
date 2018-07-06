@@ -6,6 +6,8 @@ use App\Fuel;
 use App\FuelService;
 use App\Petrolpump;
 use App\Staff;
+use App\VehicleFuel;
+use App\VehicleService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -85,10 +87,28 @@ class FuelController extends Controller
                     $fuel_service->fuel_id = $fuel->id;
                     $fuel_service->save();
                 }
+                $vehicle_service = VehicleService::findOrFail($key);
+                if($vehicle_service->service_id != 3 ){
+                        $vehicle_fuel = new VehicleFuel;
+                        $vehicle_fuel->fuel_id = $fuel->id;
+                        $vehicle_fuel->service_id = $vehicle_service->service_id;
+                        $vehicle_fuel->mileage= (float) $fuel->staff->vehicles()->first()->mileage;
+                        $vehicle_fuel->vehicle_id =$fuel->staff->vehicles()->first()->id;
+                        $vehicle_fuel->user_id = Auth::user()->id;
+
+                        $old_quantity = 0;
+                        if($vehicle_fuel_old = VehicleFuel::select('quantity')->where('service_id',$vehicle_fuel->service_id)->where('vehicle_id',$vehicle_fuel->vehicle_id)->orderBy('id','DESC')->first()){
+                            $old_quantity = $vehicle_fuel_old->quantity;
+                        }
+
+                        $month_fuel = ($fuel->current_km - $fuel->previous_km)/$vehicle_fuel->mileage ;
+                        $vehicle_fuel->quantity = $old_quantity - $month_fuel + $value;
+                        $vehicle_fuel->save();
+
+                }
 
             }
         }
-
         Session::flash('success_message','Fuel Added');
         return redirect('admin\fuel');
 
@@ -119,7 +139,6 @@ class FuelController extends Controller
         $staffs = Staff::all();
         $fuel = Fuel::findOrfail($id);
         return view('admin.fuel.edit',compact('staff','today_nepali','staffs','fuel','pump'));
-
 
     }
 

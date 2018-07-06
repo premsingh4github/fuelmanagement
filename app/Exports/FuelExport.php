@@ -31,7 +31,7 @@ class FuelExport implements FromView
 
         }
         if (\request('mode')){
-            $$fuels->where('mode', \request('mode'));
+            $fuels->where('mode', \request('mode'));
         }
         if (\request('petrolpump_name')){
             $fuels->where('petrolpump_id',\request('petrolpump_name'));
