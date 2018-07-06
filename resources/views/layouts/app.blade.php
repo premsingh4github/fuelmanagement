@@ -86,7 +86,6 @@
 </head>
 <body>
 <div id="app">
-
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -192,12 +191,9 @@
     </nav>
     @yield('content')
 </div>
-
-
 <div class="footer text-center">
     <div>©  Copyright {{date('Y')}}.All Right Reserve. <a href="http://www.webvisionaryitsol.com/" target="_new"> Web Visionary I. T. Solution </a></div>
 </div>
-
 <div class="modal fade" id="modal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -229,7 +225,6 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" >OK</button>
             </div>
-
         </div>
     </div>
 </div>
@@ -250,6 +245,7 @@
         </div>
     </div>
 </div>
+
 <div class="loading">Loading&#8230;</div>
 <!-- Scripts -->
 

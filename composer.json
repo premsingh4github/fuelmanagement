@@ -28,6 +28,7 @@
             "App\\": "app/"
         },
         "files":[
+            "app/Helpers/NepaliCalendar.php",
             "app/Helpers/Nepali_Calendar.php"
         ]
     },
