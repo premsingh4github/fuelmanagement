@@ -39,4 +39,12 @@ class Fuel extends Model
         return 0;
 
     }
+
+    public function last()
+    {
+       if($this->id == $this->staff->fuels()->orderBy('id','DESC')->first()->id){
+           return true;
+       }
+       return false;
+    }
 }

@@ -153,7 +153,6 @@ class FuelController extends Controller
     public function update(Request $request, $id)
     {
 
-//        dd($request->all());
         $this->validate($request,[
             'staff_id'=>'required',
             'month'=>'required',
@@ -161,6 +160,9 @@ class FuelController extends Controller
             'petrolpump_name'=>'required',
         ]);
         $fuel= Fuel::findOrfail($id);
+        if(!$fuel->last()){
+            return redirect()->back();
+        }
         $fuel->staff_id = \request('staff_id');
         $fuel->month_id = \request('month');
         $fuel->mode = \request('mode');

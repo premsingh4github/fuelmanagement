@@ -32,7 +32,7 @@
 
                                     <td>
                                         <a href="{{ url('admin/fuel/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                                    @if(Auth::user()->type == '1')
+                                    @if(Auth::user()->type == '1' && $user->last() )
                                         <a href="{{url('admin/fuel/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
                                         {!! Form::open([
                                                      'method'=>'DELETE',
