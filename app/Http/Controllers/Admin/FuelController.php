@@ -73,8 +73,11 @@ class FuelController extends Controller
         $fuel->previous_km = $staff->previous_km();
         $fuel->receiver_id = \request('receiver_id');
         $fuel->user_id = Auth::user()->id;
-        if(\request('servicing')){
+        if(\request('servicing') == '1'){
             $fuel->servicing = \request('servicing');
+        }
+        else{
+            $fuel->servicing = '0';
         }
         $fuel->save();
 
@@ -111,7 +114,7 @@ class FuelController extends Controller
             }
         }
         Session::flash('success_message','Fuel Added');
-        return redirect('admin\fuel');
+        return redirect('admin/fuel');
 
     }
 
@@ -192,7 +195,7 @@ class FuelController extends Controller
             }
         }
         Session::flash('success_message','Fuel Updated succefully');
-        return redirect('admin\fuel');
+        return redirect('admin/fuel');
     }
 
     /**
@@ -207,7 +210,7 @@ class FuelController extends Controller
         $fuel->fuel_services()->delete();
         $fuel->delete();
         Session::flash('success_message','Fuel Deleted Succefully');
-        return redirect('admin\fuel');
+        return redirect('admin/fuel');
     }
 
     public function checkquantity()

@@ -155,6 +155,7 @@
                         <li class="<?php if(Request::segment(2) =='report'){echo 'active';}?>" ><a href="{{ url('admin/report') }}">Reports</a></li>
                     @elseif(isset(Auth::user()->type) && Auth::user()->type == 2)
                             <li class="<?php if(Request::segment(2) =='fuel'){echo 'active';}?>"  ><a href="{{ url('admin/fuel') }}">Fuel</a></li>
+                    <li class="<?php if(Request::segment(2) =='report'){echo 'active';}?>" ><a href="{{ url('admin/report') }}">Reports</a></li>
                     @endif
 
                 </ul>

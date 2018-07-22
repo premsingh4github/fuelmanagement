@@ -37,8 +37,6 @@ Route::group(['middleware'=>'admin','prefix'=>'admin'],function(){
 
     Route::resource('staff_vehicle','Admin\StaffVehicleController');
     Route::resource('petrolpump','Admin\PetrolpumpController');
-    Route::get('report','Admin\ReportController@getreport');
-    Route::post('report','Admin\ReportController@postreport');
     Route::get('getreport','Admin\ReportController@getreport_ajax');
 
     Route::resource('users','Admin\UserController');
@@ -73,6 +71,11 @@ Route::group(['middleware'=>'auth'],function (){
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+});
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('admin/report','Admin\ReportController@getreport');
+    Route::post('admin/report','Admin\ReportController@postreport');
 });
 
 

@@ -71,16 +71,6 @@ class StaffVehicleController extends Controller
         $staff_veh->previous_meter = $vehicle->previous_km();
         $staff_veh->vehicle_id  = \request('vehicle_id');
         $staff_veh->save();
-        if (\request('vehicle_brand')){
-
-            $personal_veh = new PersonalVehicle;
-            $personal_veh->vehicle_brand = \request('vehicle_brand');
-            $personal_veh->vehicle_no = \request('vehicle_no');
-            $personal_veh->mileage = \request('mileage');
-            $personal_veh->staff_vehicle_id = $staff_veh->id;
-            $personal_veh->save();
-
-        }
         $services = Service::all();
         foreach ($services as $service){
             if(\request($service->id) && (\request($service->id) > 0 ) ){
@@ -160,9 +150,16 @@ class StaffVehicleController extends Controller
         $staff_veh->save();
         if(\request('services')){
             foreach (\request('services') as $key => $value){
-                $vehicleService = VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
-                $vehicleService->quota = $value;
-                $vehicleService->save();
+                if($value > 0){
+                    $vehicleService = VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
+                    $vehicleService->quota = $value;
+                    $vehicleService->save();
+                }
+                else{
+                    $vehicleService = VehicleService::firstOrNew(['service_id'=>$key,'staff_vehicle_id'=>$id]);
+                    $vehicleService->delete();
+                }
+
             }
         }
         Session::flash('success_message','Staff Vehicle Updated');

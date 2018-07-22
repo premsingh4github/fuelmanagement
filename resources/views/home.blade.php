@@ -5,9 +5,15 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <ul class="dashboardItems">
+                            @if(!(Auth::check() && (Auth::user()->type == '2') ) )
                             <li class="curveSmall"> <a href="{{url('admin/staff')}}"><i class="glyphicon glyphicon-user"></i><p>STAFFS</p></a> </li>
+                            @endif
+
                             <li class="curveSmall"> <a href="{{url('admin/fuel')}}"><i class="glyphicon glyphicon-user"></i><p>FUEL</p></a> </li>
+                            @if(!(Auth::check() && (Auth::user()->type == '2') ) )
                             <li class="curveSmall"> <a href="{{url('admin/vehicle')}}"><i class="glyphicon glyphicon-user"></i><p>VEHICLES</p></a> </li>
+                            @endif
+
                         </ul>
                     </div>
                 </div>
