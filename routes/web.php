@@ -60,6 +60,7 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('profile','HomeController@updateProfile');
 
     Route::resource('admin/fuel','Admin\FuelController');
+    Route::resource('nonofficialfuels','NonofficialfuelController');
 
     Route::get('admin/getStaffdetail','Admin\StaffVehicleController@getStaffdetail');
     Route::get('admin/staff_services','Admin\FuelController@staff_services');

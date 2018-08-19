@@ -65,6 +65,7 @@ class FuelController extends Controller
         $fuel->month_id = \request('month');
         $fuel->mode = \request('mode');
         $fuel->amount = \request('amount');
+        $fuel->coupon = \request('coupon');
         $fuel->petrolpump_id = \request('petrolpump_name');
         if(\request('other')){
             $fuel->other = \request('other');
