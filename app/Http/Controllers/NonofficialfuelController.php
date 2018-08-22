@@ -56,6 +56,9 @@ class NonofficialfuelController extends Controller
             'mode'=>'required',
             'petrolpump_name'=>'required',
             'receiver_name'=>'required',
+            'petrol'=>'required',
+            'diseal'=>'required',
+            'engine_oil'=>'required',
         ]);
         $fuel= new  Model;
         $fuel->date = date('Y-m-d');
@@ -69,11 +72,12 @@ class NonofficialfuelController extends Controller
         $fuel->petrolpump_id = \request('petrolpump_name');
         $fuel->receiver_name = \request('receiver_name');
         $fuel->petrol = \request('petrol');
+        $fuel->diseal = \request('diseal');
         $fuel->engine_oil = \request('engine_oil');
         $fuel->user_id = Auth::user()->id;
         $fuel->save();
         Session::flash('success_message','Fuel Added');
-        return redirect($this->url);
+        return redirect($this->url."/print/".$fuel->id);
 
     }
 
@@ -123,6 +127,9 @@ class NonofficialfuelController extends Controller
             'mode'=>'required',
             'petrolpump_name'=>'required',
             'receiver_name'=>'required',
+            'petrol'=>'required',
+            'diseal'=>'required',
+            'engine_oil'=>'required',
         ]);
         $fuel= Model::findOrfail($id);
         $fuel->name = \request('name');
@@ -135,10 +142,11 @@ class NonofficialfuelController extends Controller
         $fuel->petrolpump_id = \request('petrolpump_name');
         $fuel->receiver_name = \request('receiver_name');
         $fuel->petrol = \request('petrol');
+        $fuel->diseal = \request('diseal');
         $fuel->engine_oil = \request('engine_oil');
         $fuel->save();
         Session::flash('success_message','Fuel Updated succefully');
-        return redirect($this->url);
+        return redirect($this->url."/print/".$id);
     }
 
     /**
@@ -180,5 +188,11 @@ class NonofficialfuelController extends Controller
             return "";
         }
         return view('admin.ajax.old_fuel',compact('vehicle','staff'));
+    }
+
+    public function print($id)
+    {
+        $entry = Model::findOrFail($id);
+        return view($this->view.'print',compact('entry'));
     }
 }

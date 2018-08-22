@@ -29,6 +29,7 @@ class CreateNonofficialfuelsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->float('petrol');
             $table->float('engine_oil');
+            $table->float('diseal');
             $table->timestamps();
         });
     }

@@ -46,6 +46,10 @@ return [
         '3'=>'Sasastra',
         '4'=>'Shajha'
     ],
+    'lettertype'=>[
+        'eng'=> '/letterpad/eng.png',
+        'nep' =>'/letterpad/nep.png',
+    ]
 
 ]
 ?>

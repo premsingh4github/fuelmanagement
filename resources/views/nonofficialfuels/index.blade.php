@@ -34,6 +34,7 @@
 
                                     <td>
                                         <a href="{{ url('nonofficialfuels/' . $user->id) }}" class="btn btn-sm btn-success" title="Show "><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                                        <a href="{{ url('nonofficialfuels/print/' . $user->id) }}" class="btn btn-sm btn-success" title="Print "><span class="glyphicon glyphicon-print" aria-hidden="true"/></a>
                                     @if(Auth::user()->type == '1' )
                                         <a href="{{url('nonofficialfuels/'.$user->id.'/edit')}}" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i></a>
                                         {!! Form::open([

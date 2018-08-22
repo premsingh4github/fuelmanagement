@@ -109,14 +109,11 @@ class FuelController extends Controller
                         $month_fuel = ($fuel->current_km - $fuel->previous_km)/$vehicle_fuel->mileage ;
                         $vehicle_fuel->quantity = $old_quantity - $month_fuel + $value;
                         $vehicle_fuel->save();
-
                 }
-
             }
         }
         Session::flash('success_message','Fuel Added');
         return redirect('admin/fuel');
-
     }
 
     /**
@@ -217,9 +214,7 @@ class FuelController extends Controller
     public function checkquantity()
     {
         dd(90);
-
     }
-
     public function staff_services()
     {
         \request()->validate([
@@ -239,6 +234,13 @@ class FuelController extends Controller
             return "";
         }
         return view('admin.ajax.old_fuel',compact('vehicle','staff'));
+    }
+
+    public function print($id)
+    {
+        $entry = Fuel::findOrFail($id);
+        return view('admin.fuel.print',compact('entry'));
+
     }
 }
 

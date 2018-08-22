@@ -167,6 +167,18 @@
     </div>
     <div class="col-md-6"  >
         <div class="amountt"  >
+            <div class="{{ $errors->has('diseal') ? ' has-error' : '' }} ui-widget">
+                <label for="diseal" class="col-md-8 control-label">Diseal[Litre] <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
+
+                <div class="col-md-12">
+                    <input id="diseal" type="number" class="form-control " name="diseal" value="0" >
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6"  >
+        <div class="amountt"  >
             <div class="{{ $errors->has('engine_oil') ? ' has-error' : '' }} ui-widget">
                 <label for="engine_oil" class="col-md-8 control-label">Engine Oil <span class="glyphicon glyphicon-asterisk" style="color: red; "></span></label>
                 <div class="col-md-12">

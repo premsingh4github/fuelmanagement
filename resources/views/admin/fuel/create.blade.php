@@ -218,7 +218,6 @@
                     data: {staff_id: staff_id,month_id: month_id, quantity: quantity},
                     success:function (data) {
                         $('#message').html(data);
-                        debugger
                     },
                     error:function (error) {
                         debugger
