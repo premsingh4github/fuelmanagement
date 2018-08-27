@@ -47,7 +47,14 @@
             <td> Official </td>
             <td>{{$fuel->staff->name}}</td>
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
-            <td>{{$fuel->mode}}</td>
+            <td>
+
+                @if($fuel->mode == 'cash')
+                    {{$fuel->mode}} [{{$fuel->amount}}]
+                @else
+                    {{$fuel->mode}}
+                @endif
+            </td>
             <td>{{$fuel->petrolpump->name}}</td>
             <td>{{$fuel->receiver->name}}</td>
             <td>
@@ -80,7 +87,13 @@
             <td> Non Official </td>
             <td>{{$fuel->name}} [{{$fuel->organization}}]</td>
             <td>{{ config('custom.nepali_months')[$fuel->month_id]}}</td>
-            <td>{{$fuel->mode}}</td>
+            <td>
+                @if($fuel->mode == 'cash')
+                    {{$fuel->mode}} [{{$fuel->amount}}]
+                @else
+                    {{$fuel->mode}}
+                @endif
+            </td>
             <td>{{$fuel->petrolpump->name}}</td>
             <td>{{$fuel->receiver_name}}</td>
             <td>
