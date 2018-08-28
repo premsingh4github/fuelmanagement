@@ -47,8 +47,13 @@ class FuelExport implements FromView
         }else{
             $nonofficials = [];
         }
+        if(request('type') != 'n'){
+            $fuels = $fuels->get();
+        }else{
+            $fuels = [];
+        }
 
-        $fuels = $fuels->get();
+
         return view('admin.report.fuel', [
             'fuels' => $fuels,
             'nonofficials' => $nonofficials

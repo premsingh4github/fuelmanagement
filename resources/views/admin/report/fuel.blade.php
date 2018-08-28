@@ -39,7 +39,7 @@
         </th>
 
     </tr>
-    <?php $total_diseal = $total_engine_oil = $total_petrol = 0; ?>
+    <?php $o_count = $total_diseal = $total_engine_oil = $total_petrol = 0; ?>
     @foreach($fuels as $fuel)
         <tr>
             <td>{{$loop->iteration}}</td>
