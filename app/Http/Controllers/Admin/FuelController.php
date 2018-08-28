@@ -113,7 +113,7 @@ class FuelController extends Controller
             }
         }
         Session::flash('success_message','Fuel Added');
-        return redirect('admin/fuel');
+        return redirect('admin/fuel/print/'.$fuel->id);
     }
 
     /**

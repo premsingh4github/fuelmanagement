@@ -277,7 +277,7 @@
 </div>
 <div class="hide-print " style="text-align: center;    margin-bottom: 5px">
     <a class="btn-success" onclick="window.print()">Print</a>
-    <a class="btn-warning"  href="{{url('nonofficialfuels')}}">Back</a>
+    <a class="btn-warning"  href="{{url('admin/fuel')}}">Back</a>
 </div>
 </body>
 </html>
