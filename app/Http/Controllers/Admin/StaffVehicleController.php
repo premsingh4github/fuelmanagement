@@ -32,7 +32,7 @@ class StaffVehicleController extends Controller
      */
     public function create()
     {
-       $staffs = Staff::select('staff.id','staff.name','level')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','ASC')->get();
+       $staffs = Staff::select('staff.id','staff.name','level')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','ASC')->where('status','1')->get();
        $vehicle = Vehicle::all();
        $drivers =  Staff::whereHas('designation',function ($q){
            $q->where('name','Driver');
@@ -110,7 +110,7 @@ class StaffVehicleController extends Controller
     public function edit($id)
     {
         $staff_veh = StaffVehicle::findOrfail($id);
-        $staff = Staff::select('staff.id','staff.name')->join('designations','staff.designation_id','=','designations.id')->orderBy('designations.level','DESC')->get();
+        $staff = Staff::select('staff.id','staff.name')->join('designations','staff.designation_id','=','designations.id')->where('status','1')->orderBy('designations.level','DESC')->get();
         $vehicles = Vehicle::all();
         $drivers =  Staff::whereHas('designation',function ($q){
             $q->where('name','Driver');

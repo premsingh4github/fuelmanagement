@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports;
 
@@ -80,5 +82,26 @@ class HomeController extends Controller
     public function excel(Excel $excel)
     {
 
+    }
+    public function change_password()
+    {
+        return view('auth.change_password');
+    }
+    public function update_password(Request $request)
+    {
+        $rules = array(
+            'old_password' => 'required',
+            'password' => 'required|confirmed|min:6',
+        );
+        $this->validate(request(), $rules);
+        if (Hash::check(request('old_password'), Auth::user()->password)) {
+            Auth::user()->update([
+                'password' => bcrypt(request('password'))
+            ]);
+            Session::flash('success_message', 'Password has been changed successfully ');
+        } else {
+            Session::flash('error_message', 'Old password Incorrect');
+        }
+        return redirect()->back();
     }
 }

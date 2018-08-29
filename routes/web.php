@@ -79,6 +79,8 @@ Route::group(['middleware'=>'auth'],function (){
 Route::group(['middleware'=>'auth'],function(){
     Route::get('admin/report','Admin\ReportController@getreport');
     Route::post('admin/report','Admin\ReportController@postreport');
+    Route::get('change_password','HomeController@change_password');
+    Route::post('change_password','HomeController@update_password');
 });
 
 

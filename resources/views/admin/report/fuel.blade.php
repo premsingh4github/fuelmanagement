@@ -63,11 +63,11 @@
 
             </td>
             <td>
-                <?php $total_diseal = $diseal = $fuel->service_quantity(2); ?>
+                <?php $total_diseal += $diseal = $fuel->service_quantity(2); ?>
                 {{$diseal}}
             </td>
             <td>
-                <?php $total_engine_oil = $engine = $fuel->service_quantity(3); ?>
+                <?php $total_engine_oil += $engine = $fuel->service_quantity(3); ?>
                 {{$engine}}
             </td>
             <td>

@@ -255,7 +255,7 @@
 <div class="loading">Loading&#8230;</div>
 <!-- Scripts -->
 
-{{--{!! Html::script('js/app.js') !!}--}}
+{!! Html::script('js/app.js') !!}
 {!! Html::script('js/jquery-ui.min.js') !!}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>--}}
 {!! Html::script('js/moment.min.js') !!}
