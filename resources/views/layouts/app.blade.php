@@ -18,6 +18,7 @@
     {!! Html::style('/css/jquery-ui.min.css') !!}
     {!! Html::style('/css/khoj.css') !!}
     <link rel="stylesheet" type="text/css" href="{{url('nepalidate/nepali.datepicker.v2.2.min.css')}}" />
+
     <!-- Scripts -->
     <script>
         window.Laravel ={!! json_encode([
@@ -255,8 +256,10 @@
 <div class="loading">Loading&#8230;</div>
 <!-- Scripts -->
 
-{!! Html::script('js/app.js') !!}
+{{--{!! Html::script('js/app.js') !!}--}}
 {!! Html::script('js/jquery-ui.min.js') !!}
+{!! Html::script('js/bootstrap.min.js') !!}
+
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>--}}
 {!! Html::script('js/moment.min.js') !!}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>--}}
@@ -266,6 +269,7 @@
 
 <script>
     window.new = true;
+    debugger;
     $(document).ready(function(){
         var start = moment().subtract(29, 'days');
         var end = moment();
@@ -288,6 +292,7 @@
             }
         }, cb);
         cb(start, end);
+        debugger;
         $('.datepicker').datepicker({
             maxDate: new Date(),
             yearRange: "-100:+0",
